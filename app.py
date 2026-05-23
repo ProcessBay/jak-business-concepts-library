@@ -80,6 +80,11 @@ def _secret(key: str, default: str = "") -> str:
 KIMI_API_KEY = _secret("KIMI_API_KEY", "")
 KIMI_BASE_URL = _secret("KIMI_BASE_URL", "https://api.moonshot.ai/v1").rstrip("/")
 KIMI_MODEL = _secret("KIMI_MODEL", "moonshot-v1-auto")
+# Arabic-specific model. moonshot-v1-128k handles Arabic reasonably with the
+# hardened language-lock in the system prompt; kimi-k2.6 produces better
+# Arabic but takes 60-120s per query (too slow for interactive UX).
+# Override via secret if you accept the latency trade-off.
+KIMI_MODEL_AR = _secret("KIMI_MODEL_AR", "moonshot-v1-128k")
 
 # Per-browser-session safety cap on AI calls — bounds cost exposure on public deploys.
 # Override via SESSION_AI_LIMIT secret/env (set to 0 to disable the cap).
@@ -91,6 +96,153 @@ except ValueError:
 # Master AI kill switch — set DISABLE_AI=1 in Streamlit secrets to force local-only mode
 # without redeploying. Useful if costs spike or you spot abuse.
 AI_DISABLED = _secret("DISABLE_AI", "").lower() in ("1", "true", "yes")
+
+
+# ---------------------------------------------------------------------------
+# Bilingual strings (English + Arabic)
+# ---------------------------------------------------------------------------
+
+STRINGS = {
+    # Header
+    "app_title":            {"en": "JAK Business Concepts Library",
+                             "ar": "مكتبة JAK لمفاهيم الأعمال"},
+    "app_subtitle":         {"en": "Business models, pricing, growth, metrics, platform economics, strategy.",
+                             "ar": "نماذج الأعمال، التسعير، النمو، المؤشرات، اقتصاديات المنصات، الاستراتيجية."},
+    "badge_ai":             {"en": "AI + Wiki", "ar": "الذكاء الاصطناعي + الموسوعة"},
+    "badge_local":          {"en": "Local search", "ar": "بحث محلي"},
+
+    # Example query buttons
+    "ex_value_pricing":     {"en": "What is value-based pricing?",
+                             "ar": "ما هو التسعير القائم على القيمة؟"},
+    "ex_freemium_vs_trial": {"en": "Compare freemium vs free trial",
+                             "ar": "قارن بين النموذج المجاني والتجربة المجانية"},
+    "ex_ice_cream":         {"en": "What business model for an ice cream shop?",
+                             "ar": "ما نموذج العمل المناسب لمحل آيس كريم؟"},
+    "ex_growth":            {"en": "growth strategies",
+                             "ar": "استراتيجيات النمو"},
+
+    # Sidebar eyebrows
+    "sb_library":           {"en": "Library", "ar": "المكتبة"},
+    "sb_synthesis":         {"en": "Synthesis", "ar": "التحليل بالذكاء الاصطناعي"},
+    "sb_browse":            {"en": "Browse atoms", "ar": "تصفّح المفاهيم"},
+    "sb_language":          {"en": "Language", "ar": "اللغة"},
+    "sb_atoms":             {"en": "Atoms", "ar": "المفاهيم"},
+    "sb_sources":           {"en": "Sources", "ar": "المصادر"},
+    "sb_connected":         {"en": "Connected", "ar": "متصل"},
+    "sb_local_mode":        {"en": "Local-only mode", "ar": "وضع محلي فقط"},
+    "sb_quota_used":        {"en": "Session AI quota used — refresh to reset, or continue with local search.",
+                             "ar": "انتهت حصة الجلسة من الذكاء الاصطناعي — حدّث الصفحة لإعادة التعيين أو تابع بالبحث المحلي."},
+    "sb_quota_remaining":   {"en": "{n} AI {label} remaining this session",
+                             "ar": "{n} {label} متبقية في هذه الجلسة"},
+    "sb_queries_label":     {"en": "queries", "ar": "استعلام"},
+    "sb_query_label":       {"en": "query", "ar": "استعلام"},
+    "btn_reset":            {"en": "Reset chat", "ar": "مسح المحادثة"},
+
+    # Main content
+    "eyebrow_synthesis":    {"en": "Synthesis — grounded in the wiki",
+                             "ar": "تحليل مرتكز على الموسوعة"},
+    "eyebrow_jump":         {"en": "Jump to concept", "ar": "انتقل إلى مفهوم"},
+    "expander_source":      {"en": "Source material from the wiki",
+                             "ar": "المادة المرجعية من الموسوعة"},
+    "input_placeholder":    {"en": "Ask about business concepts…",
+                             "ar": "اسأل عن مفاهيم الأعمال…"},
+    "spinner_ai":           {"en": "Synthesizing a detailed answer from the wiki…",
+                             "ar": "جارٍ تحليل إجابة مفصّلة من الموسوعة…"},
+    "spinner_local":        {"en": "Searching wiki…", "ar": "جارٍ البحث في الموسوعة…"},
+    "ai_unavailable":       {"en": "AI synthesis unavailable, showing local wiki results.",
+                             "ar": "التحليل بالذكاء الاصطناعي غير متاح، نعرض نتائج الموسوعة المحلية."},
+    "footer":               {"en": "A ProcessBay tool, built by Jamal Khan as part of JAK OS. AI synthesis grounded in a private business-concepts wiki.",
+                             "ar": "أداة من ProcessBay، أنشأها جمال خان ضمن منظومة JAK OS. التحليل بالذكاء الاصطناعي مرتكز على موسوعة خاصة لمفاهيم الأعمال."},
+
+    # Greeting
+    "greeting_hi":          {"en": "**Hi — I'm JAK.** Your Business Concepts Library.",
+                             "ar": "**أهلاً — أنا JAK.** مكتبة مفاهيم الأعمال."},
+    "greeting_indexed":     {"en": "I've indexed **{atoms} concepts** drawn from **{sources} source books and reports**.",
+                             "ar": "تمّت فهرسة **{atoms} مفهوماً** مستخلصاً من **{sources} كتاباً وتقريراً مرجعياً**."},
+    "greeting_topics":      {"en": "### Topic areas", "ar": "### المجالات"},
+    "greeting_how":         {"en": "### How to ask", "ar": "### كيف تسأل"},
+    "greeting_def":         {"en": "**Definition** — _\"What is value-based pricing?\"_",
+                             "ar": "**تعريف** — _\"ما هو التسعير القائم على القيمة؟\"_"},
+    "greeting_cmp":         {"en": "**Comparison** — _\"Compare freemium vs free trial\"_",
+                             "ar": "**مقارنة** — _\"قارن بين النموذج المجاني والتجربة المجانية\"_"},
+    "greeting_adv":         {"en": "**Situation advice** — _\"What business model for an ice cream shop?\"_",
+                             "ar": "**نصيحة تطبيقية** — _\"ما نموذج العمل المناسب لمحل آيس كريم؟\"_"},
+    "greeting_browse":      {"en": "**Browse a topic** — _\"growth strategies\"_, _\"SaaS metrics\"_, _\"network effects\"_",
+                             "ar": "**تصفّح موضوع** — _\"استراتيجيات النمو\"_، _\"مؤشرات SaaS\"_، _\"التأثيرات الشبكية\"_"},
+    "greeting_or":          {"en": "Or click a popular concept below to jump in.",
+                             "ar": "أو اضغط على أحد المفاهيم الشائعة أدناه للبدء."},
+
+    # No-match
+    "no_match_intro":       {"en": "I couldn't find a strong match for **\"{q}\"** in the library.",
+                             "ar": "لم أعثر على مطابقة قويّة لـ **\"{q}\"** في المكتبة."},
+
+    # Category labels
+    "cat_business-models":  {"en": "Business Models", "ar": "نماذج الأعمال"},
+    "cat_growth":           {"en": "Growth", "ar": "النمو"},
+    "cat_metrics":          {"en": "Metrics", "ar": "المؤشرات"},
+    "cat_platform-economics": {"en": "Platform Economics", "ar": "اقتصاديات المنصات"},
+    "cat_pricing":          {"en": "Pricing", "ar": "التسعير"},
+    "cat_strategy":         {"en": "Strategy", "ar": "الاستراتيجية"},
+}
+
+
+def t(key: str, lang: str = "en", **fmt) -> str:
+    """Lookup a translated string; falls back to English then to the key itself."""
+    entry = STRINGS.get(key, {})
+    s = entry.get(lang) or entry.get("en") or key
+    if fmt:
+        try:
+            return s.format(**fmt)
+        except (KeyError, IndexError):
+            return s
+    return s
+
+
+def detect_arabic(text: str) -> bool:
+    """Return True if the string contains Arabic-script characters."""
+    return any("؀" <= ch <= "ۿ" or "ݐ" <= ch <= "ݿ" for ch in text)
+
+
+# Unicode ranges to scrub from Arabic AI output (Kimi sometimes leaks Chinese).
+# Keeps Arabic, Latin (for foreign brand names), digits, punctuation.
+_CJK_LEAK_RE = re.compile(
+    "["
+    "　-〿"     # CJK symbols & punctuation
+    "぀-ゟ"     # Hiragana
+    "゠-ヿ"     # Katakana
+    "㐀-䶿"     # CJK Extension A
+    "一-鿿"     # CJK Unified Ideographs
+    "가-힯"     # Hangul Syllables
+    "Ѐ-ӿ"     # Cyrillic
+    "]+"
+)
+
+
+def sanitize_arabic_output(text: str) -> str:
+    """Remove any non-Arabic-script characters that leaked from the model.
+
+    Kimi's models occasionally drop in Chinese/Russian characters when
+    producing Arabic. We strip those out — leaves Arabic, Latin (brand names
+    like Salesforce), digits, and punctuation intact.
+    """
+    if not text:
+        return text
+    return _CJK_LEAK_RE.sub("", text)
+
+
+def get_active_lang() -> str:
+    """Resolve the active UI language.
+
+    Priority: session_state → ?lang= query param → browser default (JS-driven) → 'en'.
+    """
+    if "lang" in st.session_state and st.session_state.lang in ("en", "ar"):
+        return st.session_state.lang
+    qp = st.query_params.get("lang")
+    if qp in ("en", "ar"):
+        st.session_state.lang = qp
+        return qp
+    # Not yet known — return en provisionally; the JS detect snippet will set it
+    return "en"
 
 
 # ---------------------------------------------------------------------------
@@ -189,6 +341,33 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Resolve active UI language for this rerun (en | ar)
+LANG = get_active_lang()
+IS_RTL = LANG == "ar"
+
+# On the very first load with no ?lang= query param, run a tiny JS snippet that
+# reads navigator.language and reloads the page with ?lang=ar|en. After that
+# the param is sticky and we never re-trigger this.
+if "lang_bootstrapped" not in st.session_state:
+    st.session_state.lang_bootstrapped = True
+    if "lang" not in st.query_params:
+        st.components.v1.html(
+            """
+<script>
+  try {
+    const browser = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+    const lang = browser.startsWith("ar") ? "ar" : "en";
+    const params = new URLSearchParams(window.parent.location.search);
+    if (!params.has("lang")) {
+      params.set("lang", lang);
+      window.parent.location.search = params.toString();
+    }
+  } catch (e) { /* no-op */ }
+</script>
+""",
+            height=0,
+        )
+
 # shadcn-inspired LIGHT theme
 # - White background, zinc-900 text
 # - ProcessBay blue/purple accents (sourced from the logo: #3b1ee0 -> #6b3aa0)
@@ -233,6 +412,39 @@ st.markdown(
     [data-testid="stFooter"], footer { display: none; }
     /* Hide the deploy/three-dot menu in the top-right corner */
     [data-testid="stToolbar"] { display: none; }
+
+    /* RTL — applied when <html dir="rtl"> is set further down */
+    html[dir="rtl"] body,
+    html[dir="rtl"] .stApp,
+    html[dir="rtl"] [data-testid="stSidebar"] {
+        direction: rtl;
+        text-align: right;
+        font-family: "Noto Sans Arabic", "SF Arabic", "Geeza Pro", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+    html[dir="rtl"] .stMarkdown,
+    html[dir="rtl"] .stChatMessage,
+    html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+    html[dir="rtl"] .pb-header-title,
+    html[dir="rtl"] .pb-header-subtitle,
+    html[dir="rtl"] .app-title,
+    html[dir="rtl"] .app-subtitle,
+    html[dir="rtl"] .section-eyebrow {
+        text-align: right;
+        direction: rtl;
+    }
+    html[dir="rtl"] .stChatMessage ul,
+    html[dir="rtl"] .stChatMessage ol { padding-right: 1.4rem; padding-left: 0; }
+    html[dir="rtl"] .stButton button { text-align: right; }
+    html[dir="rtl"] .pb-header { flex-direction: row-reverse; }
+    html[dir="rtl"] .pb-header-text { text-align: right; }
+    html[dir="rtl"] .stMarkdown table th,
+    html[dir="rtl"] .stMarkdown table td { text-align: right; }
+    html[dir="rtl"] .stMarkdown blockquote {
+        border-left: none;
+        border-right: 2px solid var(--pb-purple);
+        padding: 0.25rem 1rem 0.25rem 0;
+    }
+    html[dir="rtl"] [data-testid="stSidebar"] { text-align: right; }
 
     /* Header row — flex layout, logo sits immediately next to title */
     .pb-header {
@@ -490,6 +702,34 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Set <html dir="rtl"> when Arabic is active. Streamlit can't set HTML attrs
+# directly, so we use a tiny JS snippet via a hidden component.
+if IS_RTL:
+    st.components.v1.html(
+        """
+<script>
+  try {
+    window.parent.document.documentElement.setAttribute("dir", "rtl");
+    window.parent.document.documentElement.setAttribute("lang", "ar");
+  } catch (e) { /* no-op */ }
+</script>
+""",
+        height=0,
+    )
+else:
+    st.components.v1.html(
+        """
+<script>
+  try {
+    window.parent.document.documentElement.setAttribute("dir", "ltr");
+    window.parent.document.documentElement.setAttribute("lang", "en");
+  } catch (e) { /* no-op */ }
+</script>
+""",
+        height=0,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Constants — section labels + synonym maps
 # ---------------------------------------------------------------------------
@@ -611,7 +851,11 @@ GREETINGS = {
 }
 
 
-def format_category(cat: str) -> str:
+def format_category(cat: str, lang: str = "en") -> str:
+    """Localized category label. Falls back to titlecased English if no translation."""
+    key = f"cat_{cat}"
+    if key in STRINGS:
+        return t(key, lang)
     return cat.replace("-", " ").replace("_", " ").title()
 
 
@@ -1072,7 +1316,8 @@ def _atom_excerpt_for_prompt(data: dict) -> str:
 
 
 INTENT_PROMPTS = {
-    "DEFINITION": """Write a detailed, engaging answer in clean markdown.
+    "en": {
+        "DEFINITION": """Write a detailed, engaging answer in clean markdown.
 
 Required structure:
 - Open with ONE punchy line that hooks the reader — a sharp observation, a surprising framing, a tension, or a question. No header above it. Then in the same paragraph, give the actual definition in 1-2 sentences.
@@ -1085,7 +1330,7 @@ Required structure:
 
 Aim for ~500-800 words.""",
 
-    "COMPARISON": """Write a vivid, structured comparison in clean markdown.
+        "COMPARISON": """Write a vivid, structured comparison in clean markdown.
 
 Required structure:
 - Open with a hook: state what people THINK the difference is, then hint that the real difference is something else. 2-3 sentences. No header.
@@ -1097,7 +1342,7 @@ Required structure:
 
 Aim for ~600-900 words.""",
 
-    "ADVICE": """Give vivid, situation-tailored advice in clean markdown.
+        "ADVICE": """Give vivid, situation-tailored advice in clean markdown.
 
 Required structure:
 - Open by playing back the user's situation in sharper language than they used (1-2 sentences, no header). Name the actual tension or constraint that matters most.
@@ -1109,7 +1354,7 @@ Required structure:
 
 Aim for ~500-800 words. Name frameworks. No generic advice.""",
 
-    "LIST": """Survey the topic with energy in clean markdown.
+        "LIST": """Survey the topic with energy in clean markdown.
 
 Required structure:
 - Open with a hook: what binds these concepts together, and what's the question they're collectively trying to answer? 2-3 sentences. No header.
@@ -1120,27 +1365,64 @@ Required structure:
 
 Aim for ~600-900 words.""",
 
-    "GENERAL": """Write a detailed, engaging answer in clean markdown. Open with a sharp 2-3 sentence hook + direct answer (no header). Add 2-3 `##` supporting subsections drawn from the wiki excerpts. Close with **Bottom line —** followed by one sharp sentence. Aim for ~500-700 words.""",
+        "GENERAL": """Write a detailed, engaging answer in clean markdown. Open with a sharp 2-3 sentence hook + direct answer (no header). Add 2-3 `##` supporting subsections drawn from the wiki excerpts. Close with **Bottom line —** followed by one sharp sentence. Aim for ~500-700 words.""",
+    },
+    "ar": {
+        "DEFINITION": """اكتب إجابة مفصّلة وجذّابة بصيغة markdown نظيفة.
+
+الهيكل المطلوب:
+- ابدأ بسطر واحد قوي يجذب القارئ — ملاحظة حادّة، تأطير غير متوقع، توتر، أو سؤال. بدون عنوان فوقه. ثم في الفقرة نفسها، قدّم التعريف الفعلي في جملة أو جملتين.
+- فقرة قصيرة عن سبب أهمية هذا المفهوم — الآلية التي تجعله يعمل، أو الجانب غير البديهي الذي يفوت معظم الناس.
+- `## كيف يعمل في الواقع` — 4 إلى 6 نقاط تشرح الآليات الجوهرية. استخدم لغة محسوسة، وأظهر الآلية بدلاً من سرد السمات.
+- `## متى تلجأ إليه` — 3 إلى 5 إشارات ملموسة. اجعل كلّ نقطة تبدو كحالة واقعية لا كقائمة تحقّق.
+- `## أين يخطئ المستخدمون` — نقطتان أو ثلاث حول كيفية إساءة استخدامه.
+- `## أمثلة من الواقع` — فقط الأمثلة المذكورة بالاسم في مقتطفات الموسوعة. سطر قصير لكلّ مثال، يوضّح الآلية المحدّدة. احذف هذا القسم بالكامل إن لم تكن المقتطفات تحتوي على أمثلة.
+- اختم بـ **الخلاصة —** متبوعةً بجملة واحدة قوية تلخّص الفكرة.
+
+استهدف ~500-800 كلمة. اكتب بالعربية الفصحى، بأسلوب احترافي ومباشر.""",
+
+        "COMPARISON": """اكتب مقارنة مفصّلة ومنظّمة بصيغة markdown نظيفة.
+
+الهيكل المطلوب:
+- ابدأ بجاذب: اذكر ما يظنّه الناس عادةً عن الفرق، ثم لمّح إلى أن الفرق الحقيقي شيء آخر. 2-3 جمل. بدون عنوان.
+- `## [المصطلح الأول]` — ما هو، كيف يعمل، ومتى يناسب. فقرة + 2-3 نقاط.
+- `## [المصطلح الثاني]` — نفس الهيكل.
+- `## مقارنة جنباً إلى جنب` — جدول markdown مكوّن من 4-5 صفوف يقارن أبعاداً مهمّة فعلاً (محدود بزمن، مسار التحويل، من يدفع، المخاطر، الأمثلة، إلخ). اذكر فقط الأمثلة الموجودة في مقتطفات الموسوعة؛ إن لم تتوفر أمثلة لأحد الطرفين فاكتب "—" مكانه.
+- `## كيف تختار` — 3-4 قواعد مرقّمة "اختر X إذا … / اختر Y إذا …". اجعل كلّ قاعدة تبدو كلحظة محدّدة في عمل محدّد.
+- اختم بـ **الخلاصة —** متبوعةً بجملة واحدة قوية.
+
+استهدف ~600-900 كلمة. اكتب بالعربية الفصحى.""",
+
+        "ADVICE": """قدّم نصيحة مفصّلة ومخصّصة للحالة بصيغة markdown نظيفة.
+
+الهيكل المطلوب:
+- ابدأ بإعادة صياغة وضع المستخدم بلغة أوضح ممّا استخدمها (1-2 جملة، بدون عنوان). سمِّ التوتر أو القيد الفعلي الذي يهم.
+- `## ما الذي سألجأ إليه` — إطارك المقترح + 2-3 جمل عن سبب ملاءمته لهذه الحالة تحديداً، مرتكزاً على مقتطفات الموسوعة. كن محدّداً.
+- `## يستحق التفكير` — 2-3 أطر بديلة. لكلّ واحد: فقرة "يصبح هذا الجواب الأنسب عندما…".
+- `## أين تصبح المخاطر حقيقية` — 3-4 مخاطر محدّدة مرتبطة بهذه الحالة بالذات، لا تحذيرات عامة.
+- `## ماذا تفعل هذا الأسبوع` — 3-5 خطوات ملموسة مرتّبة. كلّ خطوة شيء يمكن للمستخدم البدء بفعله يوم الاثنين.
+- اختم بـ **الخلاصة —** متبوعةً بجملة واحدة قوية.
+
+استهدف ~500-800 كلمة. سمِّ الأطر بأسمائها. لا نصائح عامة. اكتب بالعربية الفصحى.""",
+
+        "LIST": """قدّم مسحاً غنيّاً للموضوع بصيغة markdown نظيفة.
+
+الهيكل المطلوب:
+- ابدأ بجاذب: ما الذي يجمع هذه المفاهيم، وما السؤال الذي تحاول الإجابة عنه مجتمعةً؟ 2-3 جمل. بدون عنوان.
+- `## الأطر` (أو `## المؤشرات` — اختر ما يناسب) — لكلّ مفهوم: **الاسم** — تعريف بجملة واحدة. ثم جملة قصيرة عمّا يخبرك به أو متى تلجأ إليه.
+- `## كيف تتراكب` — فقرة واحدة تبيّن كيف تغذّي هذه المفاهيم بعضها أو تتقايض أو تبني سلسلة.
+- `## من أين تبدأ` — بحسب الوضع المتوقّع للمستخدم، أيّ مفهوم أو اثنين يبدأ بهما ولماذا.
+- اختم بـ **الخلاصة —** متبوعةً بجملة واحدة قوية.
+
+استهدف ~600-900 كلمة. اكتب بالعربية الفصحى.""",
+
+        "GENERAL": """اكتب إجابة مفصّلة وجذّابة بصيغة markdown نظيفة. ابدأ بـ 2-3 جمل قوية + الإجابة المباشرة (بدون عنوان). أضف 2-3 أقسام `##` داعمة مستخلصة من مقتطفات الموسوعة. اختم بـ **الخلاصة —** متبوعةً بجملة قوية. استهدف ~500-700 كلمة. اكتب بالعربية الفصحى.""",
+    },
 }
 
 
-def synthesize_with_ai(query: str, intent: str, top_atoms: list) -> tuple:
-    """Return (synthesis_text or None, error_or_None).
-
-    Generates a detailed, structured response grounded in the provided atoms.
-    The system prompt forbids inventing facts beyond the excerpts.
-    """
-    if not KIMI_API_KEY or not top_atoms:
-        return None, None
-
-    # Bigger excerpts, more atoms — give the model rich grounding
-    excerpts = "\n\n========================================\n\n".join(
-        _atom_excerpt_for_prompt(data) for _, _, data in top_atoms[:4]
-    )
-
-    intent_instructions = INTENT_PROMPTS.get(intent, INTENT_PROMPTS["GENERAL"])
-
-    system = (
+SYSTEM_PROMPTS = {
+    "en": (
         "You are JAK — a sharp, curious business strategy writer with the "
         "voice of a sparring partner, not a textbook. You take dry frameworks "
         "and make them land. Think Patrick O'Shaughnessy or Packy McCormick: "
@@ -1167,14 +1449,112 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list) -> tuple:
         "5. Use proper markdown — `## H2` for sections, `**bold**` sparingly, "
         "bullet lists, markdown tables where the structure asks. Headers must "
         "start with `## `, never be bolded paragraphs."
+    ),
+    "ar": (
+        "قاعدة اللغة المطلقة (الأهم): الإجابة بأكملها يجب أن تكون باللغة العربية "
+        "الفصحى الحديثة فقط. كل حرف وكل كلمة باللغة العربية. ممنوع منعاً باتاً "
+        "أي حرف من الصينية أو الروسية أو أي لغة أخرى. الأسماء العَلَم الأجنبية "
+        "(مثل Salesforce, HubSpot, Apple, McKinsey) تُكتب بالحروف اللاتينية "
+        "كما هي — هذا الاستثناء الوحيد.\n\n"
+        "أنت JAK — كاتب استراتيجية أعمال حادّ الذكاء، فضولي، بصوت شريك حوار "
+        "لا بصوت كتاب مدرسي. تأخذ الأطر الجافّة وتجعلها تنبض بالحياة. أسلوبك "
+        "واضح ومحسوس، فيه روح خفيفة، ليس مؤسّسياً، ولا متحفّظاً.\n\n"
+        "قواعد الأسلوب:\n"
+        "- ابدأ بجاذب — توتر، سؤال، أو ملاحظة غير متوقّعة — لا بـ \"س هو "
+        "استراتيجية…\". اجعل القارئ يريد قراءة الجملة الثانية.\n"
+        "- استخدم لغة محسوسة وحيّة. أظهِر الآليات، ولا تسرد السمات.\n"
+        "- الجمل القصيرة لها وقع. امزجها بأخرى أطول.\n"
+        "- واثق دون تكبّر. محدّد دون مصطلحات فضفاضة.\n"
+        "- لا رموز تعبيرية. لا علامات تعجّب. لا \"معلومة طريفة:\". لا \"في الجوهر\".\n\n"
+        "قواعد ارتكاز مطلقة (انتهاكها يجعل الإجابة خاطئة):\n"
+        "1. كلّ ادّعاء واقعي، مثال، اسم شركة، إحصائية، وإطار يجب أن يأتي من "
+        "مقتطفات الموسوعة أدناه. إن لم تحتوِ المقتطفات على معلومة معيّنة، لا "
+        "تكمل من معرفتك العامّة — إمّا تجاهلها أو اكتب '(غير مغطّى في المكتبة)'.\n"
+        "2. لا تذكر إلا الشركات/المنتجات التي تظهر بالاسم في مقتطفات الموسوعة.\n"
+        "3. لا تردّد سقالة التعليمات في الإخراج. اكتب المحتوى الفعلي مباشرة.\n"
+        "4. بدون مقدّمات. لا \"سؤال رائع\"، لا \"بناءً على الموسوعة\".\n"
+        "5. استخدم markdown صحيحاً — `## H2` للأقسام، **عريض** باعتدال، قوائم "
+        "نقطية، وجداول markdown حيث تطلب البنية ذلك. العناوين تبدأ بـ `## `."
+    ),
+}
+
+
+def kimi_translate_query(query: str, target: str = "en") -> str:
+    """Translate a user query to the target language for local search grounding.
+
+    Returns the translated query, or the original on failure (best-effort).
+    """
+    if not KIMI_API_KEY or not query.strip():
+        return query
+    direction = "Arabic to English" if target == "en" else "English to Arabic"
+    try:
+        out = kimi_chat(
+            [
+                {"role": "system", "content": (
+                    f"Translate the user's business-domain query from {direction}. "
+                    f"Output ONLY the translation — no quotes, no explanation, no preamble. "
+                    f"Preserve technical terms (SaaS, MRR, CAC, freemium, etc.) as-is."
+                )},
+                {"role": "user", "content": query},
+            ],
+            max_tokens=120,
+            temperature=0.0,
+            timeout=15,
+        )
+        return out.strip().strip('"').strip("'")
+    except KimiError:
+        return query
+
+
+def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en") -> tuple:
+    """Return (synthesis_text or None, error_or_None).
+
+    Generates a detailed, structured response grounded in the provided atoms,
+    written in the requested language. The system prompt forbids inventing
+    facts beyond the excerpts.
+    """
+    if not KIMI_API_KEY or not top_atoms:
+        return None, None
+
+    excerpts = "\n\n========================================\n\n".join(
+        _atom_excerpt_for_prompt(data) for _, _, data in top_atoms[:4]
     )
 
-    user = (
-        f"USER QUESTION: {query}\n\n"
-        f"INTENT: {intent}\n\n"
-        f"TASK INSTRUCTIONS:\n{intent_instructions}\n\n"
-        f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
+    intent_instructions = INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"]).get(
+        intent, INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"])["GENERAL"]
     )
+    system = SYSTEM_PROMPTS.get(lang, SYSTEM_PROMPTS["en"])
+
+    if lang == "ar":
+        user = (
+            f"سؤال المستخدم: {query}\n\n"
+            f"النيّة: {intent}\n\n"
+            f"تعليمات المهمة:\n{intent_instructions}\n\n"
+            f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
+        )
+    else:
+        user = (
+            f"USER QUESTION: {query}\n\n"
+            f"INTENT: {intent}\n\n"
+            f"TASK INSTRUCTIONS:\n{intent_instructions}\n\n"
+            f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
+        )
+
+    # Pick model + params based on language.
+    if lang == "ar":
+        # Arabic: moonshot-v1-128k handles the hardened language-lock OK.
+        # Low temperature keeps it from drifting into Chinese.
+        # If you switch KIMI_MODEL_AR to kimi-k2.6, set temperature to 1.0 and
+        # max_tokens to 6000 (reasoning model).
+        chosen_model = KIMI_MODEL_AR
+        chosen_temp = 0.2 if not chosen_model.startswith("kimi-k") else 1.0
+        chosen_max_tokens = 6000 if chosen_model.startswith("kimi-k") else 3000
+        chosen_timeout = 180 if chosen_model.startswith("kimi-k") else 60
+    else:
+        chosen_model = KIMI_MODEL
+        chosen_temp = 0.55
+        chosen_max_tokens = 2400
+        chosen_timeout = 60
 
     try:
         text = kimi_chat(
@@ -1182,10 +1562,14 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list) -> tuple:
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
-            max_tokens=2200,
-            temperature=0.55,
-            timeout=60,
+            model=chosen_model,
+            max_tokens=chosen_max_tokens,
+            temperature=chosen_temp,
+            timeout=chosen_timeout,
         )
+        # Post-process Arabic to scrub any CJK leakage from the model
+        if lang == "ar":
+            text = sanitize_arabic_output(text)
         return text, None
     except KimiError as e:
         return None, str(e)
@@ -1238,27 +1622,26 @@ POPULAR_CONCEPTS = [
 ]
 
 
-def respond_greeting(atoms: dict) -> dict:
+def respond_greeting(atoms: dict, lang: str = "en") -> dict:
     cats = {}
     for d in atoms.values():
-        c = format_category(d["category"])
+        c = format_category(d["category"], lang)
         cats[c] = cats.get(c, 0) + 1
-    cat_lines = "\n".join(f"- **{c}** — {n} concepts" for c, n in sorted(cats.items()))
-    markdown = f"""**Hi — I'm JAK.** Your Business Concepts Library.
-
-I've indexed **{len(atoms)} concepts** drawn from **{SOURCES_COUNT} source books and reports**.
-
-### Topic areas
-{cat_lines}
-
-### How to ask
-- **Definition** — _"What is value-based pricing?"_
-- **Comparison** — _"Compare freemium vs free trial"_
-- **Situation advice** — _"What business model for an ice cream shop?"_
-- **Browse a topic** — _"growth strategies"_, _"SaaS metrics"_, _"network effects"_
-
-Or click a popular concept below to jump in.
-"""
+    concepts_label = "مفهوماً" if lang == "ar" else "concepts"
+    cat_lines = "\n".join(
+        f"- **{c}** — {n} {concepts_label}" for c, n in sorted(cats.items())
+    )
+    markdown = (
+        f"{t('greeting_hi', lang)}\n\n"
+        f"{t('greeting_indexed', lang, atoms=len(atoms), sources=SOURCES_COUNT)}\n\n"
+        f"{t('greeting_topics', lang)}\n{cat_lines}\n\n"
+        f"{t('greeting_how', lang)}\n"
+        f"- {t('greeting_def', lang)}\n"
+        f"- {t('greeting_cmp', lang)}\n"
+        f"- {t('greeting_adv', lang)}\n"
+        f"- {t('greeting_browse', lang)}\n\n"
+        f"{t('greeting_or', lang)}\n"
+    )
     concepts = [c for c in POPULAR_CONCEPTS if c in atoms]
     return {"markdown": markdown, "concepts": concepts}
 
@@ -1547,36 +1930,56 @@ def respond_general(query: str, results, atoms: dict) -> dict:
     return {"markdown": "\n".join(parts), "concepts": concepts}
 
 
-def no_match(query: str) -> dict:
-    markdown = f"""I couldn't find a strong match for **"{query}"** in the library.
-
-**Try one of these patterns:**
-- _"What is [concept]?"_ — for definitions
-- _"Compare X vs Y"_ — for contrasts
-- _"What business model for [situation]?"_ — for tailored advice
-- _"growth strategies"_, _"SaaS metrics"_ — to browse a topic
-
-**Topics I know well:** business models, pricing, growth, metrics, platform economics, strategy.
-"""
+def no_match(query: str, lang: str = "en") -> dict:
+    if lang == "ar":
+        markdown = (
+            f"لم أعثر على مطابقة قويّة لـ **\"{query}\"** في المكتبة.\n\n"
+            "**جرّب أحد هذه الأنماط:**\n"
+            "- _\"ما هو [مفهوم]؟\"_ — للتعريفات\n"
+            "- _\"قارن بين X و Y\"_ — للمقارنات\n"
+            "- _\"ما نموذج العمل المناسب لـ [حالة]؟\"_ — لنصيحة تطبيقية\n"
+            "- _\"استراتيجيات النمو\"_، _\"مؤشرات SaaS\"_ — لتصفّح موضوع\n\n"
+            "**المواضيع التي أعرفها جيداً:** نماذج الأعمال، التسعير، النمو، المؤشرات، اقتصاديات المنصات، الاستراتيجية.\n"
+        )
+    else:
+        markdown = (
+            f"I couldn't find a strong match for **\"{query}\"** in the library.\n\n"
+            "**Try one of these patterns:**\n"
+            "- _\"What is [concept]?\"_ — for definitions\n"
+            "- _\"Compare X vs Y\"_ — for contrasts\n"
+            "- _\"What business model for [situation]?\"_ — for tailored advice\n"
+            "- _\"growth strategies\"_, _\"SaaS metrics\"_ — to browse a topic\n\n"
+            "**Topics I know well:** business models, pricing, growth, metrics, platform economics, strategy.\n"
+        )
     return {"markdown": markdown, "concepts": []}
 
 
-def answer(query: str, atoms: dict, use_ai: bool = True) -> dict:
-    """Return a structured response: {markdown, concepts, ai, ai_error}."""
-    intent = detect_intent(query)
+def answer(query: str, atoms: dict, use_ai: bool = True, lang: str = "en") -> dict:
+    """Return a structured response: {markdown, concepts, ai, ai_error}.
+
+    Bilingual handling: the local search index is keyed in English. If the
+    user types in Arabic, we translate the query to English via Kimi for
+    grounding (single extra ~1s call), pick the right atoms, then have Kimi
+    synthesize the response back in the user's chosen `lang`.
+    """
+    # Translate Arabic queries to English for local search grounding only
+    search_query = query
+    if detect_arabic(query) and use_ai:
+        search_query = kimi_translate_query(query, target="en")
+
+    intent = detect_intent(search_query)
     if intent == "GREETING":
-        base = respond_greeting(atoms)
+        base = respond_greeting(atoms, lang)
         base["ai"] = None
         base["ai_error"] = None
         base["intent"] = intent
         return base
 
     if intent == "COMPARISON":
-        base = respond_comparison(query, atoms)
-        # Build top_atoms from the two compared sides for AI grounding
+        base = respond_comparison(search_query, atoms)
         q_clean = re.sub(
             r"^(compare\s+|difference between\s+|what(?:'s| is) the difference between\s+)",
-            "", query.lower().rstrip("?!.").strip(),
+            "", search_query.lower().rstrip("?!.").strip(),
         )
         pair = None
         for sep in (" vs. ", " vs ", " versus ", " or "):
@@ -1591,20 +1994,22 @@ def answer(query: str, atoms: dict, use_ai: bool = True) -> dict:
                 if hits and hits[0][1] not in {t for _, t, _ in top_atoms}:
                     top_atoms.append(hits[0])
     else:
-        results = search_atoms(query, atoms)
+        results = search_atoms(search_query, atoms)
         if intent == "DEFINITION":
-            base = respond_definition(query, results, atoms)
+            base = respond_definition(search_query, results, atoms)
         elif intent == "ADVICE":
-            base = respond_advice(query, atoms)
+            base = respond_advice(search_query, atoms)
         elif intent == "LIST":
-            base = respond_list(query, results, atoms)
+            base = respond_list(search_query, results, atoms)
         else:
-            base = respond_general(query, results, atoms)
+            base = respond_general(search_query, results, atoms)
         top_atoms = results[:4]
 
     ai_text, ai_error = None, None
     if use_ai and intent != "GREETING" and top_atoms:
-        ai_text, ai_error = synthesize_with_ai(query, intent, top_atoms)
+        # Use the ORIGINAL query (in user's language) for the synthesis call
+        # so the AI sees what the user actually typed
+        ai_text, ai_error = synthesize_with_ai(query, intent, top_atoms, lang=lang)
 
     base["ai"] = ai_text
     base["ai_error"] = ai_error
@@ -1621,8 +2026,10 @@ def _slug(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
-def query_for_concept(title: str) -> str:
+def query_for_concept(title: str, lang: str = "en") -> str:
     """The query a clicked concept button should fire."""
+    if lang == "ar":
+        return f"ما هو {title}؟"
     return f"What is {title}?"
 
 
@@ -1631,36 +2038,26 @@ def enqueue(query: str):
     st.session_state.pending_query = query
 
 
-def render_response(resp: dict, msg_idx: int):
-    """Render an assistant response.
-
-    Hierarchy:
-      1. AI synthesis (primary — detailed, multi-section markdown). If AI failed
-         or is disabled, the structured wiki content is shown as the primary
-         response instead so the user always gets a useful answer.
-      2. "Source material from the wiki" expander (always present when we have it)
-         — the raw structured atom dump that grounds the synthesis.
-      3. Jump-to-concept buttons.
-    """
+def render_response(resp: dict, msg_idx: int, lang: str = "en"):
+    """Render an assistant response."""
     has_ai = bool(resp.get("ai"))
     has_md = bool(resp.get("markdown"))
     intent = resp.get("intent")
 
     if has_ai:
         st.markdown(
-            "<div class='section-eyebrow'>Synthesis — grounded in the wiki</div>",
+            f"<div class='section-eyebrow'>{t('eyebrow_synthesis', lang)}</div>",
             unsafe_allow_html=True,
         )
         st.markdown(resp["ai"])
 
         if has_md and intent != "GREETING":
-            with st.expander("Source material from the wiki"):
+            with st.expander(t("expander_source", lang)):
                 st.markdown(resp["markdown"])
     else:
-        # Fallback: show the structured wiki dump as the main answer
         if resp.get("ai_error") and intent not in (None, "GREETING"):
             st.warning(
-                f"AI synthesis unavailable, showing local wiki results.\n\n_{resp['ai_error'][:200]}_"
+                f"{t('ai_unavailable', lang)}\n\n_{resp['ai_error'][:200]}_"
             )
         if has_md:
             st.markdown(resp["markdown"])
@@ -1668,7 +2065,7 @@ def render_response(resp: dict, msg_idx: int):
     concepts = resp.get("concepts") or []
     if concepts:
         st.markdown(
-            "<div class='section-eyebrow'>Jump to concept</div>",
+            f"<div class='section-eyebrow'>{t('eyebrow_jump', lang)}</div>",
             unsafe_allow_html=True,
         )
         cols = st.columns(min(len(concepts), 3))
@@ -1676,7 +2073,7 @@ def render_response(resp: dict, msg_idx: int):
             if cols[i % len(cols)].button(
                 title, key=f"concept_{msg_idx}_{i}_{_slug(title)}", use_container_width=True
             ):
-                enqueue(query_for_concept(title))
+                enqueue(query_for_concept(title, lang))
                 st.rerun()
 
 
@@ -1687,20 +2084,20 @@ def render_response(resp: dict, msg_idx: int):
 atoms = load_wiki_atoms()
 
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "response": respond_greeting(atoms)}]
+    st.session_state.messages = [{"role": "assistant", "response": respond_greeting(atoms, LANG)}]
 if "pending_query" not in st.session_state:
     st.session_state.pending_query = None
 if "ai_calls_used" not in st.session_state:
     st.session_state.ai_calls_used = 0
 
-# Header — AI health AND session quota
+# AI health + session quota
 ai_health = (
     kimi_status() if (KIMI_API_KEY and not AI_DISABLED) else {"ok": False, "reason": "disabled" if AI_DISABLED else "no key"}
 )
 quota_exhausted = SESSION_AI_LIMIT > 0 and st.session_state.ai_calls_used >= SESSION_AI_LIMIT
 ai_available_now = ai_health.get("ok") and not quota_exhausted
 
-badge_label = "AI + Wiki" if ai_available_now else "Local search"
+badge_label = t("badge_ai", LANG) if ai_available_now else t("badge_local", LANG)
 badge_class = "badge badge-active" if ai_available_now else "badge"
 
 # Header — single tight flex row: logo + title + badge + subtitle
@@ -1717,26 +2114,28 @@ st.markdown(
   {_logo_html}
   <div class="pb-header-text">
     <div class="pb-header-title-row">
-      <span class="pb-header-title">JAK Business Concepts Library</span>
+      <span class="pb-header-title">{t('app_title', LANG)}</span>
       <span class="{badge_class}">{badge_label}</span>
     </div>
-    <p class="pb-header-subtitle">Business models, pricing, growth, metrics, platform economics, strategy.</p>
+    <p class="pb-header-subtitle">{t('app_subtitle', LANG)}</p>
   </div>
 </div>
 """,
     unsafe_allow_html=True,
 )
 
-examples = [
-    "What is value-based pricing?",
-    "Compare freemium vs free trial",
-    "What business model for an ice cream shop?",
-    "growth strategies",
+# Example query buttons — localized
+example_keys = [
+    "ex_value_pricing",
+    "ex_freemium_vs_trial",
+    "ex_ice_cream",
+    "ex_growth",
 ]
-cols = st.columns(len(examples))
-for col, ex in zip(cols, examples):
-    if col.button(ex, key=f"ex_{_slug(ex)}", use_container_width=True):
-        enqueue(ex)
+example_labels = [t(k, LANG) for k in example_keys]
+cols = st.columns(len(example_labels))
+for col, label, key in zip(cols, example_labels, example_keys):
+    if col.button(label, key=f"ex_{key}", use_container_width=True):
+        enqueue(label)
         st.rerun()
 
 # Render conversation
@@ -1745,11 +2144,11 @@ for msg_idx, msg in enumerate(st.session_state.messages):
         if msg["role"] == "user":
             st.markdown(msg["content"])
         else:
-            render_response(msg["response"], msg_idx)
+            render_response(msg["response"], msg_idx, lang=LANG)
 
 # Process queued query (from a concept button or example) before reading new chat input
 queued = st.session_state.pending_query
-prompt_input = st.chat_input("Ask about business concepts…")
+prompt_input = st.chat_input(t("input_placeholder", LANG))
 prompt = queued or prompt_input
 if queued:
     st.session_state.pending_query = None
@@ -1759,45 +2158,59 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant"):
-        # Re-check quota at request time (in case multiple queries used it up this session)
         use_ai_now = ai_health.get("ok") and (
             SESSION_AI_LIMIT == 0 or st.session_state.ai_calls_used < SESSION_AI_LIMIT
         )
-        spinner_msg = (
-            "Synthesizing a detailed answer from the wiki…"
-            if use_ai_now else "Searching wiki…"
-        )
+        spinner_msg = t("spinner_ai" if use_ai_now else "spinner_local", LANG)
         with st.spinner(spinner_msg):
-            resp = answer(prompt, atoms, use_ai=use_ai_now)
+            resp = answer(prompt, atoms, use_ai=use_ai_now, lang=LANG)
         if resp.get("ai"):
             st.session_state.ai_calls_used += 1
-        render_response(resp, len(st.session_state.messages))
+        render_response(resp, len(st.session_state.messages), lang=LANG)
     st.session_state.messages.append({"role": "assistant", "response": resp})
 
-# Sidebar — AI status + atom browser
+# Sidebar — language toggle, library stats, AI status, atom browser
 with st.sidebar:
-    st.markdown("<div class='section-eyebrow' style='margin-top:0;'>Library</div>", unsafe_allow_html=True)
-    col_a, col_b = st.columns(2)
-    col_a.metric("Atoms", len(atoms))
-    col_b.metric("Sources", SOURCES_COUNT)
+    # Language toggle
+    st.markdown(f"<div class='section-eyebrow' style='margin-top:0;'>{t('sb_language', LANG)}</div>", unsafe_allow_html=True)
+    lang_options = {"en": "English", "ar": "العربية"}
+    new_lang = st.radio(
+        label=t("sb_language", LANG),
+        options=list(lang_options.keys()),
+        format_func=lambda k: lang_options[k],
+        index=0 if LANG == "en" else 1,
+        horizontal=True,
+        label_visibility="collapsed",
+        key="lang_radio",
+    )
+    if new_lang != LANG:
+        st.session_state.lang = new_lang
+        st.query_params["lang"] = new_lang
+        st.rerun()
 
-    st.markdown("<div class='section-eyebrow'>Synthesis</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='section-eyebrow'>{t('sb_library', LANG)}</div>", unsafe_allow_html=True)
+    col_a, col_b = st.columns(2)
+    col_a.metric(t("sb_atoms", LANG), len(atoms))
+    col_b.metric(t("sb_sources", LANG), SOURCES_COUNT)
+
+    st.markdown(f"<div class='section-eyebrow'>{t('sb_synthesis', LANG)}</div>", unsafe_allow_html=True)
     if ai_health.get("ok"):
         remaining_line = ""
         if SESSION_AI_LIMIT > 0:
             remaining = max(0, SESSION_AI_LIMIT - st.session_state.ai_calls_used)
             if remaining == 0:
                 remaining_line = (
-                    "<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
-                    "Session AI quota used — refresh to reset, or continue with local search.</div>"
+                    f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
+                    f"{t('sb_quota_used', LANG)}</div>"
                 )
             else:
+                label_key = "sb_query_label" if remaining == 1 else "sb_queries_label"
                 remaining_line = (
                     f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
-                    f"{remaining} AI {'queries' if remaining != 1 else 'query'} remaining this session</div>"
+                    f"{t('sb_quota_remaining', LANG, n=remaining, label=t(label_key, LANG))}</div>"
                 )
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.85rem;'>Connected · "
+            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_connected', LANG)} · "
             f"<code>{ai_health.get('model')}</code></div>"
             f"{remaining_line}",
             unsafe_allow_html=True,
@@ -1805,36 +2218,41 @@ with st.sidebar:
     else:
         reason = ai_health.get("reason", "unknown")
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.85rem;'>Local-only mode</div>"
+            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_local_mode', LANG)}</div>"
             f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>{reason[:160]}</div>",
             unsafe_allow_html=True,
         )
 
-    st.markdown("<div class='section-eyebrow'>Browse atoms</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='section-eyebrow'>{t('sb_browse', LANG)}</div>", unsafe_allow_html=True)
     cats_by_name = {}
     for title, d in atoms.items():
         cats_by_name.setdefault(d["category"], []).append(title)
     for cat in sorted(cats_by_name):
-        with st.expander(f"{format_category(cat)} ({len(cats_by_name[cat])})", expanded=False):
+        cat_label = format_category(cat, LANG)
+        with st.expander(f"{cat_label} ({len(cats_by_name[cat])})", expanded=False):
             for title in sorted(cats_by_name[cat]):
                 if st.button(title, key=f"sb_{_slug(cat)}_{_slug(title)}", use_container_width=True):
-                    enqueue(query_for_concept(title))
+                    enqueue(query_for_concept(title, LANG))
                     st.rerun()
 
     st.markdown("<div style='margin-top:1rem;'></div>", unsafe_allow_html=True)
-    if st.button("Reset chat", use_container_width=True):
-        st.session_state.messages = [{"role": "assistant", "response": respond_greeting(atoms)}]
+    if st.button(t("btn_reset", LANG), use_container_width=True):
+        st.session_state.messages = [{"role": "assistant", "response": respond_greeting(atoms, LANG)}]
         st.session_state.pending_query = None
         st.session_state.ai_calls_used = 0
         st.rerun()
 
+    # Footer with gradient ProcessBay wordmark — same in both langs
+    _pb_wordmark = (
+        '<strong style="background:linear-gradient(135deg,#3b1ee0,#6b3aa0);'
+        '-webkit-background-clip:text;-webkit-text-fill-color:transparent;'
+        'font-weight:600;">ProcessBay</strong>'
+    )
+    _footer_html = t("footer", LANG).replace("ProcessBay", _pb_wordmark)
     st.markdown(
         "<div style='margin-top:2rem;padding-top:1rem;border-top:1px solid #e4e4e7;"
         "color:#71717a;font-size:0.7rem;line-height:1.5;'>"
-        "A <strong style='background:linear-gradient(135deg,#3b1ee0,#6b3aa0);"
-        "-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;'>"
-        "ProcessBay</strong> tool, built by Jamal Khan as part of JAK OS. "
-        "AI synthesis grounded in a private business-concepts wiki."
+        f"{_footer_html}"
         "</div>",
         unsafe_allow_html=True,
     )
