@@ -1627,17 +1627,19 @@ ai_available_now = ai_health.get("ok") and not quota_exhausted
 badge_label = "AI + Wiki" if ai_available_now else "Local search"
 badge_class = "badge badge-active" if ai_available_now else "badge"
 
-# Header row: ProcessBay logo (if present) + JAK title + status badge
-logo_col, title_col = st.columns([1, 5], gap="medium")
+# Header row: ProcessBay horizontal logo + JAK title + status badge
+# To swap to the vertical lockup, set PB_LOGO_PATH = ... / "processbay-logo-vertical.png" above
+# and reduce the width below.
+logo_col, title_col = st.columns([2, 5], gap="medium")
 with logo_col:
     if PB_LOGO_PATH.exists():
-        st.image(str(PB_LOGO_PATH), width=140)
+        st.image(str(PB_LOGO_PATH), width=220)
     else:
         st.markdown("<div style='height:40px;'></div>", unsafe_allow_html=True)
 with title_col:
     st.markdown(
         f"""
-<div style='display:flex;align-items:baseline;gap:12px;margin:0.5rem 0 0.25rem 0;'>
+<div style='display:flex;align-items:baseline;gap:12px;margin:1rem 0 0.25rem 0;'>
   <h1 class='app-title' style='margin:0;'>JAK Business Concepts Library</h1>
   <span class='{badge_class}'>{badge_label}</span>
 </div>
