@@ -80,15 +80,10 @@ def _secret(key: str, default: str = "") -> str:
 KIMI_API_KEY = _secret("KIMI_API_KEY", "")
 KIMI_BASE_URL = _secret("KIMI_BASE_URL", "https://api.moonshot.ai/v1").rstrip("/")
 KIMI_MODEL = _secret("KIMI_MODEL", "moonshot-v1-auto")
-# Arabic-specific Kimi fallback. Used only if no OpenAI key is configured.
+# Arabic uses moonshot-v1-128k + hardened language-lock prompt + CJK sanitizer.
+# Quality is imperfect (Kimi's Arabic occasionally leaks Chinese chars which
+# the sanitizer strips) but it's a single-provider setup that ships cleanly.
 KIMI_MODEL_AR = _secret("KIMI_MODEL_AR", "moonshot-v1-128k")
-
-# OpenAI (used for Arabic synthesis — Kimi can't produce production-quality
-# Arabic). When OPENAI_API_KEY is set, Arabic queries route here; English stays
-# on Kimi (cheaper). Falls back to Kimi if the OpenAI key is missing/invalid.
-OPENAI_API_KEY = _secret("OPENAI_API_KEY", "")
-OPENAI_BASE_URL = _secret("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-OPENAI_MODEL = _secret("OPENAI_MODEL", "gpt-4o-mini")
 
 # Per-browser-session safety cap on AI calls — bounds cost exposure on public deploys.
 # Override via SESSION_AI_LIMIT secret/env (set to 0 to disable the cap).
@@ -411,81 +406,6 @@ def kimi_status() -> dict:
         return {"ok": True, "model": KIMI_MODEL, "endpoint": KIMI_BASE_URL}
     except KimiError as e:
         return {"ok": False, "reason": str(e), "model": KIMI_MODEL}
-
-
-# ---------------------------------------------------------------------------
-# OpenAI client (urllib, same pattern as Kimi). Used for Arabic synthesis.
-# ---------------------------------------------------------------------------
-
-
-class OpenAIError(Exception):
-    pass
-
-
-def openai_chat(messages: list, *, model: str = None, max_tokens: int = 1500,
-                temperature: float = 0.5, timeout: int = 45) -> str:
-    """Call OpenAI's /chat/completions and return assistant content.
-
-    Raises OpenAIError on any failure with a human-readable diagnostic.
-    """
-    if not OPENAI_API_KEY:
-        raise OpenAIError("OPENAI_API_KEY is not set.")
-
-    body = json.dumps({
-        "model": model or OPENAI_MODEL,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        f"{OPENAI_BASE_URL}/chat/completions",
-        data=body,
-        headers={
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            payload = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        try:
-            err_body = json.loads(e.read().decode("utf-8"))
-            msg = err_body.get("error", {}).get("message", str(e))
-        except Exception:
-            msg = str(e)
-        if e.code == 401:
-            raise OpenAIError(f"401 Invalid key. Check OPENAI_API_KEY. Detail: {msg}")
-        if e.code == 429:
-            raise OpenAIError(f"429 Rate limited / quota exceeded. Detail: {msg}")
-        raise OpenAIError(f"HTTP {e.code}: {msg}")
-    except urllib.error.URLError as e:
-        raise OpenAIError(f"Network error reaching {OPENAI_BASE_URL}: {e.reason}")
-    except Exception as e:
-        raise OpenAIError(f"Unexpected error: {e}")
-
-    try:
-        return payload["choices"][0]["message"]["content"].strip()
-    except (KeyError, IndexError):
-        raise OpenAIError(f"Unexpected response shape: {payload!r}")
-
-
-@st.cache_data(show_spinner=False, ttl=300)
-def openai_status() -> dict:
-    """Probe OpenAI once at startup so the sidebar can show health for Arabic."""
-    if not OPENAI_API_KEY:
-        return {"ok": False, "reason": "no key", "model": OPENAI_MODEL}
-    try:
-        openai_chat(
-            [{"role": "user", "content": "Reply with: OK"}],
-            max_tokens=5, temperature=0.0, timeout=10,
-        )
-        return {"ok": True, "model": OPENAI_MODEL, "endpoint": OPENAI_BASE_URL}
-    except OpenAIError as e:
-        return {"ok": False, "reason": str(e), "model": OPENAI_MODEL}
 
 
 # ---------------------------------------------------------------------------
@@ -1731,22 +1651,12 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
     written in the requested language. The system prompt forbids inventing
     facts beyond the excerpts.
     """
-    if not top_atoms:
+    if not KIMI_API_KEY or not top_atoms:
         return None, None
-    # Need at least one provider key. Arabic prefers OpenAI; English uses Kimi.
-    if lang == "ar" and not OPENAI_API_KEY and not KIMI_API_KEY:
-        return None, None
-    if lang != "ar" and not KIMI_API_KEY:
-        return None, None
-
-    # Route Arabic to OpenAI when its key is set — Kimi can't produce
-    # production-quality Arabic. Falls back to Kimi if OpenAI is missing.
-    use_openai = (lang == "ar" and bool(OPENAI_API_KEY))
 
     # Reasoning models (kimi-k2.6) scale runtime with prompt size. For Arabic
-    # on a reasoning model we use a much slimmer prompt — top 2 atoms only,
-    # ~500 chars each, and a compact system prompt.
-    is_reasoning = (lang == "ar" and not use_openai and KIMI_MODEL_AR.startswith("kimi-k"))
+    # on a reasoning model we use a much slimmer prompt — top 2 atoms only.
+    is_reasoning = (lang == "ar" and KIMI_MODEL_AR.startswith("kimi-k"))
 
     if is_reasoning:
         excerpts = "\n\n---\n\n".join(
@@ -1807,24 +1717,6 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
                 f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
             )
 
-    # Route to the right provider + params
-    if use_openai:
-        try:
-            text = openai_chat(
-                [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
-                model=OPENAI_MODEL,
-                max_tokens=2400,
-                temperature=0.5,
-                timeout=60,
-            )
-            return text, None
-        except OpenAIError as e:
-            return None, f"[OpenAI] {e}"
-
-    # Otherwise fall through to Kimi (English, or Arabic-fallback if no OpenAI key)
     if lang == "ar":
         chosen_model = KIMI_MODEL_AR
         is_reasoning_model = chosen_model.startswith("kimi-k")
@@ -1848,12 +1740,12 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
             temperature=chosen_temp,
             timeout=chosen_timeout,
         )
-        # Post-process Arabic to scrub any CJK leakage when using Kimi
+        # Post-process Arabic to scrub any CJK leakage from the model
         if lang == "ar":
             text = sanitize_arabic_output(text)
         return text, None
     except KimiError as e:
-        return None, f"[Kimi] {e}"
+        return None, str(e)
 
 
 def find_contrast_anywhere(atoms: dict, term_a: str, term_b: str):
@@ -2503,54 +2395,34 @@ with st.sidebar:
     col_b.metric(t("sb_sources", LANG), SOURCES_COUNT)
 
     st.markdown(f"<div class='section-eyebrow'>{t('sb_synthesis', LANG)}</div>", unsafe_allow_html=True)
-    # Kimi status (English synthesis)
     if ai_health.get("ok"):
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.8rem;'>EN · {t('sb_connected', LANG)} · "
+            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_connected', LANG)} · "
             f"<code>{ai_health.get('model')}</code></div>",
             unsafe_allow_html=True,
         )
+        if SESSION_AI_LIMIT > 0:
+            remaining = max(0, SESSION_AI_LIMIT - st.session_state.ai_calls_used)
+            if remaining == 0:
+                st.markdown(
+                    f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
+                    f"{t('sb_quota_used', LANG)}</div>",
+                    unsafe_allow_html=True,
+                )
+            else:
+                label_key = "sb_query_label" if remaining == 1 else "sb_queries_label"
+                st.markdown(
+                    f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
+                    f"{t('sb_quota_remaining', LANG, n=remaining, label=t(label_key, LANG))}</div>",
+                    unsafe_allow_html=True,
+                )
     else:
         reason = ai_health.get("reason", "unknown")
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.8rem;'>EN · {t('sb_local_mode', LANG)}</div>"
-            f"<div style='color:#71717a;font-size:0.72rem;margin-top:2px;'>{reason[:120]}</div>",
+            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_local_mode', LANG)}</div>"
+            f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>{reason[:160]}</div>",
             unsafe_allow_html=True,
         )
-
-    # OpenAI status (Arabic synthesis)
-    oai_health = openai_status() if OPENAI_API_KEY else {"ok": False, "reason": "no key", "model": OPENAI_MODEL}
-    if oai_health.get("ok"):
-        st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.8rem;margin-top:4px;'>AR · {t('sb_connected', LANG)} · "
-            f"<code>{oai_health.get('model')}</code></div>",
-            unsafe_allow_html=True,
-        )
-    else:
-        reason = oai_health.get("reason", "unknown")
-        ar_fallback = "Kimi fallback" if ai_health.get("ok") else "local search"
-        st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.8rem;margin-top:4px;'>AR · {ar_fallback}</div>"
-            f"<div style='color:#71717a;font-size:0.72rem;margin-top:2px;'>{reason[:120]}</div>",
-            unsafe_allow_html=True,
-        )
-
-    # Per-session quota line (applies to either provider)
-    if SESSION_AI_LIMIT > 0 and (ai_health.get("ok") or oai_health.get("ok")):
-        remaining = max(0, SESSION_AI_LIMIT - st.session_state.ai_calls_used)
-        if remaining == 0:
-            st.markdown(
-                f"<div style='color:#71717a;font-size:0.72rem;margin-top:6px;'>"
-                f"{t('sb_quota_used', LANG)}</div>",
-                unsafe_allow_html=True,
-            )
-        else:
-            label_key = "sb_query_label" if remaining == 1 else "sb_queries_label"
-            st.markdown(
-                f"<div style='color:#71717a;font-size:0.72rem;margin-top:6px;'>"
-                f"{t('sb_quota_remaining', LANG, n=remaining, label=t(label_key, LANG))}</div>",
-                unsafe_allow_html=True,
-            )
 
     st.markdown(f"<div class='section-eyebrow'>{t('sb_browse', LANG)}</div>", unsafe_allow_html=True)
     cats_by_name = {}
