@@ -80,14 +80,15 @@ def _secret(key: str, default: str = "") -> str:
 KIMI_API_KEY = _secret("KIMI_API_KEY", "")
 KIMI_BASE_URL = _secret("KIMI_BASE_URL", "https://api.moonshot.ai/v1").rstrip("/")
 KIMI_MODEL = _secret("KIMI_MODEL", "moonshot-v1-auto")
-# Arabic-specific model. After testing all Kimi models with realistic prompts:
-#   - moonshot-v1-auto: fast (~10s) but heavy Chinese/Korean leakage
-#   - moonshot-v1-128k: fast (~15s), some leakage that the sanitizer catches
-#   - kimi-k2.6: clean output but >200s latency, frequently 0 content (burns
-#     all tokens on reasoning). Unusable for interactive UX.
-# Conclusion: ship moonshot-v1-128k + CJK sanitizer as best Kimi-only Arabic.
-# For production-quality Arabic, add OPENAI_API_KEY or ANTHROPIC_API_KEY.
+# Arabic-specific Kimi fallback. Used only if no OpenAI key is configured.
 KIMI_MODEL_AR = _secret("KIMI_MODEL_AR", "moonshot-v1-128k")
+
+# OpenAI (used for Arabic synthesis — Kimi can't produce production-quality
+# Arabic). When OPENAI_API_KEY is set, Arabic queries route here; English stays
+# on Kimi (cheaper). Falls back to Kimi if the OpenAI key is missing/invalid.
+OPENAI_API_KEY = _secret("OPENAI_API_KEY", "")
+OPENAI_BASE_URL = _secret("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+OPENAI_MODEL = _secret("OPENAI_MODEL", "gpt-4o-mini")
 
 # Per-browser-session safety cap on AI calls — bounds cost exposure on public deploys.
 # Override via SESSION_AI_LIMIT secret/env (set to 0 to disable the cap).
@@ -329,6 +330,82 @@ def kimi_status() -> dict:
         return {"ok": True, "model": KIMI_MODEL, "endpoint": KIMI_BASE_URL}
     except KimiError as e:
         return {"ok": False, "reason": str(e), "model": KIMI_MODEL}
+
+
+# ---------------------------------------------------------------------------
+# OpenAI client (urllib, same pattern as Kimi). Used for Arabic synthesis.
+# ---------------------------------------------------------------------------
+
+
+class OpenAIError(Exception):
+    pass
+
+
+def openai_chat(messages: list, *, model: str = None, max_tokens: int = 1500,
+                temperature: float = 0.5, timeout: int = 45) -> str:
+    """Call OpenAI's /chat/completions and return assistant content.
+
+    Raises OpenAIError on any failure with a human-readable diagnostic.
+    """
+    if not OPENAI_API_KEY:
+        raise OpenAIError("OPENAI_API_KEY is not set.")
+
+    body = json.dumps({
+        "model": model or OPENAI_MODEL,
+        "messages": messages,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"{OPENAI_BASE_URL}/chat/completions",
+        data=body,
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            payload = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        try:
+            err_body = json.loads(e.read().decode("utf-8"))
+            msg = err_body.get("error", {}).get("message", str(e))
+        except Exception:
+            msg = str(e)
+        if e.code == 401:
+            raise OpenAIError(f"401 Invalid key. Check OPENAI_API_KEY. Detail: {msg}")
+        if e.code == 429:
+            raise OpenAIError(f"429 Rate limited / quota exceeded. Detail: {msg}")
+        raise OpenAIError(f"HTTP {e.code}: {msg}")
+    except urllib.error.URLError as e:
+        raise OpenAIError(f"Network error reaching {OPENAI_BASE_URL}: {e.reason}")
+    except Exception as e:
+        raise OpenAIError(f"Unexpected error: {e}")
+
+    try:
+        return payload["choices"][0]["message"]["content"].strip()
+    except (KeyError, IndexError):
+        raise OpenAIError(f"Unexpected response shape: {payload!r}")
+
+
+@st.cache_data(show_spinner=False, ttl=300)
+def openai_status() -> dict:
+    """Probe OpenAI once at startup so the sidebar can show health for Arabic."""
+    if not OPENAI_API_KEY:
+        return {"ok": False, "reason": "no key", "model": OPENAI_MODEL}
+    try:
+        openai_chat(
+            [{"role": "user", "content": "Reply with: OK"}],
+            max_tokens=5, temperature=0.0, timeout=10,
+        )
+        return {"ok": True, "model": OPENAI_MODEL, "endpoint": OPENAI_BASE_URL}
+    except OpenAIError as e:
+        return {"ok": False, "reason": str(e), "model": OPENAI_MODEL}
+
 
 # ---------------------------------------------------------------------------
 # Page + styles
@@ -1550,13 +1627,22 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
     written in the requested language. The system prompt forbids inventing
     facts beyond the excerpts.
     """
-    if not KIMI_API_KEY or not top_atoms:
+    if not top_atoms:
         return None, None
+    # Need at least one provider key. Arabic prefers OpenAI; English uses Kimi.
+    if lang == "ar" and not OPENAI_API_KEY and not KIMI_API_KEY:
+        return None, None
+    if lang != "ar" and not KIMI_API_KEY:
+        return None, None
+
+    # Route Arabic to OpenAI when its key is set — Kimi can't produce
+    # production-quality Arabic. Falls back to Kimi if OpenAI is missing.
+    use_openai = (lang == "ar" and bool(OPENAI_API_KEY))
 
     # Reasoning models (kimi-k2.6) scale runtime with prompt size. For Arabic
     # on a reasoning model we use a much slimmer prompt — top 2 atoms only,
     # ~500 chars each, and a compact system prompt.
-    is_reasoning = (lang == "ar" and KIMI_MODEL_AR.startswith("kimi-k"))
+    is_reasoning = (lang == "ar" and not use_openai and KIMI_MODEL_AR.startswith("kimi-k"))
 
     if is_reasoning:
         excerpts = "\n\n---\n\n".join(
@@ -1612,7 +1698,24 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
                 f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
             )
 
-    # Pick model + params based on language.
+    # Route to the right provider + params
+    if use_openai:
+        try:
+            text = openai_chat(
+                [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                model=OPENAI_MODEL,
+                max_tokens=2400,
+                temperature=0.5,
+                timeout=60,
+            )
+            return text, None
+        except OpenAIError as e:
+            return None, f"[OpenAI] {e}"
+
+    # Otherwise fall through to Kimi (English, or Arabic-fallback if no OpenAI key)
     if lang == "ar":
         chosen_model = KIMI_MODEL_AR
         is_reasoning_model = chosen_model.startswith("kimi-k")
@@ -1636,12 +1739,12 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
             temperature=chosen_temp,
             timeout=chosen_timeout,
         )
-        # Post-process Arabic to scrub any CJK leakage from the model
+        # Post-process Arabic to scrub any CJK leakage when using Kimi
         if lang == "ar":
             text = sanitize_arabic_output(text)
         return text, None
     except KimiError as e:
-        return None, str(e)
+        return None, f"[Kimi] {e}"
 
 
 def find_contrast_anywhere(atoms: dict, term_a: str, term_b: str):
