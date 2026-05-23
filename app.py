@@ -49,7 +49,7 @@ def _resolve_wiki_path() -> Path:
 
 
 WIKI_PATH = _resolve_wiki_path()
-SOURCES_COUNT = 19
+SOURCES_COUNT = 11
 
 # Load .env if present (lightweight — no python-dotenv dependency)
 ENV_PATH = Path(__file__).resolve().parent / ".env"
@@ -281,6 +281,26 @@ def concept_label(title: str, lang: str = "en") -> str:
 def detect_arabic(text: str) -> bool:
     """Return True if the string contains Arabic-script characters."""
     return any("؀" <= ch <= "ۿ" or "ݐ" <= ch <= "ݿ" for ch in text)
+
+
+def render_markdown_content_aware(text: str):
+    """Render markdown with direction matching the content's script.
+
+    If the text contains Arabic characters, wrap it in dir='rtl' + text-align:right
+    so it's correctly right-justified regardless of the current UI language. This
+    matters for user-typed messages and any other place where the content language
+    can diverge from the UI language.
+    """
+    if not text:
+        st.markdown(text or "")
+        return
+    if detect_arabic(text):
+        st.markdown(
+            f"<div dir='rtl' style='text-align:right;'>\n\n{text}\n\n</div>",
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(text)
 
 
 # Unicode ranges to scrub from Arabic AI output (Kimi sometimes leaks Chinese).
@@ -561,6 +581,37 @@ st.markdown(
     }
     /* Sidebar collapse toggle button — Streamlit positions it absolutely; let it stay
        in its default LTR position to avoid weird overlaps */
+
+    /* === Arabic text always right-justifies, regardless of UI direction ===
+       The render_markdown_content_aware helper wraps Arabic content in <div dir='rtl'>.
+       These selectors make sure any such block gets the right typographic treatment
+       even when the surrounding UI is in LTR/English mode. */
+    [dir="rtl"] {
+        text-align: right;
+        direction: rtl;
+    }
+    [dir="rtl"] ul, [dir="rtl"] ol {
+        padding-right: 1.4rem;
+        padding-left: 0;
+    }
+    [dir="rtl"] blockquote {
+        border-left: none;
+        border-right: 2px solid var(--pb-purple);
+        padding: 0.25rem 1rem 0.25rem 0;
+    }
+    [dir="rtl"] table th, [dir="rtl"] table td { text-align: right; }
+
+    /* Chat input textarea — when UI lang is Arabic, RTL the textarea so the user
+       sees Arabic text right-aligned as they type. */
+    html[dir="rtl"] [data-testid="stChatInput"] textarea {
+        direction: rtl;
+        text-align: right;
+    }
+    /* Even in LTR UI mode, let the browser auto-detect direction for the textarea
+       so Arabic typed into the English-mode input still right-aligns. */
+    [data-testid="stChatInput"] textarea {
+        unicode-bidi: plaintext;
+    }
 
     /* Header row — flex layout, logo sits immediately next to title */
     .pb-header {
@@ -2343,7 +2394,7 @@ for col, label, key in zip(cols, example_labels, example_keys):
 for msg_idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"]):
         if msg["role"] == "user":
-            st.markdown(msg["content"])
+            render_markdown_content_aware(msg["content"])
         else:
             render_response(msg["response"], msg_idx, lang=LANG)
 
@@ -2357,7 +2408,7 @@ if queued:
 if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.markdown(prompt)
+        render_markdown_content_aware(prompt)
     with st.chat_message("assistant"):
         use_ai_now = ai_health.get("ok") and (
             SESSION_AI_LIMIT == 0 or st.session_state.ai_calls_used < SESSION_AI_LIMIT
