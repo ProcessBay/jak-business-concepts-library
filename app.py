@@ -1789,10 +1789,15 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
         system = SYSTEM_PROMPTS.get(lang, SYSTEM_PROMPTS["en"])
         if lang == "ar":
             user = (
+                f"مهمّ جداً: اكتب الإجابة بالكامل بالعربية الفصحى، بصرف النظر "
+                f"عن لغة السؤال. حتى لو طُرح السؤال بالإنجليزية فإن الإجابة "
+                f"يجب أن تكون بالعربية. لا تستخدم الإنجليزية إلا لأسماء "
+                f"الشركات الأجنبية (Salesforce, HubSpot, إلخ).\n\n"
                 f"سؤال المستخدم: {query}\n\n"
                 f"النيّة: {intent}\n\n"
                 f"تعليمات المهمة:\n{intent_instructions}\n\n"
-                f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
+                f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون "
+                f"بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
             )
         else:
             user = (
@@ -2334,7 +2339,23 @@ def render_response(resp: dict, msg_idx: int, lang: str = "en"):
             f"<div class='section-eyebrow'>{t('eyebrow_synthesis', lang)}</div>",
             unsafe_allow_html=True,
         )
-        st.markdown(resp["ai"])
+        # If the AI content's language doesn't match the UI direction (e.g.
+        # English text leaked through in Arabic mode), wrap it in a div that
+        # forces the correct direction so periods/commas don't float to the
+        # wrong side and bullet markers align properly.
+        ai_text = resp["ai"]
+        content_is_arabic = detect_arabic(ai_text)
+        ui_is_rtl = (lang == "ar")
+        needs_dir_override = (ui_is_rtl != content_is_arabic) and bool(ai_text.strip())
+        if needs_dir_override:
+            content_dir = "rtl" if content_is_arabic else "ltr"
+            text_align = "right" if content_is_arabic else "left"
+            st.markdown(
+                f"<div dir='{content_dir}' style='text-align:{text_align};'>\n\n{ai_text}\n\n</div>",
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(ai_text)
 
         if has_md and intent != "GREETING":
             with st.expander(t("expander_source", lang)):
@@ -2482,34 +2503,54 @@ with st.sidebar:
     col_b.metric(t("sb_sources", LANG), SOURCES_COUNT)
 
     st.markdown(f"<div class='section-eyebrow'>{t('sb_synthesis', LANG)}</div>", unsafe_allow_html=True)
+    # Kimi status (English synthesis)
     if ai_health.get("ok"):
-        remaining_line = ""
-        if SESSION_AI_LIMIT > 0:
-            remaining = max(0, SESSION_AI_LIMIT - st.session_state.ai_calls_used)
-            if remaining == 0:
-                remaining_line = (
-                    f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
-                    f"{t('sb_quota_used', LANG)}</div>"
-                )
-            else:
-                label_key = "sb_query_label" if remaining == 1 else "sb_queries_label"
-                remaining_line = (
-                    f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>"
-                    f"{t('sb_quota_remaining', LANG, n=remaining, label=t(label_key, LANG))}</div>"
-                )
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_connected', LANG)} · "
-            f"<code>{ai_health.get('model')}</code></div>"
-            f"{remaining_line}",
+            f"<div style='color:#a1a1aa;font-size:0.8rem;'>EN · {t('sb_connected', LANG)} · "
+            f"<code>{ai_health.get('model')}</code></div>",
             unsafe_allow_html=True,
         )
     else:
         reason = ai_health.get("reason", "unknown")
         st.markdown(
-            f"<div style='color:#a1a1aa;font-size:0.85rem;'>{t('sb_local_mode', LANG)}</div>"
-            f"<div style='color:#71717a;font-size:0.75rem;margin-top:4px;'>{reason[:160]}</div>",
+            f"<div style='color:#a1a1aa;font-size:0.8rem;'>EN · {t('sb_local_mode', LANG)}</div>"
+            f"<div style='color:#71717a;font-size:0.72rem;margin-top:2px;'>{reason[:120]}</div>",
             unsafe_allow_html=True,
         )
+
+    # OpenAI status (Arabic synthesis)
+    oai_health = openai_status() if OPENAI_API_KEY else {"ok": False, "reason": "no key", "model": OPENAI_MODEL}
+    if oai_health.get("ok"):
+        st.markdown(
+            f"<div style='color:#a1a1aa;font-size:0.8rem;margin-top:4px;'>AR · {t('sb_connected', LANG)} · "
+            f"<code>{oai_health.get('model')}</code></div>",
+            unsafe_allow_html=True,
+        )
+    else:
+        reason = oai_health.get("reason", "unknown")
+        ar_fallback = "Kimi fallback" if ai_health.get("ok") else "local search"
+        st.markdown(
+            f"<div style='color:#a1a1aa;font-size:0.8rem;margin-top:4px;'>AR · {ar_fallback}</div>"
+            f"<div style='color:#71717a;font-size:0.72rem;margin-top:2px;'>{reason[:120]}</div>",
+            unsafe_allow_html=True,
+        )
+
+    # Per-session quota line (applies to either provider)
+    if SESSION_AI_LIMIT > 0 and (ai_health.get("ok") or oai_health.get("ok")):
+        remaining = max(0, SESSION_AI_LIMIT - st.session_state.ai_calls_used)
+        if remaining == 0:
+            st.markdown(
+                f"<div style='color:#71717a;font-size:0.72rem;margin-top:6px;'>"
+                f"{t('sb_quota_used', LANG)}</div>",
+                unsafe_allow_html=True,
+            )
+        else:
+            label_key = "sb_query_label" if remaining == 1 else "sb_queries_label"
+            st.markdown(
+                f"<div style='color:#71717a;font-size:0.72rem;margin-top:6px;'>"
+                f"{t('sb_quota_remaining', LANG, n=remaining, label=t(label_key, LANG))}</div>",
+                unsafe_allow_html=True,
+            )
 
     st.markdown(f"<div class='section-eyebrow'>{t('sb_browse', LANG)}</div>", unsafe_allow_html=True)
     cats_by_name = {}
