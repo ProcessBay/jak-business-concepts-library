@@ -12,6 +12,7 @@ Features:
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import re
@@ -213,6 +214,68 @@ st.markdown(
     [data-testid="stSidebar"] { background-color: #fafafa; border-right: 1px solid #e4e4e7; }
     [data-testid="stSidebar"] .stMarkdown p,
     [data-testid="stSidebar"] .stMarkdown li { color: #3f3f46; }
+
+    /* TIGHT main container — kill the huge default top padding Streamlit applies */
+    .main .block-container,
+    [data-testid="stMainBlockContainer"] {
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+        max-width: 1100px;
+    }
+    /* Sidebar — also tighten the top padding */
+    [data-testid="stSidebar"] > div:first-child,
+    [data-testid="stSidebarContent"] {
+        padding-top: 1.5rem !important;
+    }
+    /* Hide Streamlit's default header bar entirely */
+    [data-testid="stHeader"] { display: none; }
+    /* Hide the "Made with Streamlit" footer */
+    [data-testid="stFooter"], footer { display: none; }
+    /* Hide the deploy/three-dot menu in the top-right corner */
+    [data-testid="stToolbar"] { display: none; }
+
+    /* Header row — flex layout, logo sits immediately next to title */
+    .pb-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding-bottom: 1rem;
+        margin-bottom: 1.25rem;
+        border-bottom: 1px solid #e4e4e7;
+    }
+    .pb-header-logo {
+        height: 48px;
+        width: auto;
+        display: block;
+        flex-shrink: 0;
+    }
+    .pb-header-text {
+        flex: 1;
+        min-width: 0;
+    }
+    .pb-header-title-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 0;
+        line-height: 1.2;
+    }
+    .pb-header-title {
+        color: #18181b;
+        font-size: 1.4rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        margin: 0;
+        padding: 0;
+    }
+    .pb-header-subtitle {
+        color: #71717a;
+        font-size: 0.85rem;
+        margin: 4px 0 0 0;
+        font-weight: 400;
+        line-height: 1.4;
+    }
 
     /* global text */
     .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessage p, .stChatMessage li {
@@ -1627,29 +1690,27 @@ ai_available_now = ai_health.get("ok") and not quota_exhausted
 badge_label = "AI + Wiki" if ai_available_now else "Local search"
 badge_class = "badge badge-active" if ai_available_now else "badge"
 
-# Header row: ProcessBay horizontal logo + JAK title + status badge
-# To swap to the vertical lockup, set PB_LOGO_PATH = ... / "processbay-logo-vertical.png" above
-# and reduce the width below.
-logo_col, title_col = st.columns([2, 5], gap="medium")
-with logo_col:
-    if PB_LOGO_PATH.exists():
-        st.image(str(PB_LOGO_PATH), width=220)
-    else:
-        st.markdown("<div style='height:40px;'></div>", unsafe_allow_html=True)
-with title_col:
-    st.markdown(
-        f"""
-<div style='display:flex;align-items:baseline;gap:12px;margin:1rem 0 0.25rem 0;'>
-  <h1 class='app-title' style='margin:0;'>JAK Business Concepts Library</h1>
-  <span class='{badge_class}'>{badge_label}</span>
-</div>
-<p class='app-subtitle'>Business models, pricing, growth, metrics, platform economics, strategy.</p>
-""",
-        unsafe_allow_html=True,
+# Header — single tight flex row: logo + title + badge + subtitle
+_logo_html = ""
+if PB_LOGO_PATH.exists():
+    _logo_b64 = base64.b64encode(PB_LOGO_PATH.read_bytes()).decode("ascii")
+    _logo_html = (
+        f'<img src="data:image/png;base64,{_logo_b64}" class="pb-header-logo" alt="ProcessBay" />'
     )
 
 st.markdown(
-    "<div style='border-top:1px solid #e4e4e7;margin:1rem 0 1.25rem 0;'></div>",
+    f"""
+<div class="pb-header">
+  {_logo_html}
+  <div class="pb-header-text">
+    <div class="pb-header-title-row">
+      <span class="pb-header-title">JAK Business Concepts Library</span>
+      <span class="{badge_class}">{badge_label}</span>
+    </div>
+    <p class="pb-header-subtitle">Business models, pricing, growth, metrics, platform economics, strategy.</p>
+  </div>
+</div>
+""",
     unsafe_allow_html=True,
 )
 
