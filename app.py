@@ -80,10 +80,13 @@ def _secret(key: str, default: str = "") -> str:
 KIMI_API_KEY = _secret("KIMI_API_KEY", "")
 KIMI_BASE_URL = _secret("KIMI_BASE_URL", "https://api.moonshot.ai/v1").rstrip("/")
 KIMI_MODEL = _secret("KIMI_MODEL", "moonshot-v1-auto")
-# Arabic-specific model. moonshot-v1-128k handles Arabic reasonably with the
-# hardened language-lock in the system prompt; kimi-k2.6 produces better
-# Arabic but takes 60-120s per query (too slow for interactive UX).
-# Override via secret if you accept the latency trade-off.
+# Arabic-specific model. After testing all Kimi models with realistic prompts:
+#   - moonshot-v1-auto: fast (~10s) but heavy Chinese/Korean leakage
+#   - moonshot-v1-128k: fast (~15s), some leakage that the sanitizer catches
+#   - kimi-k2.6: clean output but >200s latency, frequently 0 content (burns
+#     all tokens on reasoning). Unusable for interactive UX.
+# Conclusion: ship moonshot-v1-128k + CJK sanitizer as best Kimi-only Arabic.
+# For production-quality Arabic, add OPENAI_API_KEY or ANTHROPIC_API_KEY.
 KIMI_MODEL_AR = _secret("KIMI_MODEL_AR", "moonshot-v1-128k")
 
 # Per-browser-session safety cap on AI calls — bounds cost exposure on public deploys.
@@ -445,6 +448,18 @@ st.markdown(
         padding: 0.25rem 1rem 0.25rem 0;
     }
     html[dir="rtl"] [data-testid="stSidebar"] { text-align: right; }
+
+    /* Flip the whole app layout so sidebar lives on the right in RTL.
+       Streamlit's outer app container is flex, so reversing it swaps sidebar
+       and main content visually without any JS. */
+    html[dir="rtl"] [data-testid="stAppViewContainer"] { flex-direction: row-reverse; }
+    /* Sidebar border lives on the right in LTR; flip it to the left edge in RTL */
+    html[dir="rtl"] [data-testid="stSidebar"] {
+        border-right: none;
+        border-left: 1px solid #e4e4e7;
+    }
+    /* Sidebar collapse toggle button — Streamlit positions it absolutely; let it stay
+       in its default LTR position to avoid weird overlaps */
 
     /* Header row — flex layout, logo sits immediately next to title */
     .pb-header {
@@ -1291,7 +1306,6 @@ def _atom_excerpt_for_prompt(data: dict) -> str:
     if defn:
         pieces.append("\n## Definition\n" + truncate_md(defn, 900))
 
-    # Examples come early so they can't be truncated off
     examples = get_section(data, "canonical examples", "examples")
     if examples:
         pieces.append("\n## Examples (the ONLY companies/products you may cite)\n" + truncate_md(examples, 600))
@@ -1312,6 +1326,29 @@ def _atom_excerpt_for_prompt(data: dict) -> str:
     if pitfalls:
         pieces.append("\n## Common pitfalls\n" + truncate_md(pitfalls, 400))
 
+    return "\n".join(pieces)
+
+
+def _atom_excerpt_compact(data: dict) -> str:
+    """Slim excerpt for reasoning models (kimi-k2.6) where prompt size directly
+    multiplies latency. ~500-700 chars per atom vs ~3000 for the regular excerpt.
+    Keeps only Definition + Examples + top 3 when-to-use bullets.
+    """
+    pieces = [f"# {data['title']}"]
+    defn = get_definition(data)
+    if defn:
+        pieces.append(truncate_md(defn, 400))
+    examples = get_section(data, "canonical examples", "examples")
+    if examples:
+        # Just the first 3 example lines
+        ex_lines = [l for l in examples.split("\n") if l.strip().startswith("-")][:3]
+        if ex_lines:
+            pieces.append("Examples: " + " | ".join(l.lstrip("- ").strip()[:120] for l in ex_lines))
+    when_use = get_section(data, "when to use")
+    if when_use:
+        wu_lines = [l for l in when_use.split("\n") if l.strip().startswith("-")][:3]
+        if wu_lines:
+            pieces.append("Fits when: " + " | ".join(l.lstrip("- ").strip()[:100] for l in wu_lines))
     return "\n".join(pieces)
 
 
@@ -1516,40 +1553,72 @@ def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en
     if not KIMI_API_KEY or not top_atoms:
         return None, None
 
-    excerpts = "\n\n========================================\n\n".join(
-        _atom_excerpt_for_prompt(data) for _, _, data in top_atoms[:4]
-    )
+    # Reasoning models (kimi-k2.6) scale runtime with prompt size. For Arabic
+    # on a reasoning model we use a much slimmer prompt — top 2 atoms only,
+    # ~500 chars each, and a compact system prompt.
+    is_reasoning = (lang == "ar" and KIMI_MODEL_AR.startswith("kimi-k"))
 
-    intent_instructions = INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"]).get(
-        intent, INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"])["GENERAL"]
-    )
-    system = SYSTEM_PROMPTS.get(lang, SYSTEM_PROMPTS["en"])
-
-    if lang == "ar":
-        user = (
-            f"سؤال المستخدم: {query}\n\n"
-            f"النيّة: {intent}\n\n"
-            f"تعليمات المهمة:\n{intent_instructions}\n\n"
-            f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
+    if is_reasoning:
+        excerpts = "\n\n---\n\n".join(
+            _atom_excerpt_compact(data) for _, _, data in top_atoms[:2]
         )
     else:
-        user = (
-            f"USER QUESTION: {query}\n\n"
-            f"INTENT: {intent}\n\n"
-            f"TASK INSTRUCTIONS:\n{intent_instructions}\n\n"
-            f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
+        excerpts = "\n\n========================================\n\n".join(
+            _atom_excerpt_for_prompt(data) for _, _, data in top_atoms[:4]
         )
+
+    if is_reasoning:
+        # Compact Arabic system prompt — keeps reasoning latency down
+        system = (
+            "اكتب باللغة العربية الفصحى فقط. كل كلمة عربية. الاستثناء الوحيد: "
+            "أسماء الشركات الأجنبية (Salesforce, HubSpot, Apple, Dropbox, "
+            "Spotify, LinkedIn, McKinsey, Slack) تُكتب بالحروف اللاتينية. "
+            "ممنوع منعاً باتاً أي حرف صيني أو روسي أو كوري.\n\n"
+            "أسلوبك: حادّ الذكاء، فضولي، صوت شريك حوار لا كتاب مدرسي. ابدأ "
+            "بجاذب لا بـ \"س هو…\". أظهِر الآليات لا السمات.\n\n"
+            "قواعد ارتكاز مطلقة: كل ادّعاء، مثال، شركة، رقم، يجب أن يأتي من "
+            "مقتطفات الموسوعة أدناه. لا تُدخل معلومات من معرفتك العامّة. "
+            "لا تذكر شركات لا تظهر في المقتطفات.\n\n"
+            "استخدم markdown: `## H2` للأقسام، **عريض** باعتدال، قوائم نقطية."
+        )
+        # Lighter task instructions — just enough to shape the response
+        user = (
+            f"سؤال المستخدم: {query}\n\n"
+            f"اكتب إجابة من ~400-600 كلمة بالأقسام التالية:\n"
+            f"- فقرة افتتاحية بجاذب + تعريف\n"
+            f"- `## كيف يعمل في الواقع` (4-5 نقاط)\n"
+            f"- `## متى تلجأ إليه` (3-4 نقاط)\n"
+            f"- `## أمثلة من الواقع` (فقط الشركات في المقتطفات أدناه)\n"
+            f"- اختم بـ **الخلاصة —** جملة قوية واحدة\n\n"
+            f"مقتطفات الموسوعة:\n\n{excerpts}"
+        )
+    else:
+        intent_instructions = INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"]).get(
+            intent, INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"])["GENERAL"]
+        )
+        system = SYSTEM_PROMPTS.get(lang, SYSTEM_PROMPTS["en"])
+        if lang == "ar":
+            user = (
+                f"سؤال المستخدم: {query}\n\n"
+                f"النيّة: {intent}\n\n"
+                f"تعليمات المهمة:\n{intent_instructions}\n\n"
+                f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
+            )
+        else:
+            user = (
+                f"USER QUESTION: {query}\n\n"
+                f"INTENT: {intent}\n\n"
+                f"TASK INSTRUCTIONS:\n{intent_instructions}\n\n"
+                f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
+            )
 
     # Pick model + params based on language.
     if lang == "ar":
-        # Arabic: moonshot-v1-128k handles the hardened language-lock OK.
-        # Low temperature keeps it from drifting into Chinese.
-        # If you switch KIMI_MODEL_AR to kimi-k2.6, set temperature to 1.0 and
-        # max_tokens to 6000 (reasoning model).
         chosen_model = KIMI_MODEL_AR
-        chosen_temp = 0.2 if not chosen_model.startswith("kimi-k") else 1.0
-        chosen_max_tokens = 6000 if chosen_model.startswith("kimi-k") else 3000
-        chosen_timeout = 180 if chosen_model.startswith("kimi-k") else 60
+        is_reasoning_model = chosen_model.startswith("kimi-k")
+        chosen_temp = 1.0 if is_reasoning_model else 0.2
+        chosen_max_tokens = 4000 if is_reasoning_model else 3000
+        chosen_timeout = 180 if is_reasoning_model else 90
     else:
         chosen_model = KIMI_MODEL
         chosen_temp = 0.55
