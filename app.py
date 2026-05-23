@@ -644,13 +644,13 @@ st.markdown(
     .pb-header {
         display: flex;
         align-items: center;
-        gap: 22px;
+        gap: 38px;
         padding-bottom: 1.1rem;
         margin-bottom: 1.5rem;
         border-bottom: 1px solid #e4e4e7;
     }
     .pb-header-logo {
-        height: 64px;
+        height: 88px;
         width: auto;
         display: block;
         flex-shrink: 0;
