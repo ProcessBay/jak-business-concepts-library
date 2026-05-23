@@ -486,12 +486,31 @@ st.markdown(
     [data-testid="stSidebarContent"] {
         padding-top: 1.5rem !important;
     }
-    /* Hide Streamlit's default header bar entirely */
-    [data-testid="stHeader"] { display: none; }
+    /* Hide Streamlit's default header bar — but keep it positioned so the
+       sidebar collapse toggle (which lives inside it on some Streamlit
+       versions) stays clickable. Make it transparent/empty instead. */
+    [data-testid="stHeader"] {
+        background: transparent !important;
+        height: 0;
+        min-height: 0;
+    }
     /* Hide the "Made with Streamlit" footer */
     [data-testid="stFooter"], footer { display: none; }
-    /* Hide the deploy/three-dot menu in the top-right corner */
-    [data-testid="stToolbar"] { display: none; }
+    /* Hide the deploy/three-dot menu but NOT the sidebar collapse button.
+       The collapse button is data-testid="collapsedControl" on some
+       versions and lives inside stToolbar on others. Hide only the menu. */
+    [data-testid="stToolbar"] > div:not([data-testid="collapsedControl"]) {
+        display: none;
+    }
+    [data-testid="stMainMenu"], [data-testid="stDeployButton"] { display: none; }
+    /* Make sure the sidebar collapse toggle stays visible and on top */
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"] {
+        display: block !important;
+        visibility: visible !important;
+        z-index: 999 !important;
+    }
 
     /* RTL — applied when <html dir="rtl"> is set further down */
     html[dir="rtl"] body,
