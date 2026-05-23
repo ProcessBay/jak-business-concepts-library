@@ -202,6 +202,87 @@ def t(key: str, lang: str = "en", **fmt) -> str:
     return s
 
 
+# Atom-title translations. Wiki atoms live with English canonical titles
+# (the underlying search/synthesis layer keys off the English form), but the
+# UI shows the Arabic label to Arabic users via concept_label() below.
+CONCEPT_LABELS = {
+    # Business Models
+    "Drivers of Scalability": "محرّكات قابلية التوسّع",
+    "Freemium Business Model": "النموذج المجاني (Freemium)",
+    "Freemium Value Proposition Design": "تصميم القيمة في النموذج المجاني",
+    "Hyper Scalability": "التوسّع الفائق",
+    "Internal vs External Scalability": "التوسّع الداخلي مقابل الخارجي",
+    "Land and Expand Model": "نموذج «اكسب ثم وسّع»",
+    "Scalable Business Model": "نموذج العمل القابل للتوسّع",
+    # Growth
+    "AARRR Framework": "إطار AARRR (مقاييس القراصنة)",
+    "Distribution Channels and Partnerships": "قنوات التوزيع والشراكات",
+    "Go-to-Market Strategy": "استراتيجية الإطلاق التجاري",
+    "Growth Hacking Techniques": "تقنيات النموّ السريع",
+    "Influencer Marketing for Acquisition": "التسويق عبر المؤثّرين لاكتساب العملاء",
+    "Referral Programs": "برامج الإحالة",
+    "Sales-Led vs Product-Led GTM": "الإطلاق بقيادة المبيعات مقابل بقيادة المنتج",
+    "Viral Growth Loops": "حلقات النموّ الفيروسي",
+    # Metrics
+    "Churn Rate": "معدّل التسرّب (Churn)",
+    "Customer Acquisition Cost": "تكلفة اكتساب العميل (CAC)",
+    "Customer Conversion Rate": "معدّل تحويل العملاء",
+    "Customer Engagement Score": "مؤشّر تفاعل العميل",
+    "Customer Health Score": "مؤشّر صحّة العميل",
+    "Customer Lifetime Value": "القيمة الدائمة للعميل (LTV)",
+    "Freemium Conversion Metrics": "مؤشّرات التحويل في النموذج المجاني",
+    "GTM KPIs and Measurement": "مؤشّرات الإطلاق التجاري وقياسه",
+    "Growth Hacking KPI Baselines": "خطوط الأساس لمؤشّرات النموّ السريع",
+    "Lead Velocity Rate": "معدّل سرعة العملاء المحتملين",
+    "Monthly Recurring Revenue": "الإيرادات المتكرّرة الشهرية (MRR)",
+    "Net Promoter Score": "مؤشّر صافي المروّجين (NPS)",
+    "Network Effects Metrics": "مؤشّرات التأثيرات الشبكية",
+    # Platform Economics
+    "API Business Model": "نموذج عمل واجهات البرمجة (API)",
+    "API Economy": "اقتصاد واجهات البرمجة (API)",
+    "Critical Mass": "الكتلة الحرجة",
+    "Direct vs Indirect Network Effects": "التأثيرات الشبكية المباشرة مقابل غير المباشرة",
+    "Freemium API Model": "النموذج المجاني لواجهات البرمجة",
+    "Negative Network Effects and Curation": "التأثيرات الشبكية السلبية والتنسيق",
+    "Platform Business Model Scalability": "قابلية توسّع نماذج المنصّات",
+    "Subscription Business Model": "نموذج الاشتراك",
+    "Subscription Fatigue": "إجهاد الاشتراكات",
+    "Subscription Maturity Model": "نموذج نضج الاشتراكات",
+    "Subscription Revenue Cycle": "دورة إيرادات الاشتراك",
+    "Transaction Based API Model": "نموذج API القائم على المعاملات",
+    "Two-Sided Network Effects": "التأثيرات الشبكية ثنائية الجانب",
+    # Pricing
+    "GTM Pricing Strategies": "استراتيجيات التسعير عند الإطلاق",
+    "Penny Gap": "فجوة القرش",
+    "SaaS Monetization Strategies": "استراتيجيات تحقيق الدخل لـ SaaS",
+    "SaaS Pricing Experimentation": "التجريب التسعيري لـ SaaS",
+    "SaaS Renewal Pricing": "تسعير تجديد اشتراكات SaaS",
+    "Value-Based Pricing": "التسعير القائم على القيمة",
+    # Strategy
+    "BCG Matrix": "مصفوفة BCG",
+    "Co-Innovation and R&D Alliances": "الابتكار المشترك وتحالفات البحث والتطوير",
+    "Co-Innovation and RD Alliances": "الابتكار المشترك وتحالفات البحث والتطوير",
+    "Competitive Analysis": "التحليل التنافسي",
+    "Partner Due Diligence": "العناية الواجبة في اختيار الشركاء",
+    "Partnership Exit Strategies": "استراتيجيات الخروج من الشراكات",
+    "Partnership Value Proposition": "القيمة المقترحة للشراكة",
+    "Perceptual Mapping": "الخرائط الإدراكية",
+    "Porters Five Forces": "قوى بورتر الخمس",
+    "Strategic Partnerships": "الشراكات الاستراتيجية",
+    "Strategic Partnership Types": "أنواع الشراكات الاستراتيجية",
+    "Value Proposition and USP": "القيمة المقترحة والميزة الفريدة (USP)",
+}
+
+
+def concept_label(title: str, lang: str = "en") -> str:
+    """Return the localized label for an atom title. Falls back to the
+    English title if no translation is registered (so newly added atoms
+    still display, just untranslated)."""
+    if lang == "ar" and title in CONCEPT_LABELS:
+        return CONCEPT_LABELS[title]
+    return title
+
+
 def detect_arabic(text: str) -> bool:
     """Return True if the string contains Arabic-script characters."""
     return any("؀" <= ch <= "ۿ" or "ݐ" <= ch <= "ݿ" for ch in text)
@@ -2222,8 +2303,17 @@ def _slug(s: str) -> str:
 
 
 def query_for_concept(title: str, lang: str = "en") -> str:
-    """The query a clicked concept button should fire."""
+    """The query a clicked concept button should fire.
+
+    For Arabic, we phrase the query in Arabic using the localized concept
+    label, but include the canonical English title as a parenthetical hint
+    so local search hits the right atom unambiguously regardless of any
+    translation drift.
+    """
     if lang == "ar":
+        ar_label = concept_label(title, "ar")
+        if ar_label != title:
+            return f"ما هو {ar_label} ({title})؟"
         return f"ما هو {title}؟"
     return f"What is {title}?"
 
@@ -2265,9 +2355,12 @@ def render_response(resp: dict, msg_idx: int, lang: str = "en"):
         )
         cols = st.columns(min(len(concepts), 3))
         for i, title in enumerate(concepts):
+            label = concept_label(title, lang)
             if cols[i % len(cols)].button(
-                title, key=f"concept_{msg_idx}_{i}_{_slug(title)}", use_container_width=True
+                label, key=f"concept_{msg_idx}_{i}_{_slug(title)}", use_container_width=True
             ):
+                # Click still fires the canonical English-title query so the
+                # local search finds the right atom regardless of UI language.
                 enqueue(query_for_concept(title, lang))
                 st.rerun()
 
@@ -2425,8 +2518,14 @@ with st.sidebar:
     for cat in sorted(cats_by_name):
         cat_label = format_category(cat, LANG)
         with st.expander(f"{cat_label} ({len(cats_by_name[cat])})", expanded=False):
-            for title in sorted(cats_by_name[cat]):
-                if st.button(title, key=f"sb_{_slug(cat)}_{_slug(title)}", use_container_width=True):
+            # Sort by localized label so Arabic users see Arabic alphabetical order
+            sorted_titles = sorted(
+                cats_by_name[cat],
+                key=lambda t: concept_label(t, LANG),
+            )
+            for title in sorted_titles:
+                btn_label = concept_label(title, LANG)
+                if st.button(btn_label, key=f"sb_{_slug(cat)}_{_slug(title)}", use_container_width=True):
                     enqueue(query_for_concept(title, LANG))
                     st.rerun()
 
