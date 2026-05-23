@@ -28,7 +28,7 @@ import streamlit as st
 # ---------------------------------------------------------------------------
 
 def _resolve_wiki_path() -> Path:
-    """Resolve the wiki location across local dev and deployed environments.
+    """Resolve the PRIMARY wiki location across local dev and deployed environments.
 
     Search order:
       1. WIKI_PATH env var (escape hatch / Streamlit Cloud override)
@@ -44,11 +44,35 @@ def _resolve_wiki_path() -> Path:
     for c in candidates:
         if c and Path(c).is_dir():
             return Path(c)
-    # Last-ditch fallback: in-repo copy even if missing (will yield 0 atoms with a clear sidebar warning)
     return here / "wiki"
 
 
+def _resolve_extra_atom_roots() -> list:
+    """Additional roots to scan for atom-formatted markdown.
+
+    The PB OneDrive Knowledge Library lives outside ~/jak-vault/wiki but
+    contains 70+ canonical business concepts. When running locally we scan
+    it in addition to wiki/ so Obsidian edits show up immediately. When
+    deployed (no Knowledge Library on disk) these are absent — but the
+    deploy snapshot at bot/wiki/{concepts,frameworks,tools} already contains
+    a copy of the same atoms, so coverage is identical.
+
+    Returns the list of (root_path, folder_to_category_override) tuples.
+    """
+    home = Path.home()
+    kl = home / "jak-vault" / "01_Corporate" / "03_Knowledge_Library"
+    if not kl.is_dir():
+        return []
+    # Map ugly OneDrive folder names to clean kebab-case categories
+    return [
+        (kl / "Frameworks_&_Models", "frameworks"),
+        (kl / "Reference_Materials", "concepts"),
+        (kl / "Tools_&_Resources", "tools"),
+    ]
+
+
 WIKI_PATH = _resolve_wiki_path()
+EXTRA_ATOM_ROOTS = _resolve_extra_atom_roots()
 SOURCES_COUNT = 11
 
 # Load .env if present (lightweight — no python-dotenv dependency)
@@ -1116,45 +1140,90 @@ def parse_sections(body: str) -> dict:
     return sections
 
 
+def _load_atom_file(md_file: Path, root: Path, category_override: str | None = None) -> tuple | None:
+    """Parse one markdown file. Returns (title, data) or None if the file is
+    not a valid atom (empty, MOC, or in a sources/ folder)."""
+    if md_file.name.startswith("MOC_"):
+        return None
+    if md_file.parent.name == "sources":
+        return None
+    try:
+        content = md_file.read_text(encoding="utf-8")
+    except Exception:
+        return None
+    if not content.strip():
+        return None  # skip 0-byte stubs
+
+    fm, body = parse_frontmatter(content)
+
+    # For extra roots, only accept files that are explicitly atom-formatted —
+    # this prevents pulling in stray meeting notes, templates, etc.
+    if category_override is not None and fm.get("type") != "atom":
+        return None
+
+    title = fm.get("title") or md_file.stem.replace("_", " ")
+    if isinstance(title, list):
+        title = title[0] if title else md_file.stem
+    category = category_override or md_file.parent.name
+    aliases = fm.get("aliases", [])
+    if isinstance(aliases, str):
+        aliases = [a.strip() for a in aliases.split(",") if a.strip()]
+    tags_raw = fm.get("tags", [])
+    if isinstance(tags_raw, str):
+        tags = re.findall(r"[A-Za-z0-9_-]+", tags_raw)
+    elif isinstance(tags_raw, list):
+        tags = tags_raw
+    else:
+        tags = []
+
+    try:
+        rel_path = str(md_file.relative_to(root))
+    except ValueError:
+        rel_path = str(md_file)
+
+    data = {
+        "title": title,
+        "content": body,
+        "category": category,
+        "path": rel_path,
+        "tags": [t.lower() for t in tags],
+        "aliases": [a.lower() for a in aliases],
+        "sections": parse_sections(body),
+    }
+    return title, data
+
+
 @st.cache_data(show_spinner=False)
 def load_wiki_atoms() -> dict:
-    atoms = {}
-    if not WIKI_PATH.exists():
-        return atoms
-    for md_file in WIKI_PATH.rglob("*.md"):
-        if md_file.name.startswith("MOC_"):
-            continue
-        if md_file.parent.name == "sources":
-            continue
-        try:
-            content = md_file.read_text(encoding="utf-8")
-        except Exception:
-            continue
-        fm, body = parse_frontmatter(content)
-        title = fm.get("title") or md_file.stem.replace("_", " ")
-        if isinstance(title, list):
-            title = title[0] if title else md_file.stem
-        category = md_file.parent.name
-        aliases = fm.get("aliases", [])
-        if isinstance(aliases, str):
-            aliases = [a.strip() for a in aliases.split(",") if a.strip()]
-        tags_raw = fm.get("tags", [])
-        if isinstance(tags_raw, str):
-            tags = re.findall(r"[A-Za-z0-9_-]+", tags_raw)
-        elif isinstance(tags_raw, list):
-            tags = tags_raw
-        else:
-            tags = []
+    """Load atoms from the primary wiki/ AND any configured extra roots.
 
-        atoms[title] = {
-            "title": title,
-            "content": body,
-            "category": category,
-            "path": str(md_file.relative_to(WIKI_PATH)),
-            "tags": [t.lower() for t in tags],
-            "aliases": [a.lower() for a in aliases],
-            "sections": parse_sections(body),
-        }
+    Each atom's key is its canonical title. If the same title appears in
+    multiple roots, the later one wins. We load the in-repo wiki/ first so
+    locally-edited Knowledge Library atoms (loaded later) override the
+    snapshot.
+    """
+    atoms: dict = {}
+
+    # 1. Primary wiki tree (categorized by folder name)
+    if WIKI_PATH.exists():
+        for md_file in WIKI_PATH.rglob("*.md"):
+            result = _load_atom_file(md_file, WIKI_PATH)
+            if result is None:
+                continue
+            title, data = result
+            atoms[title] = data
+
+    # 2. Extra atom roots — only files with explicit `type: atom` frontmatter
+    for root, category in EXTRA_ATOM_ROOTS:
+        if not root.is_dir():
+            continue
+        for md_file in root.glob("*.md"):
+            result = _load_atom_file(md_file, root, category_override=category)
+            if result is None:
+                continue
+            title, data = result
+            atoms[title] = data
+
     return atoms
 
 
