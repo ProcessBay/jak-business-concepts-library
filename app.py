@@ -238,13 +238,13 @@ st.markdown(
     .pb-header {
         display: flex;
         align-items: center;
-        gap: 18px;
-        padding-bottom: 1rem;
-        margin-bottom: 1.25rem;
+        gap: 22px;
+        padding-bottom: 1.1rem;
+        margin-bottom: 1.5rem;
         border-bottom: 1px solid #e4e4e7;
     }
     .pb-header-logo {
-        height: 48px;
+        height: 64px;
         width: auto;
         display: block;
         flex-shrink: 0;
@@ -256,39 +256,48 @@ st.markdown(
     .pb-header-title-row {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         flex-wrap: wrap;
         margin: 0;
         line-height: 1.2;
     }
     .pb-header-title {
         color: #18181b;
-        font-size: 1.4rem;
+        font-size: 1.65rem;
         font-weight: 600;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.02em;
         margin: 0;
         padding: 0;
+        line-height: 1.2;
     }
     .pb-header-subtitle {
         color: #71717a;
-        font-size: 0.85rem;
-        margin: 4px 0 0 0;
+        font-size: 0.92rem;
+        margin: 6px 0 0 0;
         font-weight: 400;
-        line-height: 1.4;
+        line-height: 1.45;
     }
 
     /* global text */
     .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessage p, .stChatMessage li {
         color: #27272a;                                     /* zinc-800 */
-        font-size: 0.95rem;
-        line-height: 1.65;
+        font-size: 1rem;
+        line-height: 1.55;
         letter-spacing: 0.005em;
     }
+    /* Tighter paragraph and list spacing inside chat bubbles */
+    .stChatMessage p { margin: 0.5rem 0; }
+    .stChatMessage ul, .stChatMessage ol {
+        margin: 0.4rem 0 0.75rem 0;
+        padding-left: 1.4rem;
+    }
+    .stChatMessage li { margin: 0.15rem 0; }
+    .stChatMessage li > p { margin: 0; }
 
     /* tight typography hierarchy */
     h1, .stMarkdown h1 {
         color: #18181b !important;                          /* zinc-900 */
-        font-size: 1.5rem !important;
+        font-size: 1.55rem !important;
         font-weight: 600 !important;
         letter-spacing: -0.015em;
         margin: 0.5rem 0 0.25rem 0 !important;
@@ -296,21 +305,25 @@ st.markdown(
     }
     h2, .stMarkdown h2, .stChatMessage h2 {
         color: #18181b !important;
-        font-size: 1.15rem !important;
+        font-size: 1.2rem !important;
         font-weight: 600 !important;
         letter-spacing: -0.01em;
-        margin: 1.25rem 0 0.5rem 0 !important;
-        line-height: 1.4 !important;
-        padding-bottom: 0.25rem;
+        margin: 1.5rem 0 0.5rem 0 !important;
+        line-height: 1.35 !important;
+        padding-bottom: 0.3rem;
         border-bottom: 1px solid #e4e4e7;
     }
     h3, .stMarkdown h3, .stChatMessage h3 {
         color: #18181b !important;
-        font-size: 1rem !important;
+        font-size: 1.05rem !important;
         font-weight: 600 !important;
-        margin: 1rem 0 0.4rem 0 !important;
-        line-height: 1.4 !important;
+        margin: 1.1rem 0 0.4rem 0 !important;
+        line-height: 1.35 !important;
     }
+    /* First heading inside a chat message shouldn't push down */
+    .stChatMessage > div > div:first-child h1:first-child,
+    .stChatMessage > div > div:first-child h2:first-child,
+    .stChatMessage > div > div:first-child h3:first-child { margin-top: 0 !important; }
 
     strong { color: #18181b; font-weight: 600; }
     em { color: #71717a; font-style: italic; }
@@ -330,7 +343,7 @@ st.markdown(
         background-color: #ffffff !important;
         border: 1px solid #e4e4e7;
         border-radius: 8px;
-        padding: 18px 22px;
+        padding: 20px 24px;
         margin: 6px 0;
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
     }
