@@ -178,21 +178,30 @@ def kimi_status() -> dict:
 # Page + styles
 # ---------------------------------------------------------------------------
 
+PB_ICON_PATH = Path(__file__).resolve().parent / "assets" / "processbay-icon.png"
+PB_LOGO_PATH = Path(__file__).resolve().parent / "assets" / "processbay-logo.png"
+
 st.set_page_config(
     page_title="JAK Business Concepts Library",
-    page_icon=None,
+    page_icon=str(PB_ICON_PATH) if PB_ICON_PATH.exists() else None,
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# shadcn-inspired minimalistic dark theme
-# - Neutral zinc palette (no purples/blues as accents)
+# shadcn-inspired LIGHT theme
+# - White background, zinc-900 text
+# - ProcessBay blue/purple accents (sourced from the logo: #3b1ee0 -> #6b3aa0)
 # - Tight typography hierarchy: h1 1.5rem, h2 1.15rem, h3 1rem, body 0.95rem
 # - 1px borders, subtle radii, generous whitespace
-# - Single accent: zinc-50 for foreground, zinc-400 for muted
 st.markdown(
     """
 <style>
+    :root {
+        --pb-blue: #3b1ee0;
+        --pb-purple: #6b3aa0;
+        --pb-gradient: linear-gradient(135deg, #3b1ee0 0%, #6b3aa0 100%);
+    }
+
     /* font stack */
     html, body, [class*="css"]  {
         font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
@@ -200,22 +209,22 @@ st.markdown(
     }
 
     /* canvas */
-    .stApp { background-color: #09090b; }                  /* zinc-950 */
-    [data-testid="stSidebar"] { background-color: #0a0a0c; border-right: 1px solid #1f1f23; }
+    .stApp { background-color: #ffffff; }
+    [data-testid="stSidebar"] { background-color: #fafafa; border-right: 1px solid #e4e4e7; }
     [data-testid="stSidebar"] .stMarkdown p,
-    [data-testid="stSidebar"] .stMarkdown li { color: #d4d4d8; }
+    [data-testid="stSidebar"] .stMarkdown li { color: #3f3f46; }
 
     /* global text */
     .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessage p, .stChatMessage li {
-        color: #e4e4e7;                                     /* zinc-200 */
+        color: #27272a;                                     /* zinc-800 */
         font-size: 0.95rem;
         line-height: 1.65;
         letter-spacing: 0.005em;
     }
 
-    /* tight typography hierarchy — much less delta between header and body */
+    /* tight typography hierarchy */
     h1, .stMarkdown h1 {
-        color: #fafafa !important;                          /* zinc-50 */
+        color: #18181b !important;                          /* zinc-900 */
         font-size: 1.5rem !important;
         font-weight: 600 !important;
         letter-spacing: -0.015em;
@@ -223,35 +232,48 @@ st.markdown(
         line-height: 1.3 !important;
     }
     h2, .stMarkdown h2, .stChatMessage h2 {
-        color: #fafafa !important;
+        color: #18181b !important;
         font-size: 1.15rem !important;
         font-weight: 600 !important;
         letter-spacing: -0.01em;
         margin: 1.25rem 0 0.5rem 0 !important;
         line-height: 1.4 !important;
         padding-bottom: 0.25rem;
-        border-bottom: 1px solid #1f1f23;
+        border-bottom: 1px solid #e4e4e7;
     }
     h3, .stMarkdown h3, .stChatMessage h3 {
-        color: #fafafa !important;
+        color: #18181b !important;
         font-size: 1rem !important;
         font-weight: 600 !important;
         margin: 1rem 0 0.4rem 0 !important;
         line-height: 1.4 !important;
     }
 
-    strong { color: #fafafa; font-weight: 600; }
-    em { color: #a1a1aa; font-style: italic; }              /* zinc-400 */
-    code { color: #fafafa; background: #18181b; padding: 1px 6px; border-radius: 4px; font-size: 0.85em; }
+    strong { color: #18181b; font-weight: 600; }
+    em { color: #71717a; font-style: italic; }
+    code {
+        color: var(--pb-blue);
+        background: #f4f4f5;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-size: 0.85em;
+        border: 1px solid #e4e4e7;
+    }
+    a, .stMarkdown a { color: var(--pb-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
     /* chat bubbles — minimal cards */
     .stChatMessage {
-        background-color: #0c0c0f !important;
-        border: 1px solid #1f1f23;
+        background-color: #ffffff !important;
+        border: 1px solid #e4e4e7;
         border-radius: 8px;
         padding: 18px 22px;
         margin: 6px 0;
-        box-shadow: none;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    }
+    /* user-side bubble has a subtle tint */
+    [data-testid="stChatMessageUser"] {
+        background-color: #fafafa !important;
     }
 
     /* tables */
@@ -261,69 +283,77 @@ st.markdown(
         margin: 0.75rem 0;
     }
     .stMarkdown th, .stMarkdown td {
-        border: 1px solid #27272a;
+        border: 1px solid #e4e4e7;
         padding: 8px 12px;
         text-align: left;
+        color: #27272a;
     }
-    .stMarkdown th { background: #18181b; color: #fafafa; font-weight: 600; }
+    .stMarkdown th { background: #f4f4f5; color: #18181b; font-weight: 600; }
 
     /* blockquotes */
     .stMarkdown blockquote {
-        border-left: 2px solid #3f3f46;
+        border-left: 2px solid var(--pb-purple);
         padding: 0.25rem 0 0.25rem 1rem;
-        color: #a1a1aa;
+        color: #52525b;
         margin: 0.5rem 0;
         font-style: normal;
+        background: #fafafa;
     }
 
-    /* buttons — neutral, tight */
+    /* buttons — clean, neutral with PB accent on hover */
     .stButton button {
-        background-color: #18181b;                          /* zinc-900 */
-        color: #e4e4e7;
-        border: 1px solid #27272a;                          /* zinc-800 */
+        background-color: #ffffff;
+        color: #18181b;
+        border: 1px solid #e4e4e7;
         border-radius: 6px;
         padding: 7px 12px;
         font-size: 0.85rem;
         font-weight: 500;
         text-align: left;
         transition: all 0.12s ease;
-        box-shadow: none;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.02);
     }
     .stButton button:hover {
-        background-color: #27272a;
-        border-color: #3f3f46;
-        color: #fafafa;
+        border-color: var(--pb-blue);
+        color: var(--pb-blue);
+        background-color: #fafafa;
     }
     .stButton button:focus { box-shadow: none !important; outline: none; }
 
     /* expanders */
-    .streamlit-expanderHeader {
-        background-color: transparent !important;
-        border: 1px solid #1f1f23 !important;
+    .streamlit-expanderHeader, [data-testid="stExpander"] summary {
+        background-color: #fafafa !important;
+        border: 1px solid #e4e4e7 !important;
         border-radius: 6px !important;
-        color: #a1a1aa !important;
+        color: #52525b !important;
         font-size: 0.85rem !important;
         font-weight: 500 !important;
     }
 
     /* chat input */
     [data-testid="stChatInput"] {
-        border: 1px solid #27272a;
+        border: 1px solid #e4e4e7;
         border-radius: 8px;
-        background: #0c0c0f;
+        background: #ffffff;
     }
-    [data-testid="stChatInput"] textarea { color: #fafafa !important; }
+    [data-testid="stChatInput"] textarea { color: #18181b !important; }
+    [data-testid="stChatInput"]:focus-within { border-color: var(--pb-blue); }
 
     /* metrics in sidebar */
-    [data-testid="stMetricValue"] { color: #fafafa; font-size: 1.5rem; font-weight: 600; }
-    [data-testid="stMetricLabel"] { color: #71717a; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    [data-testid="stMetricValue"] { color: #18181b; font-size: 1.5rem; font-weight: 600; }
+    [data-testid="stMetricLabel"] {
+        color: #71717a;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
 
     /* horizontal rules */
-    hr { border: none; border-top: 1px solid #1f1f23; margin: 1rem 0; }
+    hr { border: none; border-top: 1px solid #e4e4e7; margin: 1rem 0; }
 
     /* page header — top of app */
     .app-title {
-        color: #fafafa;
+        color: #18181b;
         font-size: 1.5rem;
         font-weight: 600;
         letter-spacing: -0.015em;
@@ -337,9 +367,9 @@ st.markdown(
     }
     .badge {
         display: inline-block;
-        background: #18181b;
-        color: #a1a1aa;
-        border: 1px solid #27272a;
+        background: #f4f4f5;
+        color: #52525b;
+        border: 1px solid #e4e4e7;
         padding: 2px 10px;
         border-radius: 4px;
         font-size: 0.7rem;
@@ -348,9 +378,9 @@ st.markdown(
         text-transform: uppercase;
     }
     .badge-active {
-        background: #fafafa;
-        color: #09090b;
-        border-color: #fafafa;
+        background: var(--pb-gradient);
+        color: #ffffff;
+        border-color: transparent;
     }
     .section-eyebrow {
         color: #71717a;
@@ -359,6 +389,25 @@ st.markdown(
         text-transform: uppercase;
         font-weight: 500;
         margin: 1rem 0 0.5rem 0;
+    }
+
+    /* PB logo lockup in header */
+    .pb-logo-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #e4e4e7;
+    }
+    .pb-logo-row img {
+        height: 38px;
+        width: auto;
+    }
+    .pb-divider {
+        width: 1px;
+        height: 36px;
+        background: #e4e4e7;
     }
 </style>
 """,
@@ -1578,17 +1627,29 @@ ai_available_now = ai_health.get("ok") and not quota_exhausted
 badge_label = "AI + Wiki" if ai_available_now else "Local search"
 badge_class = "badge badge-active" if ai_available_now else "badge"
 
-st.markdown(
-    f"""
-<div style='display:flex;align-items:baseline;gap:12px;margin-bottom:0.25rem;'>
+# Header row: ProcessBay logo (if present) + JAK title + status badge
+logo_col, title_col = st.columns([1, 5], gap="medium")
+with logo_col:
+    if PB_LOGO_PATH.exists():
+        st.image(str(PB_LOGO_PATH), width=140)
+    else:
+        st.markdown("<div style='height:40px;'></div>", unsafe_allow_html=True)
+with title_col:
+    st.markdown(
+        f"""
+<div style='display:flex;align-items:baseline;gap:12px;margin:0.5rem 0 0.25rem 0;'>
   <h1 class='app-title' style='margin:0;'>JAK Business Concepts Library</h1>
   <span class='{badge_class}'>{badge_label}</span>
 </div>
 <p class='app-subtitle'>Business models, pricing, growth, metrics, platform economics, strategy.</p>
 """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown(
+    "<div style='border-top:1px solid #e4e4e7;margin:1rem 0 1.25rem 0;'></div>",
     unsafe_allow_html=True,
 )
-st.markdown("<div style='margin-top:0.75rem;'></div>", unsafe_allow_html=True)
 
 examples = [
     "What is value-based pricing?",
@@ -1692,10 +1753,12 @@ with st.sidebar:
         st.rerun()
 
     st.markdown(
-        "<div style='margin-top:2rem;padding-top:1rem;border-top:1px solid #1f1f23;"
-        "color:#52525b;font-size:0.7rem;line-height:1.5;'>"
-        "Built by <strong style='color:#a1a1aa;font-weight:500;'>Jamal Khan</strong> "
-        "as part of JAK OS. AI synthesis grounded in a private business-concepts wiki."
+        "<div style='margin-top:2rem;padding-top:1rem;border-top:1px solid #e4e4e7;"
+        "color:#71717a;font-size:0.7rem;line-height:1.5;'>"
+        "A <strong style='background:linear-gradient(135deg,#3b1ee0,#6b3aa0);"
+        "-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;'>"
+        "ProcessBay</strong> tool, built by Jamal Khan as part of JAK OS. "
+        "AI synthesis grounded in a private business-concepts wiki."
         "</div>",
         unsafe_allow_html=True,
     )
