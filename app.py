@@ -486,31 +486,35 @@ st.markdown(
     [data-testid="stSidebarContent"] {
         padding-top: 1.5rem !important;
     }
-    /* Hide Streamlit's default header bar — but keep it positioned so the
-       sidebar collapse toggle (which lives inside it on some Streamlit
-       versions) stays clickable. Make it transparent/empty instead. */
+    /* Keep Streamlit's header bar in the DOM (so the sidebar collapse toggle
+       inside it stays clickable) but make it visually quiet. */
     [data-testid="stHeader"] {
-        background: transparent !important;
-        height: 0;
-        min-height: 0;
+        background: rgba(255,255,255,0.85) !important;
+        backdrop-filter: blur(6px);
     }
-    /* Hide the "Made with Streamlit" footer */
-    [data-testid="stFooter"], footer { display: none; }
-    /* Hide the deploy/three-dot menu but NOT the sidebar collapse button.
-       The collapse button is data-testid="collapsedControl" on some
-       versions and lives inside stToolbar on others. Hide only the menu. */
-    [data-testid="stToolbar"] > div:not([data-testid="collapsedControl"]) {
-        display: none;
+    /* Hide ONLY the specific Streamlit Cloud chrome elements — never the
+       sidebar collapse button. */
+    [data-testid="stMainMenu"],
+    [data-testid="stDeployButton"],
+    [data-testid="stStatusWidget"],
+    [data-testid="stFooter"],
+    footer {
+        display: none !important;
     }
-    [data-testid="stMainMenu"], [data-testid="stDeployButton"] { display: none; }
-    /* Make sure the sidebar collapse toggle stays visible and on top */
+    /* Force-show the sidebar collapse toggle in all Streamlit versions */
     [data-testid="collapsedControl"],
     [data-testid="stSidebarCollapseButton"],
-    [data-testid="stSidebarCollapsedControl"] {
-        display: block !important;
+    [data-testid="stSidebarCollapsedControl"],
+    button[kind="header"][aria-label*="sidebar" i] {
+        display: flex !important;
         visibility: visible !important;
+        opacity: 1 !important;
         z-index: 999 !important;
+        position: relative;
     }
+    /* Hide the "streamlitApp" hover-pill that appears for free-tier deploys */
+    [data-testid="stAppDeployButton"],
+    a[href*="streamlit.app"][title*="streamlit" i] { display: none !important; }
 
     /* RTL — applied when <html dir="rtl"> is set further down */
     html[dir="rtl"] body,
