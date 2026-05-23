@@ -558,7 +558,10 @@ st.markdown(
     }
     html[dir="rtl"] .stChatMessage ul,
     html[dir="rtl"] .stChatMessage ol { padding-right: 1.4rem; padding-left: 0; }
-    html[dir="rtl"] .stButton button { text-align: right; }
+    /* Arabic buttons centered (not right-aligned) — short labels look more
+       balanced centered, even when the surrounding text is RTL. */
+    html[dir="rtl"] .stButton button { text-align: center; }
+    [dir="rtl"] .stButton button { text-align: center; }
     html[dir="rtl"] .pb-header { flex-direction: row-reverse; }
     html[dir="rtl"] .pb-header-text { text-align: right; }
     html[dir="rtl"] .stMarkdown table th,
