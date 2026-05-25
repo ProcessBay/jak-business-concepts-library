@@ -89,9 +89,9 @@ Take-rate economics describes how platforms, marketplaces, and brokerages captur
 - [[Marketplace Business Model]] — _auto_ (score 9.0: tags×4.0, applicable_to×3.0, alias×2.0)
 - [[Multilateral Platform]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
 - [[Switching Costs]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Hyper Scalability]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 - [[Pipeline to Platform Shift]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Value Proposition]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

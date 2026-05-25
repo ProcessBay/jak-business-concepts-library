@@ -83,11 +83,11 @@ Crowdfunding raises capital for a venture from a large number of contributors vi
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Drop-Shipping Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Open-Source Business Model]] — _auto_ (score 4.8: tags×4.0, category×0.8)
 - [[Revenue Streams]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
 - [[Affiliate Marketing]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
+- [[As-a-Service Business Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
 - [[Bait and Hook Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
-- [[Consumption-Based Revenue Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
-- [[Direct-to-Consumer Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

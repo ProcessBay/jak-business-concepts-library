@@ -89,12 +89,12 @@ The consumption-based (or usage-based) revenue model charges customers based on 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Subscription Business Model]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Freemium Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Bait and Hook Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Data Monetization Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Revenue Streams]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
-- [[Marketplace Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Multilateral Platform]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Pay-What-You-Want Pricing]] — _auto_ (score 4.0: applicable_to×1.0, alias×3.0)
-- [[SaaS Business Model]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
+- [[Churn Rate]] — _auto_ (score 5.0: applicable_to×4.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

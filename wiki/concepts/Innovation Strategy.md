@@ -89,9 +89,9 @@ Innovation as a strategy is the deliberate use of new products, services, or pro
 - [[Blue Ocean Strategy]] — _auto_ (score 9.5: tags×4.0, applicable_to×3.0, title×1.5, alias×1.0)
 - [[Open Innovation]] — _auto_ (score 9.5: tags×4.0, applicable_to×4.0, title×1.5)
 - [[Differentiation Strategy]] — _auto_ (score 8.2: tags×2.0, applicable_to×4.0, title×1.5, category×0.8)
+- [[Growing vs Scaling]] — _auto_ (score 7.0: tags×4.0, applicable_to×2.0, alias×1.0)
 - [[Niche Market Strategy]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Cost Leadership]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Bait and Hook Model]] — _auto_ (score 5.0: applicable_to×5.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

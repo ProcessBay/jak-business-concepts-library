@@ -90,9 +90,9 @@ Three-Tier Pricing offers a product or service in three packages (typically Basi
 - [[Pricing Mechanisms]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
 - [[Ad Pricing Mechanisms]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Pay-What-You-Want Pricing]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[SaaS Pricing Models]] — _auto_ (score 6.5: tags×2.0, applicable_to×2.0, title×1.5, alias×1.0)
-- [[Bait and Hook Model]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Customer Feedback Loop]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Freemium Business Model]] — _auto_ (score 8.0: tags×2.0, applicable_to×4.0, alias×2.0)
+- [[Penny Gap]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
+- [[Cohort Retention Analysis]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

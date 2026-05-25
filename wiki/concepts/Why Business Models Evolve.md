@@ -82,11 +82,11 @@ Business models evolve for three primary reasons: (1) **Technology Disruptions**
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Six Business Model Shifts]] — _auto_ (score 8.0: tags×2.0, applicable_to×4.0, alias×2.0)
+- [[Growing vs Scaling]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Digital Disruption]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Multiple Revenue Streams]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Pipeline to Platform Shift]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Value Chain Analysis]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Continuous Improvement]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Internal vs External Scalability]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

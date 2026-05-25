@@ -85,12 +85,12 @@ The Bait and Hook (also Razor and Blades) model sells a base product at low marg
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[As-a-Service Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Subscription Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Pricing Mechanisms]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Revenue Streams]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
 - [[Three-Tier Pricing]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Consumption-Based Revenue Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Marketplace Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Multilateral Platform]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

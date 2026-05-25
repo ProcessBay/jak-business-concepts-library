@@ -94,12 +94,12 @@ A four-domain framework for analyzing the external environment a business model 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Internal vs External Scalability]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[SWOT Analysis]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Value Chain Analysis]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Six Business Model Shifts]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Five-Step Value Creation Plan]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Strategic Partnership]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

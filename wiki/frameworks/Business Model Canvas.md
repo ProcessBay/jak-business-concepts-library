@@ -105,8 +105,8 @@ The Business Model Canvas (BMC) is a strategic management tool that maps a busin
 - [[Create-Deliver-Capture Value]] — _auto_ (score 9.8: tags×4.0, applicable_to×5.0, category×0.8)
 - [[Triple Bottom Line]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Osterwalder 7 Questions]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
+- [[Scalability]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Business Model Testing Cycle]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

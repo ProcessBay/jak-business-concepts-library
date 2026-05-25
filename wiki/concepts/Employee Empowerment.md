@@ -89,8 +89,8 @@ Employee empowerment is the deliberate practice of giving employees the authorit
 - [[Brand Identity]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Customer Relationships]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Customer Experience]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Narrow vs General AI]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Operational Efficiency]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Switching Costs]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

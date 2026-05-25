@@ -90,8 +90,8 @@ Open innovation (originally Chesbrough, 2003) is the practice of collaborating w
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Strategic Partnership]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
 - [[Desirability-Feasibility-Viability]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[Key Partners]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Aggregator Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Blockbuster Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Internal vs External Scalability]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

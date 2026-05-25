@@ -89,8 +89,8 @@ A niche market strategy focuses on serving a small, distinct segment of a larger
 - [[Cost Leadership]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 7.5: tags×2.0, applicable_to×3.0, title×1.5, alias×1.0)
 - [[Innovation Strategy]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
+- [[Growing vs Scaling]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[SWOT Analysis]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Business Model Space Assessment]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

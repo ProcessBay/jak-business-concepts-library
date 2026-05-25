@@ -94,9 +94,9 @@ A multilateral platform (multi-sided platform, MSP) is a business model that ser
 - [[Marketplace Business Model]] — _auto_ (score 15.8: tags×8.0, applicable_to×4.0, category×0.8, alias×3.0)
 - [[Take-Rate Economics]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
 - [[Pipeline to Platform Shift]] — _auto_ (score 8.5: tags×4.0, applicable_to×3.0, title×1.5)
+- [[Hyper Scalability]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 - [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Bait and Hook Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Revenue Streams]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
+- [[AI-as-a-Service]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -77,12 +77,12 @@ Business models split into two structural types based on whether users and custo
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Hyper Scalability]] — _auto_ (score 11.8: tags×6.0, applicable_to×5.0, category×0.8)
+- [[Scalability]] — _auto_ (score 10.8: tags×6.0, applicable_to×4.0, category×0.8)
 - [[Pipeline to Platform Shift]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
+- [[Growing vs Scaling]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Network Effects]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Marketplace Business Model]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Multilateral Platform]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Switching Costs]] — _auto_ (score 6.0: applicable_to×5.0, alias×1.0)
-- [[Take-Rate Economics]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Digital Disruption]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -83,12 +83,12 @@ Affiliate marketing is a business model where third-party publishers promote ano
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Subscription Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Drop-Shipping Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Freemium Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Marketplace Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Direct-to-Consumer Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Multilateral Platform]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[White-Labeling Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Ad Pricing Mechanisms]] — _auto_ (score 4.0: applicable_to×4.0)
+- [[AI-as-a-Service]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[As-a-Service Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

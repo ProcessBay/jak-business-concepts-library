@@ -94,7 +94,7 @@ Franchising is a model where a brand owner (franchisor) licenses its business sy
 - [[Bait and Hook Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Drop-Shipping Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Marketplace Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Differentiation Strategy]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
+- [[Subscription Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

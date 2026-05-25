@@ -89,9 +89,9 @@ Value chain analysis (originally Porter, 1985) is the systematic decomposition o
 - [[SWOT Analysis]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Business Model Space Assessment]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Internal vs External Scalability]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Six Business Model Shifts]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Create-Deliver-Capture Value]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[Customer Value Creation Model]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
+- [[AI Value Chain]] — _auto_ (score 6.8: tags×2.0, applicable_to×1.0, title×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

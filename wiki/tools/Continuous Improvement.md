@@ -84,12 +84,12 @@ Continuous improvement is the practice of treating products, processes, and cust
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Pareto Principle]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Customer Feedback Loop]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Key Activities]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Key Resources]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Value Chain Analysis]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Visionary Leadership]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Digital Disruption]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

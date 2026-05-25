@@ -87,10 +87,10 @@ Switching costs are the total cost — time, money, effort, risk — a customer 
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Customer Experience]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Take-Rate Economics]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Churn Rate]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 6.0: applicable_to×5.0, alias×1.0)
 - [[Value Drivers]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Value Proposition]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

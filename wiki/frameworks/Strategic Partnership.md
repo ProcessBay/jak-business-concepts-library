@@ -88,11 +88,11 @@ A strategic partnership is a deliberate collaboration between two or more organi
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Open Innovation]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
+- [[Blockbuster Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Business Model Space Assessment]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Aggregator Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[AI Value Chain]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Blue Ocean Strategy]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Business Model Canvas]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Business Model Testing Cycle]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

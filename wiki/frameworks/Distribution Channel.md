@@ -88,11 +88,11 @@ Distribution Channels is the BMC block that defines how a firm reaches customers
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Customer Relationships]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
+- [[Blockbuster Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Cost Structure]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Key Activities]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Key Partners]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Key Resources]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Customer Segments]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

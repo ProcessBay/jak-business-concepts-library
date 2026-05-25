@@ -93,10 +93,10 @@ Revenue Streams is the BMC block that defines how a firm makes money from each c
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Multiple Revenue Streams]] — _auto_ (score 11.0: tags×2.0, applicable_to×6.0, title×3.0)
 - [[Pricing Mechanisms]] — _auto_ (score 8.0: tags×6.0, applicable_to×2.0)
+- [[Data Monetization Model]] — _auto_ (score 7.0: tags×4.0, applicable_to×1.0, alias×2.0)
 - [[Customer Relationships]] — _auto_ (score 6.8: tags×2.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Customer Segments]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Ad Pricing Mechanisms]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
-- [[Bait and Hook Model]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

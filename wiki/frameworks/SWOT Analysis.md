@@ -86,7 +86,7 @@ SWOT analysis is a structured strategic diagnosis tool that maps a firm across f
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Business Model Space Assessment]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Create-Deliver-Capture Value]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Six Business Model Shifts]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Internal vs External Scalability]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

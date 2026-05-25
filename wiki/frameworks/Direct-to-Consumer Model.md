@@ -90,12 +90,12 @@ The Direct-to-Consumer (D2C) model has the manufacturer or brand sell directly t
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Subscription Box Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Subscription Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Affiliate Marketing]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[As-a-Service Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Bait and Hook Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Drop-Shipping Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[White-Labeling Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Long-Tail Business Model]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
-- [[Consumption-Based Revenue Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

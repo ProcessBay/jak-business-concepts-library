@@ -85,10 +85,10 @@ Most successful modern companies operate not on a single revenue stream but on a
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Revenue Streams]] — _auto_ (score 11.0: tags×2.0, applicable_to×6.0, title×3.0)
 - [[Pipeline to Platform Shift]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
-- [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Why Business Models Evolve]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Osterwalder 7 Questions]] — _auto_ (score 5.0: applicable_to×5.0)
-- [[Value Proposition]] — _auto_ (score 5.0: applicable_to×5.0)
+- [[Scalability]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
+- [[Growing vs Scaling]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Hyper Scalability]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Network Effects]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

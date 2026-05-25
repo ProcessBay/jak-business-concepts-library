@@ -85,10 +85,10 @@ A customer feedback loop is a structured system for capturing customer signals �
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Customer Segmentation Models]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Customer Personas]] — _auto_ (score 9.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8)
+- [[Cohort Retention Analysis]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Loyalty Program]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Customer Experience]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 - [[Customer Relationships]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
-- [[Customer Value Creation Model]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

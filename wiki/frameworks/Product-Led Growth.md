@@ -135,12 +135,12 @@ Free Signup → Quick Time-to-Value → Active Usage
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Land and Expand Model]] — _auto_ (score 8.8: tags×6.0, applicable_to×1.0, category×0.8, alias×1.0)
+- [[High-Touch vs Low-Touch Sales]] — _auto_ (score 7.0: tags×2.0, applicable_to×1.0, alias×4.0)
 - [[SaaS Metrics Suite]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[SaaS Pricing Models]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[SaaS Company Stages]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
-- [[Innovation Strategy]] — _auto_ (score 4.0: tags×2.0, alias×2.0)
-- [[SaaS Business Model]] — _auto_ (score 3.8: tags×2.0, applicable_to×1.0, category×0.8)
-- [[Distribution Channel]] — _auto_ (score 1.8: category×0.8, alias×1.0)
+- [[Freemium Business Model]] — _auto_ (score 5.0: tags×4.0, applicable_to×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

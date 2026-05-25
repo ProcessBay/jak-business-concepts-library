@@ -89,12 +89,12 @@ Digital Disruption is the structural transformation that has reshaped industries
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Hyper Scalability]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Pipeline to Platform Shift]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Servitization]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Why Business Models Evolve]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Ad Pricing Mechanisms]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Continuous Improvement]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Multiple Revenue Streams]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Pareto Principle]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

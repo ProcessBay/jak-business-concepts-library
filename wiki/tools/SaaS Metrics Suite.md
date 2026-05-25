@@ -134,8 +134,8 @@ Pereira: "Typically a good or acceptable churn rate is from 2% to 8% for B2C and
 - [[SaaS Business Model]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[Product-Led Growth]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[SaaS Company Stages]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
-- [[Affiliate Marketing]] — _auto_ (score 2.0: tags×2.0)
-- [[Take-Rate Economics]] — _auto_ (score 2.0: applicable_to×2.0)
+- [[Land and Expand Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
+- [[High-Touch vs Low-Touch Sales]] — _auto_ (score 4.0: tags×2.0, applicable_to×1.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 
