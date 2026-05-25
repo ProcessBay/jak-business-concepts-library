@@ -1204,16 +1204,39 @@ def load_wiki_atoms() -> dict:
     """
     atoms: dict = {}
 
-    # 1. Primary wiki tree (categorized by folder name)
+    # We track the canonical category folders (business-models, growth, etc.)
+    # separately so KL atoms don't overwrite them. The wiki/ taxonomy is the
+    # curated source of truth — concept/framework/tool labels are catch-alls.
+    canonical_folders = {
+        "business-models", "growth", "metrics", "platform-economics",
+        "pricing", "strategy",
+    }
+
+    # 1. Primary wiki tree — load EVERYTHING, including the snapshot copies of
+    #    KL atoms at bot/wiki/{concepts,frameworks,tools}.
     if WIKI_PATH.exists():
         for md_file in WIKI_PATH.rglob("*.md"):
             result = _load_atom_file(md_file, WIKI_PATH)
             if result is None:
                 continue
             title, data = result
-            atoms[title] = data
+            existing = atoms.get(title)
+            if existing is None:
+                atoms[title] = data
+                continue
+            # If two atoms share a title within wiki/ itself, prefer the one
+            # in a canonical category folder over a catch-all (concepts/etc.)
+            if existing["category"] in canonical_folders:
+                continue  # keep canonical
+            if data["category"] in canonical_folders:
+                atoms[title] = data  # upgrade to canonical
+            # Otherwise: leave the first one in place
 
-    # 2. Extra atom roots — only files with explicit `type: atom` frontmatter
+    # 2. Extra atom roots — only files with explicit `type: atom` frontmatter.
+    #    When running locally with the live Obsidian Knowledge Library, this
+    #    is the source of truth for KL atoms. On Streamlit Cloud (no KL on
+    #    disk), this loop is a no-op because the snapshot already loaded
+    #    them under bot/wiki/{frameworks,concepts,tools}.
     for root, category in EXTRA_ATOM_ROOTS:
         if not root.is_dir():
             continue
@@ -1222,6 +1245,16 @@ def load_wiki_atoms() -> dict:
             if result is None:
                 continue
             title, data = result
+            existing = atoms.get(title)
+            if existing is None:
+                atoms[title] = data
+                continue
+            # Collision with a wiki/ atom — never overwrite the canonical
+            # categorization with the KL's generic concept/framework/tool label.
+            if existing["category"] in canonical_folders:
+                continue
+            # Both are non-canonical (e.g., snapshot copy under concepts/)
+            # — refresh from the live KL so latest edits win.
             atoms[title] = data
 
     return atoms
