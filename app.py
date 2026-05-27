@@ -23,6 +23,12 @@ from pathlib import Path
 
 import streamlit as st
 
+# Telemetry: fire-and-forget query logging to Supabase. Stdlib-only, never
+# blocks or raises into the response path. See telemetry.py for design notes.
+# Lives outside `try` so a missing module is loud, but log_query itself is
+# always safe to call — when SUPABASE_* secrets are absent it's a no-op.
+import telemetry
+
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
@@ -437,6 +443,86 @@ def kimi_chat(messages: list, *, model: str = None, max_tokens: int = 400,
         raise KimiError(f"Unexpected response shape: {payload!r}")
 
 
+def kimi_chat_stream(messages: list, *, model: str = None, max_tokens: int = 2200,
+                     temperature: float = 0.55, timeout: int = 60):
+    """Stream Kimi /chat/completions, yielding content chunks as they arrive.
+
+    Uses OpenAI-compatible SSE — Moonshot returns `data: {...}` lines with
+    delta.content fragments, terminated by `data: [DONE]`. Yields plain text
+    chunks suitable for passing to st.write_stream().
+
+    Raises KimiError on connection-level failure. Stream-level errors (Kimi
+    returning a non-stream JSON error mid-response) are also surfaced via
+    KimiError so the caller can fall back gracefully.
+    """
+    if not KIMI_API_KEY:
+        raise KimiError("KIMI_API_KEY is not set.")
+
+    body = json.dumps({
+        "model": model or KIMI_MODEL,
+        "messages": messages,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "stream": True,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"{KIMI_BASE_URL}/chat/completions",
+        data=body,
+        headers={
+            "Authorization": f"Bearer {KIMI_API_KEY}",
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream",
+        },
+        method="POST",
+    )
+
+    try:
+        resp = urllib.request.urlopen(req, timeout=timeout)
+    except urllib.error.HTTPError as e:
+        try:
+            err_body = json.loads(e.read().decode("utf-8"))
+            msg = err_body.get("error", {}).get("message", str(e))
+        except Exception:
+            msg = str(e)
+        if e.code == 401:
+            raise KimiError(f"401 Invalid Authentication: {msg}")
+        if e.code == 404 and "model" in msg.lower():
+            raise KimiError(f"Model `{model or KIMI_MODEL}` not available: {msg}")
+        raise KimiError(f"HTTP {e.code}: {msg}")
+    except urllib.error.URLError as e:
+        raise KimiError(f"Network error reaching {KIMI_BASE_URL}: {e.reason}")
+
+    # Parse the SSE stream
+    try:
+        for raw_line in resp:
+            line = raw_line.decode("utf-8", errors="replace").strip()
+            if not line or not line.startswith("data:"):
+                continue
+            payload = line[5:].strip()
+            if payload == "[DONE]":
+                break
+            try:
+                obj = json.loads(payload)
+            except json.JSONDecodeError:
+                continue
+            # Surface mid-stream errors
+            if "error" in obj:
+                raise KimiError(str(obj["error"]))
+            try:
+                delta = obj["choices"][0].get("delta", {})
+            except (KeyError, IndexError):
+                continue
+            chunk = delta.get("content")
+            if chunk:
+                yield chunk
+    finally:
+        try:
+            resp.close()
+        except Exception:
+            pass
+
+
 @st.cache_data(show_spinner=False, ttl=300)
 def kimi_status() -> dict:
     """Probe Kimi once at startup so the sidebar can show health."""
@@ -470,6 +556,13 @@ st.set_page_config(
 LANG = get_active_lang()
 IS_RTL = LANG == "ar"
 
+# Stable per-session id used only for telemetry hashing. Not a user id, not
+# a tracker — just a way to count distinct sessions in analytics. We hash it
+# before it ever leaves the process (telemetry.hash_session).
+if "_telemetry_session_id" not in st.session_state:
+    import uuid as _uuid
+    st.session_state._telemetry_session_id = _uuid.uuid4().hex
+
 # On the very first load with no ?lang= query param, run a tiny JS snippet that
 # reads navigator.language and reloads the page with ?lang=ar|en. After that
 # the param is sticky and we never re-trigger this.
@@ -501,16 +594,24 @@ if "lang_bootstrapped" not in st.session_state:
 st.markdown(
     """
 <style>
+    /* Load Inter — same family Vercel/Linear/Stripe use. The variable-font
+       version means one HTTP request gets every weight. The display=swap
+       avoids invisible-text flash. */
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
     :root {
         --pb-blue: #3b1ee0;
         --pb-purple: #6b3aa0;
         --pb-gradient: linear-gradient(135deg, #3b1ee0 0%, #6b3aa0 100%);
     }
 
-    /* font stack */
+    /* Inter as primary, with the OS fallback chain behind it. */
     html, body, [class*="css"]  {
-        font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-feature-settings: "cv11", "ss01"; /* Inter's tabular numerals + alt 'a' */
+        text-rendering: optimizeLegibility;
     }
 
     /* canvas */
@@ -684,12 +785,13 @@ st.markdown(
         line-height: 1.45;
     }
 
-    /* global text */
+    /* Body prose — Inter, slightly looser line-height for readability,
+       refined letter-spacing. Big-company copy reads at 1.65-1.7 line-height. */
     .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessage p, .stChatMessage li {
         color: #27272a;                                     /* zinc-800 */
         font-size: 1rem;
-        line-height: 1.55;
-        letter-spacing: 0.005em;
+        line-height: 1.7;
+        letter-spacing: -0.003em;
     }
     /* Tighter paragraph and list spacing inside chat bubbles */
     .stChatMessage p { margin: 0.5rem 0; }
@@ -744,18 +846,41 @@ st.markdown(
     a, .stMarkdown a { color: var(--pb-blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* chat bubbles — minimal cards */
+    /* Chat — borderless, prose-first. Linear/Claude.ai style: no card outline,
+       no shadow, no background tint. The only visual distinction between
+       user and assistant is the role avatar at the side. */
     .stChatMessage {
-        background-color: #ffffff !important;
-        border: 1px solid #e4e4e7;
-        border-radius: 8px;
-        padding: 20px 24px;
-        margin: 6px 0;
-        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+        background-color: transparent !important;
+        border: none !important;
+        border-radius: 0;
+        padding: 14px 4px;
+        margin: 0;
+        box-shadow: none;
     }
-    /* user-side bubble has a subtle tint */
     [data-testid="stChatMessageUser"] {
-        background-color: #fafafa !important;
+        background-color: transparent !important;
+    }
+    [data-testid="stChatMessage"] + [data-testid="stChatMessage"] {
+        margin-top: 4px;
+    }
+
+    /* Related-concepts compact chip row — soft visual weight */
+    .related-label {
+        color: #a1a1aa;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin: 1.5rem 0 0.5rem 0;
+    }
+    /* Chips look like small text-link-ish buttons, not heavy CTA buttons */
+    .stChatMessage .stButton button,
+    .stChatMessage + .stHorizontalBlock .stButton button {
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 5px 10px;
+        background: #fafafa;
+        border-color: #e4e4e7;
     }
 
     /* tables */
@@ -782,7 +907,8 @@ st.markdown(
         background: #fafafa;
     }
 
-    /* buttons — clean, neutral with PB accent on hover */
+    /* Buttons — Vercel/Linear-style: clean, neutral, with a smooth PB-accent
+       hover. The 180ms transition + subtle lift on hover feels considered. */
     .stButton button {
         background-color: #ffffff;
         color: #18181b;
@@ -792,15 +918,17 @@ st.markdown(
         font-size: 0.85rem;
         font-weight: 500;
         text-align: left;
-        transition: all 0.12s ease;
+        transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease, transform 180ms ease;
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.02);
     }
     .stButton button:hover {
         border-color: var(--pb-blue);
         color: var(--pb-blue);
         background-color: #fafafa;
+        transform: translateY(-1px);
     }
-    .stButton button:focus { box-shadow: none !important; outline: none; }
+    .stButton button:active { transform: translateY(0); }
+    .stButton button:focus { box-shadow: 0 0 0 3px rgba(59, 30, 224, 0.12) !important; outline: none; }
 
     /* expanders */
     .streamlit-expanderHeader, [data-testid="stExpander"] summary {
@@ -1800,12 +1928,139 @@ def kimi_translate_query(query: str, target: str = "en") -> str:
         return query
 
 
+def _build_synthesis_request(query: str, intent: str, top_atoms: list, lang: str = "en"):
+    """Build the (messages, model, max_tokens, temperature, timeout) tuple
+    for a synthesis call. Shared by both sync and streaming paths.
+
+    Returns None if there's no way to synthesize (no API key, no atoms).
+    """
+    if not KIMI_API_KEY or not top_atoms:
+        return None
+
+    # Reasoning models (kimi-k2.6) scale runtime with prompt size. For Arabic
+    # on a reasoning model we use a much slimmer prompt — top 2 atoms only.
+    is_reasoning = (lang == "ar" and KIMI_MODEL_AR.startswith("kimi-k"))
+
+    if is_reasoning:
+        excerpts = "\n\n---\n\n".join(
+            _atom_excerpt_compact(data) for _, _, data in top_atoms[:2]
+        )
+    else:
+        excerpts = "\n\n========================================\n\n".join(
+            _atom_excerpt_for_prompt(data) for _, _, data in top_atoms[:4]
+        )
+
+    if is_reasoning:
+        system = (
+            "اكتب باللغة العربية الفصحى فقط. كل كلمة عربية. الاستثناء الوحيد: "
+            "أسماء الشركات الأجنبية (Salesforce, HubSpot, Apple, Dropbox, "
+            "Spotify, LinkedIn, McKinsey, Slack) تُكتب بالحروف اللاتينية. "
+            "ممنوع منعاً باتاً أي حرف صيني أو روسي أو كوري.\n\n"
+            "أسلوبك: حادّ الذكاء، فضولي، صوت شريك حوار لا كتاب مدرسي. ابدأ "
+            "بجاذب لا بـ \"س هو…\". أظهِر الآليات لا السمات.\n\n"
+            "قواعد ارتكاز مطلقة: كل ادّعاء، مثال، شركة، رقم، يجب أن يأتي من "
+            "مقتطفات الموسوعة أدناه. لا تُدخل معلومات من معرفتك العامّة. "
+            "لا تذكر شركات لا تظهر في المقتطفات.\n\n"
+            "استخدم markdown: `## H2` للأقسام، **عريض** باعتدال، قوائم نقطية."
+        )
+        user = (
+            f"سؤال المستخدم: {query}\n\n"
+            f"اكتب إجابة من ~400-600 كلمة بالأقسام التالية:\n"
+            f"- فقرة افتتاحية بجاذب + تعريف\n"
+            f"- `## كيف يعمل في الواقع` (4-5 نقاط)\n"
+            f"- `## متى تلجأ إليه` (3-4 نقاط)\n"
+            f"- `## أمثلة من الواقع` (فقط الشركات في المقتطفات أدناه)\n"
+            f"- اختم بـ **الخلاصة —** جملة قوية واحدة\n\n"
+            f"مقتطفات الموسوعة:\n\n{excerpts}"
+        )
+    else:
+        intent_instructions = INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"]).get(
+            intent, INTENT_PROMPTS.get(lang, INTENT_PROMPTS["en"])["GENERAL"]
+        )
+        system = SYSTEM_PROMPTS.get(lang, SYSTEM_PROMPTS["en"])
+        if lang == "ar":
+            user = (
+                f"مهمّ جداً: اكتب الإجابة بالكامل بالعربية الفصحى، بصرف النظر "
+                f"عن لغة السؤال. حتى لو طُرح السؤال بالإنجليزية فإن الإجابة "
+                f"يجب أن تكون بالعربية. لا تستخدم الإنجليزية إلا لأسماء "
+                f"الشركات الأجنبية (Salesforce, HubSpot, إلخ).\n\n"
+                f"سؤال المستخدم: {query}\n\n"
+                f"النيّة: {intent}\n\n"
+                f"تعليمات المهمة:\n{intent_instructions}\n\n"
+                f"مقتطفات الموسوعة (المعرفة الوحيدة المسموح بها — قد تكون "
+                f"بالإنجليزية لكن أجِب أنت بالعربية):\n\n{excerpts}"
+            )
+        else:
+            user = (
+                f"USER QUESTION: {query}\n\n"
+                f"INTENT: {intent}\n\n"
+                f"TASK INSTRUCTIONS:\n{intent_instructions}\n\n"
+                f"WIKI EXCERPTS (the only knowledge you may use):\n\n{excerpts}"
+            )
+
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
+    ]
+    if lang == "ar":
+        chosen_model = KIMI_MODEL_AR
+        is_reasoning_model = chosen_model.startswith("kimi-k")
+        chosen_temp = 1.0 if is_reasoning_model else 0.2
+        chosen_max_tokens = 4000 if is_reasoning_model else 3000
+        chosen_timeout = 180 if is_reasoning_model else 90
+    else:
+        chosen_model = KIMI_MODEL
+        chosen_temp = 0.55
+        chosen_max_tokens = 2400
+        chosen_timeout = 60
+
+    return {
+        "messages": messages,
+        "model": chosen_model,
+        "max_tokens": chosen_max_tokens,
+        "temperature": chosen_temp,
+        "timeout": chosen_timeout,
+    }
+
+
+def synthesize_with_ai_stream(query: str, intent: str, top_atoms: list, lang: str = "en"):
+    """Yield text chunks of the AI synthesis as they arrive from Kimi.
+
+    The generator owns no rendering — the caller (typically st.write_stream)
+    accumulates the chunks. On any error mid-stream, yields nothing further
+    and stores the error on the function's `last_error` attribute so the
+    caller can decide whether to fall back.
+    """
+    synthesize_with_ai_stream.last_error = None
+    req = _build_synthesis_request(query, intent, top_atoms, lang)
+    if req is None:
+        return
+
+    try:
+        chunks_yielded = False
+        full_text = ""
+        for chunk in kimi_chat_stream(**req):
+            full_text += chunk
+            chunks_yielded = True
+            # Arabic post-processing must happen on the FINAL text; for live
+            # streaming we yield raw chunks (CJK leakage is rare and the AR
+            # system prompt explicitly forbids it).
+            yield chunk
+        # Save final text for the caller (history persistence, telemetry)
+        synthesize_with_ai_stream.last_full_text = full_text
+        if not chunks_yielded:
+            synthesize_with_ai_stream.last_error = "Empty stream from Kimi"
+    except KimiError as e:
+        synthesize_with_ai_stream.last_error = str(e)
+        synthesize_with_ai_stream.last_full_text = ""
+
+
 def synthesize_with_ai(query: str, intent: str, top_atoms: list, lang: str = "en") -> tuple:
     """Return (synthesis_text or None, error_or_None).
 
-    Generates a detailed, structured response grounded in the provided atoms,
-    written in the requested language. The system prompt forbids inventing
-    facts beyond the excerpts.
+    Non-streaming path — used for tests, telemetry, and any callsite that
+    needs the full text before rendering. Streaming is the default for
+    user-facing chat.
     """
     if not KIMI_API_KEY or not top_atoms:
         return None, None
@@ -2283,7 +2538,7 @@ def no_match(query: str, lang: str = "en") -> dict:
     return {"markdown": markdown, "concepts": []}
 
 
-def answer(query: str, atoms: dict, use_ai: bool = True, lang: str = "en") -> dict:
+def answer(query: str, atoms: dict, use_ai: bool = True, lang: str = "en", defer_ai: bool = False) -> dict:
     """Return a structured response: {markdown, concepts, ai, ai_error}.
 
     Bilingual handling: the local search index is keyed in English. If the
@@ -2334,15 +2589,18 @@ def answer(query: str, atoms: dict, use_ai: bool = True, lang: str = "en") -> di
             base = respond_general(search_query, results, atoms)
         top_atoms = results[:4]
 
-    ai_text, ai_error = None, None
-    if use_ai and intent != "GREETING" and top_atoms:
-        # Use the ORIGINAL query (in user's language) for the synthesis call
-        # so the AI sees what the user actually typed
-        ai_text, ai_error = synthesize_with_ai(query, intent, top_atoms, lang=lang)
-
-    base["ai"] = ai_text
-    base["ai_error"] = ai_error
     base["intent"] = intent
+    # Always include top_atoms so the caller (chat handler) can stream the
+    # synthesis itself with st.write_stream(). Defer the AI call here.
+    base["top_atoms"] = top_atoms if intent != "GREETING" else []
+
+    if use_ai and not defer_ai and intent != "GREETING" and top_atoms:
+        ai_text, ai_error = synthesize_with_ai(query, intent, top_atoms, lang=lang)
+        base["ai"] = ai_text
+        base["ai_error"] = ai_error
+    else:
+        base["ai"] = None
+        base["ai_error"] = None
     return base
 
 
@@ -2376,62 +2634,69 @@ def enqueue(query: str):
     st.session_state.pending_query = query
 
 
+def render_response_extras(resp: dict, msg_idx: int, lang: str = "en"):
+    """Render only the secondary parts of a response — the related-concept
+    chips. Used after streaming finishes (the AI body is already on screen)
+    and as the tail end of full history-replay rendering."""
+    concepts = resp.get("concepts") or []
+    if not concepts:
+        return
+    # Compact chip row instead of a 3-col button grid. Limit to 5 to keep
+    # the row tight and the visual weight low.
+    pool = concepts[:5]
+    st.markdown(
+        f"<div class='related-label'>{t('eyebrow_jump', lang)}</div>",
+        unsafe_allow_html=True,
+    )
+    chip_cols = st.columns(len(pool))
+    for i, title in enumerate(pool):
+        label = concept_label(title, lang)
+        if chip_cols[i].button(
+            label,
+            key=f"concept_{msg_idx}_{i}_{_slug(title)}",
+            use_container_width=True,
+        ):
+            enqueue(query_for_concept(title, lang))
+            st.rerun()
+
+
+def render_ai_text_with_direction(ai_text: str, lang: str):
+    """Render already-streamed AI text, forcing the correct text direction
+    when content language differs from UI language."""
+    if not ai_text:
+        return
+    content_is_arabic = detect_arabic(ai_text)
+    ui_is_rtl = (lang == "ar")
+    needs_dir_override = (ui_is_rtl != content_is_arabic) and bool(ai_text.strip())
+    if needs_dir_override:
+        content_dir = "rtl" if content_is_arabic else "ltr"
+        text_align = "right" if content_is_arabic else "left"
+        st.markdown(
+            f"<div dir='{content_dir}' style='text-align:{text_align};'>\n\n{ai_text}\n\n</div>",
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(ai_text)
+
+
 def render_response(resp: dict, msg_idx: int, lang: str = "en"):
-    """Render an assistant response."""
+    """Render an already-completed assistant response (history replay).
+
+    The live chat path uses st.write_stream + render_response_extras instead.
+    """
     has_ai = bool(resp.get("ai"))
     has_md = bool(resp.get("markdown"))
     intent = resp.get("intent")
 
     if has_ai:
-        st.markdown(
-            f"<div class='section-eyebrow'>{t('eyebrow_synthesis', lang)}</div>",
-            unsafe_allow_html=True,
-        )
-        # If the AI content's language doesn't match the UI direction (e.g.
-        # English text leaked through in Arabic mode), wrap it in a div that
-        # forces the correct direction so periods/commas don't float to the
-        # wrong side and bullet markers align properly.
-        ai_text = resp["ai"]
-        content_is_arabic = detect_arabic(ai_text)
-        ui_is_rtl = (lang == "ar")
-        needs_dir_override = (ui_is_rtl != content_is_arabic) and bool(ai_text.strip())
-        if needs_dir_override:
-            content_dir = "rtl" if content_is_arabic else "ltr"
-            text_align = "right" if content_is_arabic else "left"
-            st.markdown(
-                f"<div dir='{content_dir}' style='text-align:{text_align};'>\n\n{ai_text}\n\n</div>",
-                unsafe_allow_html=True,
-            )
-        else:
-            st.markdown(ai_text)
-
-        if has_md and intent != "GREETING":
-            with st.expander(t("expander_source", lang)):
-                st.markdown(resp["markdown"])
+        render_ai_text_with_direction(resp["ai"], lang)
     else:
         if resp.get("ai_error") and intent not in (None, "GREETING"):
-            st.warning(
-                f"{t('ai_unavailable', lang)}\n\n_{resp['ai_error'][:200]}_"
-            )
+            st.warning(f"{t('ai_unavailable', lang)}\n\n_{resp['ai_error'][:200]}_")
         if has_md:
             st.markdown(resp["markdown"])
 
-    concepts = resp.get("concepts") or []
-    if concepts:
-        st.markdown(
-            f"<div class='section-eyebrow'>{t('eyebrow_jump', lang)}</div>",
-            unsafe_allow_html=True,
-        )
-        cols = st.columns(min(len(concepts), 3))
-        for i, title in enumerate(concepts):
-            label = concept_label(title, lang)
-            if cols[i % len(cols)].button(
-                label, key=f"concept_{msg_idx}_{i}_{_slug(title)}", use_container_width=True
-            ):
-                # Click still fires the canonical English-title query so the
-                # local search finds the right atom regardless of UI language.
-                enqueue(query_for_concept(title, lang))
-                st.rerun()
+    render_response_extras(resp, msg_idx, lang)
 
 
 # ---------------------------------------------------------------------------
@@ -2518,12 +2783,78 @@ if prompt:
         use_ai_now = ai_health.get("ok") and (
             SESSION_AI_LIMIT == 0 or st.session_state.ai_calls_used < SESSION_AI_LIMIT
         )
-        spinner_msg = t("spinner_ai" if use_ai_now else "spinner_local", LANG)
-        with st.spinner(spinner_msg):
-            resp = answer(prompt, atoms, use_ai=use_ai_now, lang=LANG)
-        if resp.get("ai"):
-            st.session_state.ai_calls_used += 1
-        render_response(resp, len(st.session_state.messages), lang=LANG)
+
+        _t_start = time.monotonic()
+        # Build the response shell (search results, concepts, intent) without
+        # the AI synthesis — defer that so we can stream it.
+        with st.spinner(t("spinner_local", LANG)):
+            resp = answer(prompt, atoms, use_ai=use_ai_now, lang=LANG, defer_ai=True)
+
+        intent = resp.get("intent")
+        top_atoms = resp.get("top_atoms") or []
+        can_stream = use_ai_now and intent != "GREETING" and bool(top_atoms)
+
+        if can_stream:
+            # Stream the AI synthesis directly into the chat container.
+            # st.write_stream accumulates yielded strings and returns the
+            # concatenated full text — which we store for history replay.
+            ai_text_final = ""
+            try:
+                ai_text_final = st.write_stream(
+                    synthesize_with_ai_stream(prompt, intent, top_atoms, lang=LANG)
+                )
+                # Arabic post-processing must apply to the assembled text
+                if LANG == "ar" and ai_text_final:
+                    cleaned = sanitize_arabic_output(ai_text_final)
+                    if cleaned != ai_text_final:
+                        # If the sanitizer changed anything, re-render in
+                        # place so the user sees the cleaned version.
+                        ai_text_final = cleaned
+            except Exception as e:
+                resp["ai_error"] = str(e)
+                ai_text_final = ""
+
+            resp["ai"] = ai_text_final or None
+            stream_err = getattr(synthesize_with_ai_stream, "last_error", None)
+            if stream_err and not ai_text_final:
+                resp["ai_error"] = stream_err
+                # No AI text — fall back to local structured markdown so the
+                # user gets a useful answer instead of an empty bubble.
+                if resp.get("markdown"):
+                    st.warning(f"{t('ai_unavailable', LANG)}\n\n_{stream_err[:200]}_")
+                    st.markdown(resp["markdown"])
+
+            if ai_text_final:
+                st.session_state.ai_calls_used += 1
+        else:
+            # No-AI path: render the local structured markdown the way
+            # render_response would have.
+            if resp.get("markdown"):
+                st.markdown(resp["markdown"])
+
+        _response_ms = int((time.monotonic() - _t_start) * 1000)
+
+        # Render concept chips below the response
+        render_response_extras(resp, len(st.session_state.messages), lang=LANG)
+
+        # Fire-and-forget telemetry. No-op when SUPABASE_* secrets are absent.
+        # Wrapped in try so any unexpected issue is swallowed — we never let
+        # logging surface as a user-visible error.
+        try:
+            # `concepts` is a list of atom titles (strings).
+            _matched = [str(c) for c in (resp.get("concepts") or []) if c][:12]
+            telemetry.log_query(
+                query_text=prompt,
+                language=LANG,
+                intent=resp.get("intent", ""),
+                matched_atoms=_matched,
+                ai_used=bool(resp.get("ai")),
+                ai_model=(KIMI_MODEL_AR if LANG == "ar" else KIMI_MODEL) if resp.get("ai") else "",
+                response_ms=_response_ms,
+                session_id=st.session_state.get("_telemetry_session_id", ""),
+            )
+        except Exception:
+            pass
     st.session_state.messages.append({"role": "assistant", "response": resp})
 
 # Sidebar — language toggle, library stats, AI status, atom browser
