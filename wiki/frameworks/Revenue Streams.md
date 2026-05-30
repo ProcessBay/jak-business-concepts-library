@@ -1,19 +1,41 @@
 ---
 type: atom
 title: Revenue Streams
-aliases: [BMC Revenue Streams, Revenue Model, Monetization Strategy]
+aliases:
+  - BMC Revenue Streams
+  - Revenue Model
+  - Monetization Strategy
 category: framework
-applicable_to: [B2B, B2C, B2B2C, startup, scaleup, mature_business]
-key_metrics: [revenue_per_stream, gross_margin_per_stream, growth_rate_per_stream, revenue_concentration, ARPU, MRR_ARR, contribution_margin]
+applicable_to:
+  - B2B
+  - B2C
+  - B2B2C
+  - startup
+  - scaleup
+  - mature_business
+key_metrics:
+  - revenue_per_stream
+  - gross_margin_per_stream
+  - growth_rate_per_stream
+  - revenue_concentration
+  - ARPU
+  - MRR_ARR
+  - contribution_margin
 related:
   - "specializes: Business Model Canvas"
   - "see_also: Pricing Mechanisms"
   - "see_also: Subscription Business Model"
   - "see_also: Freemium"
   - "amplifies: Value Proposition"
-sources: [_Sources/Business_Model_Canvas_Explained-bhmuli]
-source_pages: "97-115"
-tags: [bmc_block, revenue, monetization, pricing, revenue_model]
+sources:
+  - _Sources/Business_Model_Canvas_Explained-bhmuli
+source_pages: 97-115
+tags:
+  - bmc_block
+  - revenue
+  - monetization
+  - pricing
+  - revenue_model
 created: 2026-05-22
 ---
 # Revenue Streams

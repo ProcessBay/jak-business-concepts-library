@@ -2780,81 +2780,100 @@ if prompt:
     with st.chat_message("user"):
         render_markdown_content_aware(prompt)
     with st.chat_message("assistant"):
-        use_ai_now = ai_health.get("ok") and (
-            SESSION_AI_LIMIT == 0 or st.session_state.ai_calls_used < SESSION_AI_LIMIT
-        )
+        # Outer try/except catches ANY unexpected error so the user sees a
+        # clear failure message instead of Streamlit's generic "Oh no" page.
+        # Helps diagnose deploy-environment-only issues since we can copy the
+        # traceback from the deployed app.
+        resp = {"markdown": "", "concepts": [], "intent": None, "ai": None, "ai_error": None, "top_atoms": []}
+        try:
+            use_ai_now = ai_health.get("ok") and (
+                SESSION_AI_LIMIT == 0 or st.session_state.ai_calls_used < SESSION_AI_LIMIT
+            )
 
-        _t_start = time.monotonic()
-        # Build the response shell (search results, concepts, intent) without
-        # the AI synthesis — defer that so we can stream it.
-        with st.spinner(t("spinner_local", LANG)):
-            resp = answer(prompt, atoms, use_ai=use_ai_now, lang=LANG, defer_ai=True)
+            _t_start = time.monotonic()
+            # Build the response shell (search results, concepts, intent) without
+            # the AI synthesis — defer that so we can stream it.
+            with st.spinner(t("spinner_local", LANG)):
+                resp = answer(prompt, atoms, use_ai=use_ai_now, lang=LANG, defer_ai=True)
 
-        intent = resp.get("intent")
-        top_atoms = resp.get("top_atoms") or []
-        can_stream = use_ai_now and intent != "GREETING" and bool(top_atoms)
+            intent = resp.get("intent")
+            top_atoms = resp.get("top_atoms") or []
+            can_stream = use_ai_now and intent != "GREETING" and bool(top_atoms)
 
-        if can_stream:
-            # Stream the AI synthesis directly into the chat container.
-            # st.write_stream accumulates yielded strings and returns the
-            # concatenated full text — which we store for history replay.
-            ai_text_final = ""
-            try:
-                ai_text_final = st.write_stream(
-                    synthesize_with_ai_stream(prompt, intent, top_atoms, lang=LANG)
-                )
-                # Arabic post-processing must apply to the assembled text
-                if LANG == "ar" and ai_text_final:
-                    cleaned = sanitize_arabic_output(ai_text_final)
-                    if cleaned != ai_text_final:
-                        # If the sanitizer changed anything, re-render in
-                        # place so the user sees the cleaned version.
-                        ai_text_final = cleaned
-            except Exception as e:
-                resp["ai_error"] = str(e)
+            if can_stream:
+                # Stream the AI synthesis directly into the chat container.
+                # st.write_stream accumulates yielded strings and returns the
+                # concatenated full text — which we store for history replay.
                 ai_text_final = ""
+                try:
+                    ai_text_final = st.write_stream(
+                        synthesize_with_ai_stream(prompt, intent, top_atoms, lang=LANG)
+                    )
+                    # Arabic post-processing must apply to the assembled text
+                    if LANG == "ar" and ai_text_final:
+                        cleaned = sanitize_arabic_output(ai_text_final)
+                        if cleaned != ai_text_final:
+                            ai_text_final = cleaned
+                except Exception as e:
+                    resp["ai_error"] = str(e)
+                    ai_text_final = ""
 
-            resp["ai"] = ai_text_final or None
-            stream_err = getattr(synthesize_with_ai_stream, "last_error", None)
-            if stream_err and not ai_text_final:
-                resp["ai_error"] = stream_err
-                # No AI text — fall back to local structured markdown so the
-                # user gets a useful answer instead of an empty bubble.
+                resp["ai"] = ai_text_final or None
+                stream_err = getattr(synthesize_with_ai_stream, "last_error", None)
+                if stream_err and not ai_text_final:
+                    resp["ai_error"] = stream_err
+                    # No AI text — fall back to local structured markdown so the
+                    # user gets a useful answer instead of an empty bubble.
+                    if resp.get("markdown"):
+                        st.warning(f"{t('ai_unavailable', LANG)}\n\n_{stream_err[:200]}_")
+                        st.markdown(resp["markdown"])
+
+                if ai_text_final:
+                    st.session_state.ai_calls_used += 1
+            else:
+                # No-AI path: render the local structured markdown the way
+                # render_response would have.
                 if resp.get("markdown"):
-                    st.warning(f"{t('ai_unavailable', LANG)}\n\n_{stream_err[:200]}_")
                     st.markdown(resp["markdown"])
 
-            if ai_text_final:
-                st.session_state.ai_calls_used += 1
-        else:
-            # No-AI path: render the local structured markdown the way
-            # render_response would have.
-            if resp.get("markdown"):
-                st.markdown(resp["markdown"])
+            _response_ms = int((time.monotonic() - _t_start) * 1000)
 
-        _response_ms = int((time.monotonic() - _t_start) * 1000)
+            # Render concept chips below the response
+            render_response_extras(resp, len(st.session_state.messages), lang=LANG)
 
-        # Render concept chips below the response
-        render_response_extras(resp, len(st.session_state.messages), lang=LANG)
+            # Fire-and-forget telemetry. No-op when SUPABASE_* secrets are absent.
+            try:
+                _matched = [str(c) for c in (resp.get("concepts") or []) if c][:12]
+                telemetry.log_query(
+                    query_text=prompt,
+                    language=LANG,
+                    intent=resp.get("intent", ""),
+                    matched_atoms=_matched,
+                    ai_used=bool(resp.get("ai")),
+                    ai_model=(KIMI_MODEL_AR if LANG == "ar" else KIMI_MODEL) if resp.get("ai") else "",
+                    response_ms=_response_ms,
+                    session_id=st.session_state.get("_telemetry_session_id", ""),
+                )
+            except Exception:
+                pass
 
-        # Fire-and-forget telemetry. No-op when SUPABASE_* secrets are absent.
-        # Wrapped in try so any unexpected issue is swallowed — we never let
-        # logging surface as a user-visible error.
-        try:
-            # `concepts` is a list of atom titles (strings).
-            _matched = [str(c) for c in (resp.get("concepts") or []) if c][:12]
-            telemetry.log_query(
-                query_text=prompt,
-                language=LANG,
-                intent=resp.get("intent", ""),
-                matched_atoms=_matched,
-                ai_used=bool(resp.get("ai")),
-                ai_model=(KIMI_MODEL_AR if LANG == "ar" else KIMI_MODEL) if resp.get("ai") else "",
-                response_ms=_response_ms,
-                session_id=st.session_state.get("_telemetry_session_id", ""),
+        except Exception as _outer_err:
+            # Last-ditch error display. Surfaces the actual traceback so we can
+            # debug deploy-environment-only failures.
+            import traceback as _tb
+            _err_msg = str(_outer_err) or _outer_err.__class__.__name__
+            _err_trace = _tb.format_exc()
+            st.error(
+                f"**Something failed while answering your question.**\n\n"
+                f"`{_err_msg}`\n\n"
+                f"This is shown so it can be reported — normally a Kimi network "
+                f"error, a missing API key, or a Streamlit Cloud secret. Try again, "
+                f"or refresh the page."
             )
-        except Exception:
-            pass
+            with st.expander("Technical details"):
+                st.code(_err_trace, language="text")
+            resp["ai_error"] = _err_msg
+
     st.session_state.messages.append({"role": "assistant", "response": resp})
 
 # Sidebar — language toggle, library stats, AI status, atom browser
