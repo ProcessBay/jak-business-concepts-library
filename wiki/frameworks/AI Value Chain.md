@@ -94,12 +94,12 @@ The AI Value Chain maps the sequential stages required to deliver value from AI:
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Technology Partnership]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
 - [[AI-as-a-Service]] — _auto_ (score 8.5: tags×2.0, applicable_to×4.0, title×1.5, alias×1.0)
 - [[Value Chain Analysis]] — _auto_ (score 6.8: tags×2.0, applicable_to×1.0, title×3.0, category×0.8)
 - [[Narrow vs General AI]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
+- [[Product Development Lifecycle (9 Stages)]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Create-Deliver-Capture Value]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
-- [[Customer Value Creation Model]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
-- [[Five-Step Value Creation Plan]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

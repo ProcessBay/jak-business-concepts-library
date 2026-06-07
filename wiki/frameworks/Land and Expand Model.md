@@ -90,11 +90,11 @@ Land and Expand is a B2B SaaS strategy where the company first "lands" individua
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Product-Led Growth]] — _auto_ (score 8.8: tags×6.0, applicable_to×1.0, category×0.8, alias×1.0)
+- [[Co-Marketing Agreement]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[SaaS Business Model]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[SaaS Pricing Models]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Freemium Business Model]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
-- [[High-Touch vs Low-Touch Sales]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
-- [[Five Stages of Subscription Maturity]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Joint Venture Partnership]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

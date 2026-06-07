@@ -1,41 +1,19 @@
 ---
 type: atom
 title: Revenue Streams
-aliases:
-  - BMC Revenue Streams
-  - Revenue Model
-  - Monetization Strategy
+aliases: [BMC Revenue Streams, Revenue Model, Monetization Strategy]
 category: framework
-applicable_to:
-  - B2B
-  - B2C
-  - B2B2C
-  - startup
-  - scaleup
-  - mature_business
-key_metrics:
-  - revenue_per_stream
-  - gross_margin_per_stream
-  - growth_rate_per_stream
-  - revenue_concentration
-  - ARPU
-  - MRR_ARR
-  - contribution_margin
+applicable_to: [B2B, B2C, B2B2C, startup, scaleup, mature_business]
+key_metrics: [revenue_per_stream, gross_margin_per_stream, growth_rate_per_stream, revenue_concentration, ARPU, MRR_ARR, contribution_margin]
 related:
   - "specializes: Business Model Canvas"
   - "see_also: Pricing Mechanisms"
   - "see_also: Subscription Business Model"
   - "see_also: Freemium"
   - "amplifies: Value Proposition"
-sources:
-  - _Sources/Business_Model_Canvas_Explained-bhmuli
-source_pages: 97-115
-tags:
-  - bmc_block
-  - revenue
-  - monetization
-  - pricing
-  - revenue_model
+sources: [_Sources/Business_Model_Canvas_Explained-bhmuli]
+source_pages: "97-115"
+tags: [bmc_block, revenue, monetization, pricing, revenue_model]
 created: 2026-05-22
 ---
 # Revenue Streams
@@ -115,10 +93,10 @@ Revenue Streams is the BMC block that defines how a firm makes money from each c
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Multiple Revenue Streams]] — _auto_ (score 11.0: tags×2.0, applicable_to×6.0, title×3.0)
 - [[Pricing Mechanisms]] — _auto_ (score 8.0: tags×6.0, applicable_to×2.0)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Data Monetization Model]] — _auto_ (score 7.0: tags×4.0, applicable_to×1.0, alias×2.0)
 - [[Customer Relationships]] — _auto_ (score 6.8: tags×2.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Customer Segments]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Ad Pricing Mechanisms]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

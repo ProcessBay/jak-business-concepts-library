@@ -199,10 +199,10 @@ Example: HubSpot = Freemium entry → Tiered plans → Per-user seats + usage ov
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[SaaS Business Model]] — _auto_ (score 13.2: tags×8.0, applicable_to×1.0, title×1.5, category×0.8, alias×2.0)
 - [[SaaS Metrics Suite]] — _auto_ (score 9.2: tags×2.0, applicable_to×4.0, title×1.5, category×0.8, alias×1.0)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 7.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8)
 - [[Subscription Business Model]] — _auto_ (score 7.0: tags×6.0, alias×1.0)
 - [[Land and Expand Model]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Product-Led Growth]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Pricing Mechanisms]] — _auto_ (score 6.5: tags×4.0, title×1.5, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

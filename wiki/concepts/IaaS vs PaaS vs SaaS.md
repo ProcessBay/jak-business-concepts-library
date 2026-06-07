@@ -82,9 +82,9 @@ The three foundational layers of cloud computing as a service. They differ by wh
 - [[SaaS Business Model]] — _auto_ (score 8.5: tags×4.0, applicable_to×1.0, title×1.5, alias×2.0)
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[AI-as-a-Service]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
+- [[Technology Transfer Partnership]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[SaaS Rule of 40]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
 - [[Brand Identity]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Community vs Commercial Open-Source]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Customer Experience]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -89,12 +89,12 @@ Network effects describe the phenomenon where a product or service becomes more 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Negative Network Effects]] — _auto_ (score 10.0: tags×2.0, applicable_to×3.0, title×3.0, alias×2.0)
+- [[Network Effects vs Virality vs Economies of Scale]] — _auto_ (score 10.0: tags×4.0, applicable_to×3.0, title×3.0)
+- [[Metcalfe's Law]] — _auto_ (score 9.8: tags×4.0, applicable_to×2.0, category×0.8, alias×3.0)
+- [[Reed's Law]] — _auto_ (score 8.8: tags×4.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Scalability]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Growing vs Scaling]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[Hyper Scalability]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Multiple Revenue Streams]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Pipeline to Platform Shift]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Data Network Effect]] — _auto_ (score 7.5: tags×2.0, applicable_to×2.0, title×1.5, alias×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -66,9 +66,9 @@ The foundational distinction in AI capability. **Narrow AI (ANI / Weak AI)** —
 - [[AI Value Chain]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 - [[AI-as-a-Service]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 - [[Brand Identity]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Competitor Identification (Direct, Indirect, Substitute)]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Employee Empowerment]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Customer Experience]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Free Trial vs Freemium]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Flywheel vs Funnel]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

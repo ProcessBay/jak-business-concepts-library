@@ -84,12 +84,12 @@ The Business Model Testing Cycle is a 7-step iterative process for validating bu
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Build-Measure-Learn Loop]] — _auto_ (score 13.8: tags×8.0, category×0.8, alias×5.0)
 - [[Falsifiable Hypothesis Building]] — _auto_ (score 10.0: tags×4.0, applicable_to×5.0, alias×1.0)
 - [[Desirability-Feasibility-Viability]] — _auto_ (score 9.8: tags×4.0, applicable_to×5.0, category×0.8)
+- [[Lean Startup Methodology]] — _auto_ (score 9.8: tags×6.0, applicable_to×3.0, category×0.8)
 - [[Wizard of Oz Test]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
-- [[Blue Ocean Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Business Model Canvas]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Create-Deliver-Capture Value]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Minimum Viable Product]] — _auto_ (score 8.8: tags×6.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

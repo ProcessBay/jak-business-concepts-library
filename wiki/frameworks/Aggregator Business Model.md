@@ -89,10 +89,10 @@ An aggregator business model creates value by collecting information, goods, or 
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Long-Tail Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Marketplace Business Model]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
+- [[7Ps Marketing Mix]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Blue Ocean Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Customer Value Creation Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Blockbuster Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Business Model Canvas]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Go-to-Market Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

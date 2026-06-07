@@ -94,12 +94,12 @@ The BMI (Business Models Inc.) Scalability Matrix splits scalability into two co
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[BCG Matrix]] — _auto_ (score 8.8: tags×4.0, applicable_to×3.0, category×0.8, alias×1.0)
+- [[Competitive Analysis Process]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
+- [[Porter's Five Forces]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
 - [[Growing vs Scaling]] — _auto_ (score 8.0: tags×4.0, applicable_to×4.0)
 - [[Business Model Space Assessment]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Six Business Model Shifts]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Value Chain Analysis]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Blue Ocean Strategy]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[SWOT Analysis]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Flywheel Effect]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

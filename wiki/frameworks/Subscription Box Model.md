@@ -90,11 +90,11 @@ The Subscription Box model delivers a curated or replenishment shipment of physi
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Subscription Business Model]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
+- [[Influencer Marketing]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
 - [[Direct-to-Consumer Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Affiliate Marketing]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[As-a-Service Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Bait and Hook Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Drop-Shipping Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

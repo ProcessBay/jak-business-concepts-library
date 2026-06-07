@@ -81,7 +81,7 @@ Two structurally distinct flavors of open-source. **Community Open-Source** — 
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[Switching Costs]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Open-Core Model]] — _auto_ (score 4.5: applicable_to×3.0, title×1.5)
+- [[Technology Transfer Partnership]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

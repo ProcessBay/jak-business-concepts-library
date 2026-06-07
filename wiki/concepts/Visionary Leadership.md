@@ -83,12 +83,12 @@ Visionary leadership is the practice of setting a clear, compelling, and communi
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Massive Transformative Purpose]] — _auto_ (score 9.0: tags×6.0, alias×3.0)
 - [[Employee Empowerment]] — _auto_ (score 8.8: tags×6.0, applicable_to×2.0, category×0.8)
 - [[Non-Profit Value Creation]] — _auto_ (score 6.8: tags×4.0, category×0.8, alias×2.0)
 - [[Value Proposition]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Continuous Improvement]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Brand Identity]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Customer Experience]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

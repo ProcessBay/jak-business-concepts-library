@@ -89,12 +89,12 @@ Brand identity is the distinct, recognizable set of associations a firm builds i
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Perceptual Mapping]] — _auto_ (score 10.0: tags×6.0, applicable_to×2.0, alias×2.0)
 - [[Customer Experience]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
 - [[Value Proposition]] — _auto_ (score 8.8: tags×6.0, applicable_to×2.0, category×0.8)
+- [[Unique Selling Proposition]] — _auto_ (score 8.0: tags×4.0, applicable_to×4.0)
 - [[Differentiation Strategy]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[Employee Empowerment]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Operational Efficiency]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Narrow vs General AI]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

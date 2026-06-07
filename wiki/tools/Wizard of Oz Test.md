@@ -81,12 +81,12 @@ A Wizard of Oz test presents customers with what appears to be an automated, ful
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Concierge MVP]] — _auto_ (score 13.8: tags×6.0, applicable_to×3.0, category×0.8, alias×4.0)
+- [[Fake Door Test]] — _auto_ (score 12.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×2.0)
 - [[Falsifiable Hypothesis Building]] — _auto_ (score 11.8: tags×6.0, applicable_to×4.0, category×0.8, alias×1.0)
-- [[Business Model Testing Cycle]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
-- [[Desirability-Feasibility-Viability]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
-- [[Customer Feedback Loop]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Customer Personas]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Osterwalder 7 Questions]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Landing Page MVP]] — _auto_ (score 11.8: tags×6.0, applicable_to×3.0, category×0.8, alias×2.0)
+- [[Explainer Video MVP]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
+- [[Piecemeal MVP]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

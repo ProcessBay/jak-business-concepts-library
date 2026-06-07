@@ -88,11 +88,11 @@ A marketplace is a platform that connects buyers and sellers of goods or service
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Multilateral Platform]] — _auto_ (score 15.8: tags×8.0, applicable_to×4.0, category×0.8, alias×3.0)
+- [[Two-Sided Network Effect]] — _auto_ (score 10.0: tags×6.0, applicable_to×1.0, alias×3.0)
 - [[Take-Rate Economics]] — _auto_ (score 9.0: tags×4.0, applicable_to×3.0, alias×2.0)
 - [[Drop-Shipping Model]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Subscription Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Aggregator Business Model]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Pipeline to Platform Shift]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

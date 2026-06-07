@@ -78,12 +78,12 @@ The two primary SaaS sales motions, distinguished by intensity of salesperson in
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Sales-Led GTM]] — _auto_ (score 10.5: tags×6.0, applicable_to×2.0, title×1.5, alias×1.0)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Joint Marketing and Sales Initiatives]] — _auto_ (score 7.5: tags×4.0, applicable_to×2.0, title×1.5)
 - [[Product-Led Growth]] — _auto_ (score 7.0: tags×2.0, applicable_to×1.0, alias×4.0)
-- [[Customer Experience]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Distribution Channel]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
-- [[Freemium Business Model]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Land and Expand Model]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
+- [[Sales Enablement]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
+- [[SaaS Rule of 40]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

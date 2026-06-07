@@ -94,10 +94,10 @@ The Data Monetization Model captures value by treating data itself as a sellable
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Revenue Streams]] — _auto_ (score 7.0: tags×4.0, applicable_to×1.0, alias×2.0)
 - [[AI-as-a-Service]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Data Network Effect]] — _auto_ (score 6.5: tags×4.0, applicable_to×1.0, title×1.5)
 - [[Consumption-Based Revenue Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Freemium Business Model]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Open-Core Model]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
-- [[As-a-Service Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

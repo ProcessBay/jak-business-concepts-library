@@ -92,7 +92,7 @@ A loyalty program rewards repeat customers with points, discounts, exclusive acc
 - [[Customer Relationships]] — _auto_ (score 7.0: tags×4.0, applicable_to×2.0, alias×1.0)
 - [[Cohort Retention Analysis]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Customer Feedback Loop]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[Customer Experience]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
+- [[Influencer Marketing]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

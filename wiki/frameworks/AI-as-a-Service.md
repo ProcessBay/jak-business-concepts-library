@@ -95,7 +95,7 @@ AI-as-a-Service (AIaaS, also Machine-Learning-as-a-Service / MLaaS) delivers AI 
 - [[Data Monetization Model]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Narrow vs General AI]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Multilateral Platform]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Technology Partnership]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

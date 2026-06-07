@@ -86,9 +86,9 @@ Cost leadership is the strategy of offering products or services at a lower cost
 - [[Differentiation Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Niche Market Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Operational Efficiency]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 7.0: tags×2.0, applicable_to×3.0, alias×2.0)
 - [[Value Chain Analysis]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
 - [[Innovation Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Cost Structure]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

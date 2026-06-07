@@ -196,11 +196,11 @@ The four-stage lifecycle of a SaaS company: Pre-startup, Startup, Growth, and Ma
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Five Stages of Subscription Maturity]] — _auto_ (score 7.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[SaaS Rule of 40]] — _auto_ (score 6.5: tags×4.0, applicable_to×1.0, title×1.5)
+- [[Product Development Lifecycle (9 Stages)]] — _auto_ (score 6.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[SaaS Business Model]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Product-Led Growth]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[SaaS Metrics Suite]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
-- [[SaaS Pricing Models]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
-- [[Land and Expand Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

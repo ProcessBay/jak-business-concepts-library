@@ -76,11 +76,11 @@ The Desirability-Feasibility-Viability framework (originated at IDEO; widely use
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Business Model Testing Cycle]] — _auto_ (score 9.8: tags×4.0, applicable_to×5.0, category×0.8)
+- [[Lean Startup Methodology]] — _auto_ (score 9.8: tags×6.0, applicable_to×3.0, category×0.8)
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Falsifiable Hypothesis Building]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
 - [[Wizard of Oz Test]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
-- [[Open Innovation]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[Business Model Canvas]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Co-Innovation and Product Development]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

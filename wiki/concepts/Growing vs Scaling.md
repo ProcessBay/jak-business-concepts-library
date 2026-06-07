@@ -83,8 +83,8 @@ Growth and scaling are commonly confused but structurally different. **Growing**
 - [[Internal vs External Scalability]] — _auto_ (score 8.0: tags×4.0, applicable_to×4.0)
 - [[Hyper Scalability]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Why Business Models Evolve]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
+- [[Flywheel Effect]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
 - [[Innovation Strategy]] — _auto_ (score 7.0: tags×4.0, applicable_to×2.0, alias×1.0)
-- [[Multiple Revenue Streams]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

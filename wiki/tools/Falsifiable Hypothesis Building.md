@@ -83,9 +83,9 @@ A falsifiable hypothesis is a specific, testable claim about a business model as
 - [[Wizard of Oz Test]] — _auto_ (score 11.8: tags×6.0, applicable_to×4.0, category×0.8, alias×1.0)
 - [[Business Model Testing Cycle]] — _auto_ (score 10.0: tags×4.0, applicable_to×5.0, alias×1.0)
 - [[Desirability-Feasibility-Viability]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
-- [[Customer Feedback Loop]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Customer Personas]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Customer Segmentation Models]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Concierge MVP]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Explainer Video MVP]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Fake Door Test]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -90,12 +90,12 @@ Blue Ocean Strategy (originally Kim & Mauborgne, 2005) is the deliberate creatio
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Go-to-Market Strategy]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
 - [[Innovation Strategy]] — _auto_ (score 9.5: tags×4.0, applicable_to×3.0, title×1.5, alias×1.0)
+- [[Co-Innovation and Product Development]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Competitive Analysis Process]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[Customer Value Creation Model]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
-- [[Desirability-Feasibility-Viability]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Five-Step Value Creation Plan]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
-- [[Open Innovation]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[SWOT Analysis]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -86,12 +86,12 @@ A value proposition is the specific, unique benefit a firm offers customers that
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Unique Selling Proposition]] — _auto_ (score 10.5: tags×4.0, applicable_to×2.0, title×1.5, alias×3.0)
 - [[Brand Identity]] — _auto_ (score 8.8: tags×6.0, applicable_to×2.0, category×0.8)
 - [[Value Drivers]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Customer Segments]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
 - [[Customer Experience]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[Customer Personas]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
-- [[Customer Segmentation Models]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
+- [[Flywheel vs Funnel]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

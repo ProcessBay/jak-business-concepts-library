@@ -82,10 +82,10 @@ Free Trial and Freemium are different acquisition mechanics often conflated. A *
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Freemium Business Model]] — _auto_ (score 11.5: tags×4.0, applicable_to×5.0, title×1.5, alias×1.0)
 - [[Penny Gap]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Three-Tier Pricing]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Brand Identity]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Customer Experience]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Employee Empowerment]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Network Effects vs Virality vs Economies of Scale]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
+- [[Flywheel vs Funnel]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Product-Market Fit]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Product-Market Fit vs Go-to-Market Fit]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

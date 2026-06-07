@@ -93,8 +93,8 @@ Customer Segments is the BMC block that defines the distinct groups of people or
 - [[Customer Personas]] — _auto_ (score 11.5: tags×6.0, applicable_to×4.0, title×1.5)
 - [[Customer Relationships]] — _auto_ (score 9.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[Value Proposition]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
+- [[Perceptual Mapping]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Revenue Streams]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Loyalty Program]] — _auto_ (score 6.0: tags×4.0, applicable_to×1.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

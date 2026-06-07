@@ -89,7 +89,7 @@ Non-profit value creation is the practice of generating social, economic, and en
 - [[Value Creation]] — _auto_ (score 5.8: applicable_to×2.0, title×3.0, category×0.8)
 - [[Value Drivers]] — _auto_ (score 4.2: tags×2.0, title×1.5, category×0.8)
 - [[Value Proposition]] — _auto_ (score 4.2: tags×2.0, title×1.5, category×0.8)
-- [[Free Trial vs Freemium]] — _auto_ (score 3.8: tags×2.0, category×0.8, alias×1.0)
+- [[Massive Transformative Purpose]] — _auto_ (score 4.0: tags×2.0, alias×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

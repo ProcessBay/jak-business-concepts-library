@@ -88,8 +88,8 @@ Customer Segmentation Models are the seven approaches for dividing a market into
 - [[Customer Segments]] — _auto_ (score 13.5: tags×6.0, applicable_to×5.0, title×1.5, alias×1.0)
 - [[Customer Feedback Loop]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Loyalty Program]] — _auto_ (score 8.8: tags×6.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[Value Drivers]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Value Proposition]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
+- [[Unique Selling Proposition]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
+- [[Landing Page MVP]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

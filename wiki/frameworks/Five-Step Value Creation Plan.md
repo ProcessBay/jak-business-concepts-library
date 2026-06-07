@@ -92,8 +92,8 @@ Pereira's Five-Step Value Creation Plan is a meta-framework that sequences the m
 - [[Triple Bottom Line]] — _auto_ (score 8.8: tags×4.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
 - [[Create-Deliver-Capture Value]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
-- [[Five Stages of Subscription Maturity]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[Value Chain Analysis]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
+- [[PMF Five Core Areas]] — _auto_ (score 7.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Lean Startup Methodology]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

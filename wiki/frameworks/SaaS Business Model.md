@@ -123,8 +123,8 @@ Pereira notes: "SaaS is not about the cost only, it is also about the ease of ac
 - [[Subscription Business Model]] — _auto_ (score 9.0: tags×6.0, applicable_to×2.0, alias×1.0)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 8.5: tags×4.0, applicable_to×1.0, title×1.5, alias×2.0)
 - [[SaaS Metrics Suite]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
+- [[Co-Marketing Agreement]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Five Stages of Subscription Maturity]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Land and Expand Model]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -90,7 +90,7 @@ The Pareto Principle (commonly called the 80/20 Rule) states that roughly 80% of
 - [[Continuous Improvement]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Digital Disruption]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Customer Personas]] — _auto_ (score 5.0: applicable_to×5.0)
-- [[Distribution Channel]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
+- [[Direct vs Indirect Distribution]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 
