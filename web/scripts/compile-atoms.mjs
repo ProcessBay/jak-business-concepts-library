@@ -145,7 +145,13 @@ function walk(dir) {
 }
 
 if (!fs.existsSync(WIKI_DIR)) {
-  console.error(`wiki dir not found: ${WIKI_DIR}`);
+  // CLI deploys upload only web/ — the wiki lives one level up and won't be
+  // present. Fall back to the committed index instead of failing the build.
+  if (fs.existsSync(OUT_FILE)) {
+    console.log(`wiki dir not found (${WIKI_DIR}); using committed atoms.json`);
+    process.exit(0);
+  }
+  console.error(`wiki dir not found and no committed atoms.json: ${WIKI_DIR}`);
   process.exit(1);
 }
 walk(WIKI_DIR);
