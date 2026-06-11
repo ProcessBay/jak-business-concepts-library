@@ -135,6 +135,24 @@ export function Chat() {
               </button>
             ))}
           </div>
+          <div className="mt-8 text-xs text-muted-foreground">
+            Working toward a decision?{" "}
+            <Link
+              href="/playbooks"
+              className="font-medium text-primary hover:underline"
+            >
+              Follow a playbook
+            </Link>{" "}
+            — guided paths like{" "}
+            <Link href="/playbooks/price-your-product" className="underline-offset-2 hover:underline">
+              Price your product
+            </Link>{" "}
+            or{" "}
+            <Link href="/playbooks/add-recurring-revenue" className="underline-offset-2 hover:underline">
+              Add recurring revenue
+            </Link>
+            .
+          </div>
         </div>
       ) : (
         <>

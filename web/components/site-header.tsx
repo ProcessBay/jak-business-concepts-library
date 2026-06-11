@@ -34,6 +34,12 @@ export function SiteHeader() {
             Library
           </Link>
           <Link
+            href="/playbooks"
+            className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            Playbooks
+          </Link>
+          <Link
             href="/graph"
             className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
