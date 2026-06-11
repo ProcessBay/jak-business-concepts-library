@@ -118,11 +118,11 @@ export default async function ConceptPage({
           nativeButton={false}
           render={
             <Link
-              href={`/?q=${encodeURIComponent(`Tell me about ${atom.title} for my business`)}`}
+              href={`/?q=${encodeURIComponent(`Apply "${atom.title}" to my business — what does it mean for us concretely, and what should we do about it?`)}`}
             />
           }
         >
-          Ask the library about this
+          Apply to my business
         </Button>
       </div>
     </article>

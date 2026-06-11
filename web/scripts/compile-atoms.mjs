@@ -165,7 +165,22 @@ for (const atom of atoms.values()) {
     .map((a) => ({ title: a.title, slug: a.slug }));
 }
 
-const list = [...atoms.values()].sort((a, b) => a.title.localeCompare(b.title));
+// Second dedup pass: distinct titles can slugify identically
+// ("Ecosystem-Based" vs "Ecosystem Based"). Slugs are route params and React
+// keys, so they MUST be unique. Canonical-folder atoms win; else first kept.
+const bySlug = new Map();
+for (const atom of atoms.values()) {
+  const existing = bySlug.get(atom.slug);
+  if (!existing) {
+    bySlug.set(atom.slug, atom);
+  } else if (!CANONICAL.has(existing.category) && CANONICAL.has(atom.category)) {
+    bySlug.set(atom.slug, atom);
+  } else {
+    console.log(`  slug collision: dropping "${atom.title}" (keeps "${existing.title}")`);
+  }
+}
+
+const list = [...bySlug.values()].sort((a, b) => a.title.localeCompare(b.title));
 fs.mkdirSync(OUT_DIR, { recursive: true });
 fs.writeFileSync(OUT_FILE, JSON.stringify(list, null, 0));
 
@@ -192,6 +207,36 @@ const slim = list.map((a) => ({
   blurb: firstSentence(a.definition || ""),
 }));
 fs.writeFileSync(path.join(OUT_DIR, "atoms-index.json"), JSON.stringify(slim, null, 0));
+
+// Knowledge-graph edge list for the /graph visualization. Undirected edges
+// from `related` links, deduped (a->b == b->a).
+const edgeSet = new Set();
+const links = [];
+for (const a of list) {
+  for (const r of a.related) {
+    const key = [a.slug, r.slug].sort().join("|");
+    if (edgeSet.has(key)) continue;
+    edgeSet.add(key);
+    links.push({ source: a.slug, target: r.slug });
+  }
+}
+const degree = {};
+for (const l of links) {
+  degree[l.source] = (degree[l.source] || 0) + 1;
+  degree[l.target] = (degree[l.target] || 0) + 1;
+}
+const nodes = list.map((a) => ({
+  id: a.slug,
+  title: a.title,
+  category: a.category,
+  blurb: firstSentence(a.definition || ""),
+  val: 1 + (degree[a.slug] || 0), // node size ~ connectedness
+}));
+fs.writeFileSync(
+  path.join(OUT_DIR, "graph.json"),
+  JSON.stringify({ nodes, links }, null, 0)
+);
+console.log(`Graph: ${nodes.length} nodes, ${links.length} edges`);
 
 const byCat = {};
 for (const a of list) byCat[a.category] = (byCat[a.category] || 0) + 1;

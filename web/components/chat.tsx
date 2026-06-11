@@ -8,6 +8,8 @@ import { DefaultChatTransport } from "ai";
 import { Streamdown } from "streamdown";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getProfile, profilePromptBlock } from "@/lib/profile";
+import { useBusinessProfile } from "@/components/business-profile-dialog";
 
 interface ConceptRef {
   title: string;
@@ -22,6 +24,13 @@ const SUGGESTIONS = [
   "How do network effects create moats?",
 ];
 
+const PROFILE_SUGGESTIONS = [
+  "Which pricing model fits our business?",
+  "What's our biggest strategic risk right now?",
+  "Which growth lever should we pull first?",
+  "How could we add recurring revenue?",
+];
+
 function MessageText({ text }: { text: string }) {
   return (
     <div className="prose-chat text-[0.95rem]">
@@ -32,6 +41,7 @@ function MessageText({ text }: { text: string }) {
 
 export function Chat() {
   const searchParams = useSearchParams();
+  const activeProfile = useBusinessProfile();
   const [input, setInput] = React.useState("");
   // Related-concept chips per user query (keyed by the query text)
   const [chips, setChips] = React.useState<Record<string, ConceptRef[]>>({});
@@ -46,7 +56,12 @@ export function Chat() {
     (text: string) => {
       const q = text.trim();
       if (!q) return;
-      sendMessage({ text: q });
+      // Read the profile at send time so it's always current.
+      const profile = getProfile();
+      sendMessage(
+        { text: q },
+        { body: profile ? { profile: profilePromptBlock(profile) } : {} }
+      );
       setInput("");
       // Fire the local search for citation chips — instant, no LLM.
       fetch(`/api/search?q=${encodeURIComponent(q)}`)
@@ -85,12 +100,14 @@ export function Chat() {
       {isEmpty ? (
         <div className="flex flex-1 flex-col items-center justify-center pb-24 text-center">
           <h1 className="text-3xl font-semibold tracking-tight">
-            What are you trying to figure out?
+            {activeProfile
+              ? `What are you trying to figure out for ${activeProfile.name}?`
+              : "What are you trying to figure out?"}
           </h1>
           <p className="mt-3 max-w-md text-sm text-muted-foreground">
-            Ask anything about business models, pricing, growth, metrics,
-            platform economics, or strategy. Every answer is grounded in a
-            curated library of 244 concepts — no invented facts.
+            {activeProfile
+              ? `Answers are tailored to ${activeProfile.name} — ${activeProfile.oneLiner}`
+              : "Ask anything about business models, pricing, growth, metrics, platform economics, or strategy. Every answer is grounded in a curated library of 244 concepts — no invented facts."}
           </p>
           <form
             className="mt-8 w-full max-w-xl"
@@ -108,7 +125,7 @@ export function Chat() {
             />
           </form>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-            {SUGGESTIONS.map((s) => (
+            {(activeProfile ? PROFILE_SUGGESTIONS : SUGGESTIONS).map((s) => (
               <button
                 key={s}
                 onClick={() => ask(s)}

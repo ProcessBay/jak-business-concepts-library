@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CommandMenu } from "@/components/command-menu";
+import { BusinessProfileDialog } from "@/components/business-profile-dialog";
 
 export function SiteHeader() {
   return (
@@ -32,7 +33,14 @@ export function SiteHeader() {
           >
             Library
           </Link>
+          <Link
+            href="/graph"
+            className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            Map
+          </Link>
           <CommandMenu />
+          <BusinessProfileDialog />
         </nav>
       </div>
     </header>
