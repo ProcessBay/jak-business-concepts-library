@@ -206,6 +206,21 @@ export function Chat() {
                 Searching the library…
               </div>
             )}
+            {status === "error" && (
+              <div className="rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+                The AI engine is temporarily unavailable — your question
+                wasn&apos;t lost, try sending it again in a little while.
+                Browsing the{" "}
+                <Link href="/library" className="underline">
+                  library
+                </Link>{" "}
+                and{" "}
+                <Link href="/playbooks" className="underline">
+                  playbooks
+                </Link>{" "}
+                still works.
+              </div>
+            )}
             <div ref={bottomRef} />
           </div>
           <form
