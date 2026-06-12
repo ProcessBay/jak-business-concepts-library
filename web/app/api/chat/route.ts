@@ -5,10 +5,13 @@ import { buildSystemPrompt } from "@/lib/prompts";
 
 export const maxDuration = 60;
 
+// Works with both Moonshot direct (Bearer) and Azure AI Foundry (api-key
+// header) — we send both auth headers; each provider ignores the other's.
 const kimi = createOpenAICompatible({
-  name: "moonshot",
+  name: "kimi",
   apiKey: process.env.KIMI_API_KEY ?? "",
   baseURL: process.env.KIMI_BASE_URL ?? "https://api.moonshot.ai/v1",
+  headers: { "api-key": process.env.KIMI_API_KEY ?? "" },
 });
 
 const MODEL = process.env.KIMI_MODEL ?? "moonshot-v1-auto";
