@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "JAK Business Concepts Library — ProcessBay",
+    default: "JAK Business Concepts Library",
     template: "%s — JAK Library",
   },
   description:
-    "A grounded AI library of 244 business concepts — business models, pricing, growth, metrics, platform economics, and strategy. Every answer cites a curated wiki, never invention.",
+    "Upload or describe your business and get strategy advice grounded in a curated library of 244 business concepts — pricing, growth, business models, metrics, platform economics. By ProcessBay.",
   icons: { icon: "/processbay-icon.png" },
 };
 

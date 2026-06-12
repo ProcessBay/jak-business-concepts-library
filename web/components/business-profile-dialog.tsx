@@ -22,6 +22,26 @@ export function useBusinessProfile(): BusinessProfile | null {
   return React.useSyncExternalStore(subscribeProfile, getProfile, () => null);
 }
 
+// Obviously-fictional sample so any visitor can experience personalization
+// in one click — no document needed, no API call (works even if the AI
+// engine is briefly unavailable).
+const SAMPLE_PROFILE: BusinessProfile = {
+  name: "Riverline Roasters",
+  oneLiner: "Specialty coffee roastery selling online and wholesale to cafes",
+  industry: "Food & beverage",
+  businessModel: "One-off online bean orders plus monthly wholesale accounts for cafes",
+  customers: "Home coffee enthusiasts and independent cafes",
+  stage: "Early — two years in, profitable but plateauing",
+  challenges: [
+    "Customer retention on online orders",
+    "Thin margins on wholesale",
+    "No recurring revenue from consumers",
+  ],
+  summary:
+    "Riverline Roasters is a small specialty coffee roastery. Online sales are one-off purchases with low repeat rates; wholesale provides steadier volume but compresses margins. The team wants recurring consumer revenue (possibly subscriptions), better retention, and a clearer growth channel beyond word-of-mouth.",
+  createdAt: "sample",
+};
+
 export function BusinessProfileDialog() {
   const profile = useBusinessProfile();
   const [open, setOpen] = React.useState(false);
@@ -74,8 +94,8 @@ export function BusinessProfileDialog() {
           </DialogTitle>
           <DialogDescription>
             {profile
-              ? "Every answer and concept is now applied to this business. Stored only in your browser."
-              : "Paste a description or upload a document (pitch deck text, business plan, website copy — .pdf, .txt, .md). The library will tailor every answer to it. Nothing is stored on our servers."}
+              ? "Every answer is now applied to this business. It lives only in this browser — every visitor sees only their own business, and you can remove it anytime."
+              : "Paste a few sentences or upload a document (pitch deck text, business plan, website copy — .pdf, .txt, .md). Every answer on the site will then be applied to your business. Stored only in this browser — never on our servers."}
           </DialogDescription>
         </DialogHeader>
 
@@ -130,7 +150,7 @@ export function BusinessProfileDialog() {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="e.g. We run a 12-person management consulting firm in Riyadh serving government and enterprise clients. Revenue is project-based and lumpy. We want recurring revenue and are exploring productizing our frameworks…"
+              placeholder="What you do, who you serve, how you make money, and what's hard right now — a few sentences is plenty. Works for any business: a bakery, a SaaS startup, a clinic, an agency, a factory…"
               rows={6}
               className="w-full resize-none rounded-lg border bg-background p-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             />
@@ -150,6 +170,12 @@ export function BusinessProfileDialog() {
             >
               {busy ? "Analyzing your business…" : "Analyze"}
             </Button>
+            <button
+              onClick={() => setProfile(SAMPLE_PROFILE)}
+              className="w-full text-center text-xs text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+            >
+              No document handy? Try a sample business
+            </button>
           </div>
         )}
       </DialogContent>

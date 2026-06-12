@@ -20,7 +20,7 @@ interface ConceptRef {
 const SUGGESTIONS = [
   "What is value-based pricing?",
   "Compare freemium vs free trial",
-  "What business model fits a consulting firm?",
+  "What business model fits an online store?",
   "How do network effects create moats?",
 ];
 
