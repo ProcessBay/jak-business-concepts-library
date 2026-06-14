@@ -59,7 +59,7 @@ PERSONALIZATION RULES:
       system,
       messages: await convertToModelMessages(messages),
       temperature: 0.55,
-      maxOutputTokens: 2400,
+      maxOutputTokens: 4000, // includes K2.6 reasoning tokens
       onError: ({ error }) => {
         console.error("[chat] stream error:", error);
       },

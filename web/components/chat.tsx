@@ -206,6 +206,21 @@ export function Chat() {
                 Searching the library…
               </div>
             )}
+            {/* K2.6 reasons before it writes — show a pulse while the last
+                assistant message is streaming reasoning but has no text yet. */}
+            {status === "streaming" &&
+              (() => {
+                const last = messages[messages.length - 1];
+                const hasVisibleText =
+                  last?.role === "assistant" &&
+                  last.parts.some((p) => p.type === "text" && p.text.trim());
+                return last?.role === "assistant" && !hasVisibleText ? (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="inline-block size-2 animate-pulse rounded-full bg-primary" />
+                    Thinking it through…
+                  </div>
+                ) : null;
+              })()}
             {status === "error" && (
               <div className="rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
                 The AI engine is temporarily unavailable — your question

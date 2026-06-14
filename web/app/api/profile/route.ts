@@ -89,7 +89,7 @@ export async function POST(req: Request) {
     const { text: out, finishReason } = await generateText({
       model: kimi(MODEL),
       temperature: 0.1,
-      maxOutputTokens: 2000,
+      maxOutputTokens: 4500, // includes K2.6 reasoning tokens — thinking alone can use 1-2k
       system:
         "You extract a structured business profile from a document or description. " +
         "Reply with ONLY a JSON object — no markdown fences, no commentary. Schema: " +
