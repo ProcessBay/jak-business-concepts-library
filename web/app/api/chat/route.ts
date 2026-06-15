@@ -59,7 +59,11 @@ PERSONALIZATION RULES:
       system,
       messages: await convertToModelMessages(messages),
       temperature: 0.55,
-      maxOutputTokens: 4000, // includes K2.6 reasoning tokens
+      maxOutputTokens: 4000,
+      // K2.6 is a reasoning model; for grounded synthesis-from-wiki (a writing
+      // task, not a thinking task) its reasoning burns the entire token budget
+      // before any answer is produced. "none" = full answer, ~3x faster/cheaper.
+      providerOptions: { kimi: { reasoningEffort: "none" } },
       onError: ({ error }) => {
         console.error("[chat] stream error:", error);
       },

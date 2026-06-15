@@ -89,7 +89,10 @@ export async function POST(req: Request) {
     const { text: out, finishReason } = await generateText({
       model: kimi(MODEL),
       temperature: 0.1,
-      maxOutputTokens: 4500, // includes K2.6 reasoning tokens — thinking alone can use 1-2k
+      maxOutputTokens: 1500,
+      // Extraction is mechanical — no reasoning needed. "none" keeps K2.6 from
+      // spending the whole budget thinking and returning empty (the 500 bug).
+      providerOptions: { kimi: { reasoningEffort: "none" } },
       system:
         "You extract a structured business profile from a document or description. " +
         "Reply with ONLY a JSON object — no markdown fences, no commentary. Schema: " +
