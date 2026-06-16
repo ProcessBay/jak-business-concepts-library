@@ -42,13 +42,50 @@ const SAMPLE_PROFILE: BusinessProfile = {
   createdAt: "sample",
 };
 
+/** Reconstruct editable source text from a saved profile so "Replace" feels
+ *  like editing, not starting over. */
+function profileToText(p: BusinessProfile): string {
+  return [
+    p.summary,
+    p.challenges.length ? `Key challenges: ${p.challenges.join("; ")}.` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 export function BusinessProfileDialog() {
   const profile = useBusinessProfile();
   const [open, setOpen] = React.useState(false);
+  // editing === true means show the input form even though a profile exists
+  // (Replace flow). The existing profile is preserved until a NEW analysis
+  // succeeds, so cancelling never loses it.
+  const [editing, setEditing] = React.useState(false);
   const [text, setText] = React.useState("");
   const [file, setFile] = React.useState<File | null>(null);
   const [busy, setBusy] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+
+  const showForm = !profile || editing;
+
+  function startReplace() {
+    if (profile) setText(profileToText(profile));
+    setFile(null);
+    setError(null);
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    setEditing(false);
+    setText("");
+    setFile(null);
+    setError(null);
+  }
+
+  // Reset transient form state whenever the dialog is closed.
+  function handleOpenChange(next: boolean) {
+    setOpen(next);
+    if (!next) cancelEdit();
+  }
 
   async function analyze() {
     setBusy(true);
@@ -68,9 +105,11 @@ export function BusinessProfileDialog() {
       }
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Analysis failed");
+      // Only NOW is the old profile overwritten — never before this point.
       setProfile(data.profile as BusinessProfile);
       setText("");
       setFile(null);
+      setEditing(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Analysis failed");
     } finally {
@@ -79,7 +118,7 @@ export function BusinessProfileDialog() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger
         render={
           <Button variant={profile ? "secondary" : "default"} size="sm" nativeButton>
@@ -90,16 +129,20 @@ export function BusinessProfileDialog() {
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>
-            {profile ? profile.name : "Tell the library about your business"}
+            {showForm
+              ? editing
+                ? "Update your business"
+                : "Tell the library about your business"
+              : profile?.name}
           </DialogTitle>
           <DialogDescription>
-            {profile
-              ? "Every answer is now applied to this business. It lives only in this browser — every visitor sees only their own business, and you can remove it anytime."
-              : "Paste a few sentences or upload a document (pitch deck text, business plan, website copy — .pdf, .txt, .md). Every answer on the site will then be applied to your business. Stored only in this browser — never on our servers."}
+            {showForm
+              ? "Paste a few sentences or upload a document (pitch deck text, business plan, website copy — .pdf, .txt, .md). Every answer on the site will then be applied to your business. Stored only in this browser — never on our servers."
+              : "Every answer is now applied to this business. It lives only in this browser — every visitor sees only their own business, and you can edit or remove it anytime."}
           </DialogDescription>
         </DialogHeader>
 
-        {profile ? (
+        {!showForm ? (
           <div className="space-y-3 text-sm">
             <p className="text-muted-foreground">{profile.oneLiner}</p>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -140,8 +183,8 @@ export function BusinessProfileDialog() {
               >
                 Remove
               </Button>
-              <Button size="sm" onClick={() => setProfile(null)}>
-                Replace…
+              <Button size="sm" onClick={startReplace}>
+                Edit / replace…
               </Button>
             </div>
           </div>
@@ -168,14 +211,31 @@ export function BusinessProfileDialog() {
               disabled={busy || (!file && text.trim().length < 40)}
               className="w-full"
             >
-              {busy ? "Analyzing your business…" : "Analyze"}
+              {busy
+                ? "Analyzing your business…"
+                : editing
+                  ? "Save changes"
+                  : "Analyze"}
             </Button>
-            <button
-              onClick={() => setProfile(SAMPLE_PROFILE)}
-              className="w-full text-center text-xs text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
-            >
-              No document handy? Try a sample business
-            </button>
+            {editing && profile ? (
+              // Cancel restores the existing profile untouched — the whole
+              // point of the fix: Replace can never lose your business.
+              <Button
+                variant="ghost"
+                onClick={cancelEdit}
+                disabled={busy}
+                className="w-full"
+              >
+                Cancel — keep {profile.name}
+              </Button>
+            ) : (
+              <button
+                onClick={() => setProfile(SAMPLE_PROFILE)}
+                className="w-full text-center text-xs text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+              >
+                No document handy? Try a sample business
+              </button>
+            )}
           </div>
         )}
       </DialogContent>
