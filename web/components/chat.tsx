@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getProfile, profilePromptBlock } from "@/lib/profile";
 import { useBusinessProfile } from "@/components/business-profile-dialog";
+import { CementDialog, type CementSeed } from "@/components/cement-dialog";
+import { CopyButton } from "@/components/copy-button";
 import { ATOM_COUNT } from "@/lib/atoms";
 
 interface ConceptRef {
@@ -46,6 +48,7 @@ export function Chat() {
   const [input, setInput] = React.useState("");
   // Related-concept chips per user query (keyed by the query text)
   const [chips, setChips] = React.useState<Record<string, ConceptRef[]>>({});
+  const [cementSeed, setCementSeed] = React.useState<CementSeed | null>(null);
   const bottomRef = React.useRef<HTMLDivElement>(null);
   const autoSent = React.useRef(false);
 
@@ -174,6 +177,14 @@ export function Chat() {
                 );
               }
               const refs = chips[lastUserText] ?? [];
+              const answerText = message.parts
+                .filter((p) => p.type === "text")
+                .map((p) => (p.type === "text" ? p.text : ""))
+                .join("");
+              const topConcept = refs[0];
+              // Only offer "add to model" once the answer has finished streaming.
+              const isLast = message.id === messages[messages.length - 1]?.id;
+              const answerDone = !isLast || status === "ready" || status === "error";
               return (
                 <div key={message.id}>
                   {message.parts.map((part, i) =>
@@ -196,6 +207,29 @@ export function Chat() {
                           </Badge>
                         </Link>
                       ))}
+                    </div>
+                  )}
+                  {answerText.trim() && answerDone && (
+                    // The read-vs-adopt split: read freely, or commit this into
+                    // your consolidated business model.
+                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={() =>
+                          setCementSeed({
+                            conceptSlug: topConcept?.slug,
+                            conceptTitle: topConcept?.title ?? lastUserText.slice(0, 60),
+                            conceptCategory: topConcept?.category,
+                            sourceAnswer: answerText,
+                          })
+                        }
+                        className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M12 5v14" />
+                        </svg>
+                        Add to my model
+                      </button>
+                      <CopyButton text={answerText} />
                     </div>
                   )}
                 </div>
@@ -260,6 +294,7 @@ export function Chat() {
           </form>
         </>
       )}
+      <CementDialog seed={cementSeed} onClose={() => setCementSeed(null)} />
     </div>
   );
 }
