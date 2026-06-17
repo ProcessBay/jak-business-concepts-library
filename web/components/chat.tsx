@@ -12,6 +12,8 @@ import { getProfile, profilePromptBlock } from "@/lib/profile";
 import { useBusinessProfile } from "@/components/business-profile-dialog";
 import { CementDialog, type CementSeed } from "@/components/cement-dialog";
 import { CopyButton } from "@/components/copy-button";
+import { CementedGraph } from "@/components/cemented-graph";
+import { PlanStrip } from "@/components/plan-strip";
 import { ATOM_COUNT } from "@/lib/atoms";
 
 interface ConceptRef {
@@ -102,7 +104,13 @@ export function Chat() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4">
       {isEmpty ? (
-        <div className="flex flex-1 flex-col items-center justify-center pb-24 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-2 py-12 text-center">
+          {/* Your business map — grows as concepts are cemented (above the ask). */}
+          {activeProfile && (
+            <div className="mb-4 w-full max-w-2xl">
+              <CementedGraph />
+            </div>
+          )}
           <h1 className="text-3xl font-semibold tracking-tight">
             {activeProfile
               ? `What are you trying to figure out for ${activeProfile.name}?`
@@ -139,6 +147,12 @@ export function Chat() {
               </button>
             ))}
           </div>
+          {/* The central plan, below the ask. */}
+          {activeProfile && (
+            <div className="mt-10 flex w-full justify-center">
+              <PlanStrip />
+            </div>
+          )}
           <div className="mt-8 text-xs text-muted-foreground">
             Working toward a decision?{" "}
             <Link
