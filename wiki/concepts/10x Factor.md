@@ -97,11 +97,11 @@ The 10x Factor is the value-differential threshold Pereira identifies as the ent
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Exponential Business Model]] — _auto_ (score 6.0: tags×4.0, applicable_to×1.0, alias×1.0)
+- [[Digital Product Value Perception]] — _auto_ (score 5.8: tags×4.0, category×0.8, alias×1.0)
 - [[Massive Transformative Purpose]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Why Business Models Evolve]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Digital Disruption]] — _auto_ (score 4.8: tags×4.0, category×0.8)
 - [[Five Elements of Exponential Growth]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Validated Learning]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

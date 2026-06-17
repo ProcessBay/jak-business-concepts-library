@@ -81,9 +81,9 @@ The Penny Gap is the psychologically and economically significant gap between fr
 - [[Free Trial vs Freemium]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Pricing Psychology]] — _auto_ (score 9.0: tags×6.0, applicable_to×3.0)
 - [[Freemium Business Model]] — _auto_ (score 8.0: tags×4.0, applicable_to×3.0, alias×1.0)
-- [[Three-Tier Pricing]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
-- [[Flywheel vs Funnel]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Network Effects vs Virality vs Economies of Scale]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Personalized Price Discrimination]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Price Elasticity of Demand]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -84,10 +84,10 @@ White-labeling is a revenue model where a producer manufactures or develops a pr
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Supply Chain Partnership]] — _auto_ (score 6.0: tags×4.0, applicable_to×2.0)
 - [[Subscription Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[SaaS Customization and White-Label Monetization]] — _auto_ (score 5.5: tags×2.0, title×1.5, alias×2.0)
 - [[Technology Transfer Partnership]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Affiliate Marketing]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[AI-as-a-Service]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[As-a-Service Business Model]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -87,9 +87,9 @@ Pay-What-You-Want (PWYW) is a pricing mechanism where the buyer sets the price t
 - [[Pricing Psychology]] — _auto_ (score 11.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[Ad Pricing Mechanisms]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Pricing Mechanisms]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[Three-Tier Pricing]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[Bundling and Packaging Strategies]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 7.5: tags×4.0, applicable_to×2.0, title×1.5)
+- [[Variable Pricing for Digital Goods]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
+- [[Anchor Pricing]] — _auto_ (score 9.2: tags×6.0, title×1.5, category×0.8, alias×1.0)
+- [[Decoy Pricing]] — _auto_ (score 9.2: tags×6.0, applicable_to×1.0, title×1.5, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

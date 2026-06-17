@@ -90,7 +90,7 @@ Switching costs are the total cost — time, money, effort, risk — a customer 
 - [[Churn Rate]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[Symmetrical vs Asymmetrical Business Models]] — _auto_ (score 6.0: applicable_to×5.0, alias×1.0)
-- [[Value Drivers]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -84,12 +84,12 @@ Value drivers are the specific features, attributes, or benefits that create val
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Co-Creation Customer Relationship]] — _auto_ (score 8.8: tags×4.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Value Proposition]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Customer Experience]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Self-Service Customer Relationship]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Viral Loop (Steve Blank)]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Customer Personas]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
-- [[Pareto Principle]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
-- [[Customer Feedback Loop]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Customer Segmentation Models]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

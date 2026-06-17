@@ -84,12 +84,12 @@ Churn Rate is the percentage of customers (or revenue) lost over a given period 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Customer Success Management]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
+- [[Customer Success Anti-Patterns]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
+- [[Customer Success Manager Role]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
+- [[Customer Success Strategy 8 Pillars]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[GTM KPIs]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Cohort Retention Analysis]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Customer Relationships]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Five Stages of Subscription Maturity]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Subscription Business Model]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Switching Costs]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

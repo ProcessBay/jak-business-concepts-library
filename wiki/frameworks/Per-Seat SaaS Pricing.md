@@ -98,6 +98,15 @@ Per-Seat SaaS Pricing (also called per-user pricing) charges customers based on 
 - [[Usage-Based SaaS Pricing]] — _contrasts_with_ (consumption- vs license-based)
 - [[SaaS Metrics Suite]] — _see_also_ (ARPU, NRR, expansion metrics)
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[SaaS Pricing Models]] — _auto_ (score 15.8: tags×10.0, applicable_to×2.0, title×3.0, category×0.8)
+- [[Value-Based SaaS Pricing]] — _auto_ (score 12.0: tags×6.0, applicable_to×2.0, title×3.0, alias×1.0)
+- [[Hybrid SaaS Pricing]] — _auto_ (score 11.8: tags×6.0, applicable_to×2.0, title×3.0, category×0.8)
+- [[Usage-Based SaaS Pricing]] — _auto_ (score 11.8: tags×6.0, applicable_to×1.0, title×3.0, category×0.8, alias×1.0)
+- [[SaaS Renewal Pricing]] — _auto_ (score 11.0: tags×6.0, applicable_to×2.0, title×3.0)
+- [[Value-Based Pricing]] — _auto_ (score 10.2: tags×6.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Pricing_Strategies_for_SaaS-flmttw]] — pages 26-28 (per-user pricing model definition, pros/cons, user-definition decisions, tiering), pages 59-60 (per-user vs per-organization trade-offs), pages 104-105 (Slack case study showing per-active-user combined with tiered packaging)

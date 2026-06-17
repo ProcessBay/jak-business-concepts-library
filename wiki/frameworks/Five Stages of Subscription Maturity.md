@@ -87,12 +87,12 @@ A capability-maturity framework for organizations adopting or operating subscrip
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Customer Success Management]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[PMF Five Core Areas]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[Product Development Lifecycle (9 Stages)]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[SaaS Company Stages]] — _auto_ (score 7.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[SaaS Business Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Five-Step Value Creation Plan]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
-- [[Porter's Five Forces]] — _auto_ (score 6.2: tags×2.0, applicable_to×2.0, title×1.5, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

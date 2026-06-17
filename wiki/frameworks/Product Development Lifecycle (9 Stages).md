@@ -94,11 +94,11 @@ Pereira frames new product development as a 9-stage progression from idea to sus
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Co-Innovation and Product Development]] — _auto_ (score 9.8: tags×4.0, applicable_to×2.0, title×3.0, category×0.8)
+- [[Customer Success Strategy 8 Pillars]] — _auto_ (score 9.8: tags×4.0, applicable_to×3.0, category×0.8, alias×2.0)
 - [[Strategic Partnership Lifecycle (Pereira)]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
+- [[Four Cs of Pricing]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
 - [[Go-to-Market Strategy]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
 - [[PMF Five Core Areas]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 7.8: tags×2.0, applicable_to×5.0, category×0.8)
-- [[Product Launch Playbook]] — _auto_ (score 7.5: applicable_to×6.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -88,8 +88,8 @@ Operational efficiency is the discipline of producing maximum output for minimum
 - [[Sustainable Business Practices]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
 - [[Brand Identity]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Customer Experience]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Cost Structure]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Key Activities]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
+- [[Self-Service Customer Relationship]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Willingness to Pay]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

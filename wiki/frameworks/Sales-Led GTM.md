@@ -102,9 +102,9 @@ A Sales-Led Go-to-Market strategy makes the sales team the primary engine of cus
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 10.5: tags×6.0, applicable_to×2.0, title×1.5, alias×1.0)
 - [[Go-to-Market Strategy]] — _auto_ (score 8.8: tags×4.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Sales Enablement]] — _auto_ (score 8.5: tags×4.0, applicable_to×3.0, title×1.5)
-- [[Joint Marketing and Sales Initiatives]] — _auto_ (score 7.5: tags×4.0, applicable_to×1.0, title×1.5, alias×1.0)
-- [[GTM KPIs]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
-- [[Co-Marketing Agreement]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
+- [[Dedicated Personal Assistance]] — _auto_ (score 8.0: tags×6.0, applicable_to×2.0)
+- [[Value-Based Pricing]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
+- [[Value-Based Services Pricing]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

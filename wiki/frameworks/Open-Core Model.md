@@ -92,7 +92,7 @@ The Open-Core Model splits a software product into two layers: a free, open-sour
 - [[As-a-Service Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Data Monetization Model]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Revenue Streams]] — _auto_ (score 5.0: tags×4.0, applicable_to×1.0)
-- [[AI-as-a-Service]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Usage-Based SaaS Pricing]] — _auto_ (score 5.0: tags×4.0, applicable_to×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

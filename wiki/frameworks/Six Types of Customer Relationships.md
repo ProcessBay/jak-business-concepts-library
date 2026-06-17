@@ -94,6 +94,15 @@ A framework cataloguing the six structural modes a company can use to relate to 
 - [[Customer Segments]] — _see_also_ (mode choice follows segment definition)
 - [[Customer Experience]] — _amplifies_ (mode choice shapes the experience)
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Self-Service Customer Relationship]] — _auto_ (score 16.5: tags×8.0, applicable_to×6.0, title×1.5, alias×1.0)
+- [[Customer Relationships]] — _auto_ (score 15.8: tags×6.0, applicable_to×4.0, title×3.0, category×0.8, alias×2.0)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 12.5: tags×6.0, applicable_to×4.0, title×1.5, alias×1.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 12.5: tags×6.0, applicable_to×5.0, title×1.5)
+- [[Customer Segments]] — _auto_ (score 11.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Co-Marketing Agreement]] — _auto_ (score 10.8: tags×6.0, applicable_to×4.0, category×0.8)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Customer-Relationship-Strategies-83cvax-2]] — pages 20-22 (six relationship types catalogued and exemplified)

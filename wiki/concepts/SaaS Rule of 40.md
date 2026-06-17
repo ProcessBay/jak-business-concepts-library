@@ -91,9 +91,9 @@ The SaaS Rule of 40 is a business heuristic that asserts a healthy SaaS company'
 - [[SaaS Company Stages]] — _auto_ (score 6.5: tags×4.0, applicable_to×1.0, title×1.5)
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
+- [[Customer Success Management]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 - [[Freemium Business Model]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
-- [[Land and Expand Model]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
-- [[Product-Led Growth]] — _auto_ (score 5.0: tags×4.0, applicable_to×1.0)
+- [[Guided Customer Onboarding]] — _auto_ (score 5.0: tags×2.0, applicable_to×3.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

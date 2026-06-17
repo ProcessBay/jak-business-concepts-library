@@ -98,12 +98,12 @@ Pereira catalogs the eight most frequent mistakes that undermine Go-to-Market st
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Customer Success Anti-Patterns]] — _auto_ (score 12.8: tags×4.0, applicable_to×2.0, category×0.8, alias×6.0)
 - [[GTM KPIs]] — _auto_ (score 12.5: tags×2.0, applicable_to×7.0, title×1.5, alias×2.0)
 - [[Go-to-Market Strategy]] — _auto_ (score 10.0: tags×2.0, applicable_to×5.0, alias×3.0)
 - [[Joint Marketing and Sales Initiatives]] — _auto_ (score 8.0: tags×2.0, applicable_to×3.0, alias×3.0)
 - [[Product Launch Playbook]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[Product-Market Fit vs Go-to-Market Fit]] — _auto_ (score 7.0: applicable_to×4.0, alias×3.0)
-- [[PMF Common Misconceptions]] — _auto_ (score 6.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -62,7 +62,7 @@ export function CommandMenu() {
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search 244 business concepts…" />
+        <CommandInput placeholder={`Search ${index.length} business concepts…`} />
         <CommandList>
           <CommandEmpty>No concepts found.</CommandEmpty>
           {sortedCategories.map((cat) => (

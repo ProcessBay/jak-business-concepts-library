@@ -92,7 +92,7 @@ An aggregator business model creates value by collecting information, goods, or 
 - [[7Ps Marketing Mix]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Blue Ocean Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Customer Value Creation Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Go-to-Market Strategy]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Four Cs of Pricing]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

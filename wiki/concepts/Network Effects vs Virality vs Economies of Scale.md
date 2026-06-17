@@ -89,11 +89,11 @@ Three growth-and-value mechanisms are routinely confused: **network effects** (t
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Critical Mass]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
+- [[Viral Loop (Steve Blank)]] — _auto_ (score 10.8: tags×6.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Network Effects]] — _auto_ (score 10.0: tags×4.0, applicable_to×3.0, title×3.0)
 - [[Network Density and Clustering]] — _auto_ (score 9.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[Negative Network Effects]] — _auto_ (score 9.0: tags×2.0, applicable_to×4.0, title×3.0)
 - [[Hidden Network Effects]] — _auto_ (score 8.8: tags×4.0, applicable_to×1.0, title×3.0, category×0.8)
-- [[Product-Market Fit]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

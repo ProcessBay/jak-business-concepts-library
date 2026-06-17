@@ -15,7 +15,7 @@ const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-      Laying out 244 concepts…
+      Laying out the concept map…
     </div>
   ),
 });

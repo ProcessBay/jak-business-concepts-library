@@ -101,8 +101,8 @@ An automation-based business model relies on algorithms or automated systems to 
 - [[Ecosystem-Based Business Model]] — _auto_ (score 6.2: tags×4.0, title×1.5, category×0.8)
 - [[Exponential Business Model]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Flywheel Business Model]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
+- [[Value-Based Pricing]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
 - [[Linear vs Exponential Business Model]] — _auto_ (score 4.8: tags×4.0, category×0.8)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

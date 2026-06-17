@@ -92,10 +92,10 @@ Pricing Mechanisms are the structural approaches a firm uses to set prices, orga
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Ad Pricing Mechanisms]] — _auto_ (score 11.8: tags×6.0, applicable_to×2.0, title×3.0, category×0.8)
 - [[Bundling and Packaging Strategies]] — _auto_ (score 10.8: tags×4.0, applicable_to×4.0, category×0.8, alias×2.0)
+- [[Bundle and Cross-Sell Pricing for Ecommerce]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
 - [[Pay-What-You-Want Pricing]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Pricing Psychology]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
 - [[Three-Tier Pricing]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 9.5: tags×4.0, applicable_to×4.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

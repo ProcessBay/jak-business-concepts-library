@@ -90,12 +90,12 @@ Cohort Retention Analysis groups customers by a shared characteristic (typically
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 9.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[Competitive Product Analysis]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[Feature Matrix Analysis]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
 - [[Customer Feedback Loop]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Loyalty Program]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Piecemeal MVP]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Pricing Psychology]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

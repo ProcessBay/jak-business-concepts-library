@@ -134,8 +134,8 @@ Pereira: "Typically a good or acceptable churn rate is from 2% to 8% for B2C and
 - [[SaaS Business Model]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[GTM KPIs]] — _auto_ (score 7.0: tags×4.0, applicable_to×1.0, alias×2.0)
 - [[Product-Led Growth]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Vanity Metrics vs Actionable Metrics]] — _auto_ (score 5.5: tags×4.0, title×1.5)
-- [[SaaS Company Stages]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
+- [[Pricing Tactics for SaaS Churn Reduction]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
+- [[SaaS Renewal Pricing]] — _auto_ (score 6.5: tags×2.0, applicable_to×2.0, title×1.5, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

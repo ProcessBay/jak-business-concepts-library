@@ -92,11 +92,11 @@ Technology transfer is the partnership mechanism through which knowledge, techno
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Technology Partnership]] — _auto_ (score 17.0: tags×6.0, applicable_to×5.0, title×3.0, alias×3.0)
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[R&D Alliance]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[Joint Venture Partnership]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 - [[Distribution Partnership]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
-- [[Strategic Partnership]] — _auto_ (score 5.5: tags×2.0, applicable_to×2.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

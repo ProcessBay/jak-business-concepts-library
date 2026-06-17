@@ -95,9 +95,9 @@ Negative network effects (congestion and pollution) emerge in nearly every matur
 - [[Negative Network Effects]] — _auto_ (score 14.0: tags×4.0, applicable_to×5.0, title×3.0, alias×2.0)
 - [[Cold-Start Playbook]] — _auto_ (score 12.8: tags×6.0, applicable_to×4.0, category×0.8, alias×2.0)
 - [[Asymmetric Supply-Demand Acquisition]] — _auto_ (score 9.8: tags×6.0, applicable_to×3.0, category×0.8)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 9.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×2.0)
 - [[Network Effects vs Virality vs Economies of Scale]] — _auto_ (score 7.5: tags×2.0, applicable_to×4.0, title×1.5)
 - [[Critical Mass]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
-- [[Direct Network Effect]] — _auto_ (score 7.0: tags×2.0, applicable_to×2.0, title×3.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

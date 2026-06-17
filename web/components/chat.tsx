@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getProfile, profilePromptBlock } from "@/lib/profile";
 import { useBusinessProfile } from "@/components/business-profile-dialog";
+import { ATOM_COUNT } from "@/lib/atoms";
 
 interface ConceptRef {
   title: string;
@@ -107,7 +108,7 @@ export function Chat() {
           <p className="mt-3 max-w-md text-sm text-muted-foreground">
             {activeProfile
               ? `Answers are tailored to ${activeProfile.name} — ${activeProfile.oneLiner}`
-              : "Ask anything about business models, pricing, growth, metrics, platform economics, or strategy. Every answer is grounded in a curated library of 244 concepts — no invented facts."}
+              : `Ask anything about business models, pricing, growth, metrics, platform economics, or strategy. Every answer is grounded in a curated library of ${ATOM_COUNT} concepts — no invented facts.`}
           </p>
           <form
             className="mt-8 w-full max-w-xl"

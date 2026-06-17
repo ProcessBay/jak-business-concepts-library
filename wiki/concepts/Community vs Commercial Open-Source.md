@@ -77,11 +77,11 @@ Two structurally distinct flavors of open-source. **Community Open-Source** — 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Open-Source Business Model]] — _auto_ (score 11.0: tags×4.0, applicable_to×3.0, title×3.0, alias×1.0)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Customer Experience]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Switching Costs]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
-- [[Technology Transfer Partnership]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

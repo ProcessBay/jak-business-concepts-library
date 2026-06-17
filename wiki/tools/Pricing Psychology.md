@@ -102,11 +102,11 @@ Pricing psychology is the application of cognitive and behavioral biases to how 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Three-Tier Pricing]] — _auto_ (score 12.2: tags×6.0, applicable_to×4.0, title×1.5, category×0.8)
+- [[Anchor Pricing]] — _auto_ (score 11.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[Pay-What-You-Want Pricing]] — _auto_ (score 11.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[Bundling and Packaging Strategies]] — _auto_ (score 10.8: tags×4.0, applicable_to×5.0, category×0.8, alias×1.0)
+- [[Decoy Pricing]] — _auto_ (score 10.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Pricing Mechanisms]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
-- [[Ad Pricing Mechanisms]] — _auto_ (score 9.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8)
-- [[Penny Gap]] — _auto_ (score 9.0: tags×6.0, applicable_to×3.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

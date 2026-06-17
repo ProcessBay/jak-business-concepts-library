@@ -101,8 +101,8 @@ The subscription business model charges customers a recurring fee (weekly, month
 - [[As-a-Service Business Model]] — _auto_ (score 8.8: tags×4.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Subscription Box Model]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Consumption-Based Revenue Model]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 7.0: tags×4.0, applicable_to×3.0)
 - [[SaaS Pricing Models]] — _auto_ (score 7.0: tags×6.0, alias×1.0)
-- [[Affiliate Marketing]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

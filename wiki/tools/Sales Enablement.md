@@ -100,12 +100,12 @@ Sales Enablement is the discipline of equipping sales teams with the knowledge, 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Proactive Customer Education]] — _auto_ (score 8.8: tags×4.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Sales-Led GTM]] — _auto_ (score 8.5: tags×4.0, applicable_to×3.0, title×1.5)
 - [[Joint Marketing and Sales Initiatives]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Channel Partner Programs]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[High-Touch vs Low-Touch Sales]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
-- [[Bundling and Packaging Strategies]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
-- [[Pricing Psychology]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

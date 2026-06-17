@@ -86,6 +86,15 @@ Cost-plus pricing sets the selling price by calculating the total cost of produc
 - [[Pricing Mechanisms]] — _specializes_
 - [[Three Pricing Strategy Approaches]] — _see_also_
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 12.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8, alias×2.0)
+- [[Value-Based Services Pricing]] — _auto_ (score 11.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Four Cs of Pricing]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
+- [[Hourly and Time-and-Materials Pricing]] — _auto_ (score 9.5: tags×6.0, applicable_to×2.0, title×1.5)
+- [[Value-Based Pricing]] — _auto_ (score 9.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Productized Services]] — _auto_ (score 8.8: tags×6.0, applicable_to×2.0, category×0.8)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Super_Guide_Pricing_Strategies__Tactics-mqzuac]] — pages 44-49

@@ -89,8 +89,8 @@ Sustainable business practices are the concrete operational changes a firm makes
 - [[Key Activities]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[Operational Efficiency]] — _auto_ (score 7.0: tags×2.0, applicable_to×5.0)
 - [[Bundling and Packaging Strategies]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 - [[Pricing Mechanisms]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Pricing Psychology]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

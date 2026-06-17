@@ -98,8 +98,8 @@ Pereira's Strategic Partnership Lifecycle is a comprehensive, eight-phase framew
 - [[Product Development Lifecycle (9 Stages)]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[Partner Due Diligence]] — _auto_ (score 8.0: tags×2.0, applicable_to×4.0, alias×2.0)
 - [[Joint Venture Partnership]] — _auto_ (score 7.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8)
+- [[Customer Success Strategy 8 Pillars]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Five-Step Value Creation Plan]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[Strategic Partnership]] — _auto_ (score 6.8: tags×2.0, applicable_to×1.0, title×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

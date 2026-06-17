@@ -89,11 +89,11 @@ A co-marketing agreement is a strategic partnership type where two or more compa
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Distribution Partnership]] — _auto_ (score 11.8: tags×4.0, applicable_to×5.0, category×0.8, alias×2.0)
+- [[Six Types of Customer Relationships]] — _auto_ (score 10.8: tags×6.0, applicable_to×4.0, category×0.8)
 - [[Joint Marketing and Sales Initiatives]] — _auto_ (score 10.5: tags×4.0, applicable_to×3.0, title×1.5, alias×2.0)
 - [[Joint Venture Partnership]] — _auto_ (score 9.8: tags×6.0, applicable_to×1.0, category×0.8, alias×2.0)
 - [[Co-Innovation and Product Development]] — _auto_ (score 9.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
 - [[Strategic Partnership]] — _auto_ (score 8.8: tags×4.0, applicable_to×2.0, category×0.8, alias×2.0)
-- [[7Ps Marketing Mix]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

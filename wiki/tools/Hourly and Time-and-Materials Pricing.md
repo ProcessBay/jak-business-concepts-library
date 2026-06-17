@@ -91,6 +91,15 @@ Hourly / time-and-materials (T&M) pricing charges the client a per-hour rate for
 - [[Three Pricing Strategy Approaches]] — _specializes_ (T&M is the canonical cost-based services form)
 - [[Productized Services]] — _see_also_ (deliberate escape from hourly)
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Retainer Pricing]] — _auto_ (score 16.2: tags×8.0, applicable_to×6.0, title×1.5, category×0.8)
+- [[Fixed-Bid Project Pricing]] — _auto_ (score 15.2: tags×8.0, applicable_to×5.0, title×1.5, category×0.8)
+- [[Tiered Service Packages]] — _auto_ (score 14.8: tags×8.0, applicable_to×5.0, category×0.8, alias×1.0)
+- [[Productized Services]] — _auto_ (score 14.0: tags×8.0, applicable_to×6.0)
+- [[Performance and Success-Fee Pricing]] — _auto_ (score 13.2: tags×6.0, applicable_to×5.0, title×1.5, category×0.8)
+- [[Value-Based Services Pricing]] — _auto_ (score 12.5: tags×6.0, applicable_to×5.0, title×1.5)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Pricing_Strategies_for_Service_Providers-iyicqk]] — pages 15-25 (cost-based pricing for services, consulting firm worked example), pages 93-95 (pay-as-you-go and metered subscription variants)

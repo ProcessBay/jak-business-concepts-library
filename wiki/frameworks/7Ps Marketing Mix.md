@@ -98,9 +98,9 @@ The 7Ps Marketing Mix is a framework for designing and analyzing a marketing str
 - [[Perceptual Mapping]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
 - [[Co-Marketing Agreement]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[HubSpot Inbound Flywheel]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Flywheel vs Funnel]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
-- [[Unique Selling Proposition]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Aggregator Business Model]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
+- [[Cost-Plus Pricing]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Productized Services]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Value-Based Services Pricing]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

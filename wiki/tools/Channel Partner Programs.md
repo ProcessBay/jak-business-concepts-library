@@ -102,10 +102,10 @@ Channel partner programs are the structured systems a company uses to recruit, e
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Sales Enablement]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Direct vs Indirect Distribution]] — _auto_ (score 6.0: tags×2.0, applicable_to×2.0, alias×2.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Joint Marketing and Sales Initiatives]] — _auto_ (score 5.8: tags×4.0, applicable_to×1.0, category×0.8)
 - [[Partner Due Diligence]] — _auto_ (score 5.2: tags×2.0, applicable_to×1.0, title×1.5, category×0.8)
 - [[Distribution Partnership]] — _auto_ (score 5.0: tags×2.0, applicable_to×2.0, alias×1.0)
-- [[Pricing Mechanisms]] — _auto_ (score 4.8: tags×2.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

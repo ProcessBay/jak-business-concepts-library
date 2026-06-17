@@ -89,12 +89,12 @@ Customer Relationships is the BMC block that defines the type of interaction a f
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Six Types of Customer Relationships]] — _auto_ (score 15.8: tags×6.0, applicable_to×4.0, title×3.0, category×0.8, alias×2.0)
+- [[Self-Service Customer Relationship]] — _auto_ (score 10.5: tags×4.0, applicable_to×4.0, title×1.5, alias×1.0)
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 9.5: tags×4.0, applicable_to×4.0, title×1.5)
 - [[Customer Segments]] — _auto_ (score 9.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 8.5: tags×4.0, applicable_to×2.0, title×1.5, alias×1.0)
 - [[Customer Experience]] — _auto_ (score 8.5: tags×2.0, applicable_to×5.0, title×1.5)
-- [[Cost Structure]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
-- [[Distribution Channel]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
-- [[Key Activities]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
-- [[Loyalty Program]] — _auto_ (score 7.0: tags×4.0, applicable_to×2.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -100,8 +100,8 @@ Competitive Product Analysis is a focused sub-method within the broader competit
 - [[Unique Selling Proposition]] — _auto_ (score 9.8: tags×4.0, applicable_to×5.0, category×0.8)
 - [[Product Launch Playbook]] — _auto_ (score 8.2: tags×2.0, applicable_to×4.0, title×1.5, category×0.8)
 - [[Bundling and Packaging Strategies]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
-- [[Single-Feature MVP]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Cohort Retention Analysis]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
+- [[Competitor Price Tracking and Matching]] — _auto_ (score 7.8: tags×4.0, applicable_to×1.0, category×0.8, alias×2.0)
+- [[Competitor-Based Pricing]] — _auto_ (score 7.8: tags×4.0, applicable_to×1.0, category×0.8, alias×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

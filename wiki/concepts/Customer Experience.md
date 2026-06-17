@@ -86,12 +86,12 @@ Customer experience (CX) is the totality of customer interactions with a firm ac
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Self-Service Customer Relationship]] — _auto_ (score 10.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8)
 - [[Brand Identity]] — _auto_ (score 8.8: tags×4.0, applicable_to×4.0, category×0.8)
+- [[Viral Loop (Steve Blank)]] — _auto_ (score 8.8: tags×4.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 8.5: tags×2.0, applicable_to×5.0, title×1.5)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Value Drivers]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
-- [[Operational Efficiency]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
-- [[Switching Costs]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Value Proposition]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

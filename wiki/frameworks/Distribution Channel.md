@@ -91,8 +91,8 @@ Distribution Channels is the BMC block that defines how a firm reaches customers
 - [[Distribution Partnership]] — _auto_ (score 8.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
 - [[Go-to-Market Strategy]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
+- [[Six Types of Customer Relationships]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
 - [[GTM KPIs]] — _auto_ (score 7.0: tags×2.0, applicable_to×3.0, alias×2.0)
-- [[Joint Marketing and Sales Initiatives]] — _auto_ (score 7.0: tags×2.0, applicable_to×2.0, alias×3.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

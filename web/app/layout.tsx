@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s — JAK Library",
   },
   description:
-    "Upload or describe your business and get strategy advice grounded in a curated library of 244 business concepts — pricing, growth, business models, metrics, platform economics. By ProcessBay.",
+    "Upload or describe your business and get strategy advice grounded in a curated library of business concepts — pricing, growth, business models, metrics, platform economics. By ProcessBay.",
   icons: { icon: "/processbay-icon.png" },
 };
 

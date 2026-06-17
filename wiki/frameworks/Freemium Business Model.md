@@ -98,8 +98,8 @@ Freemium offers products or services in basic form free of charge while requirin
 - [[Open-Core Model]] — _auto_ (score 10.8: tags×6.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Penny Gap]] — _auto_ (score 8.0: tags×4.0, applicable_to×3.0, alias×1.0)
 - [[Three-Tier Pricing]] — _auto_ (score 8.0: tags×2.0, applicable_to×4.0, alias×2.0)
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 7.0: applicable_to×6.0, alias×1.0)
 - [[Consumption-Based Revenue Model]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Ad Pricing Mechanisms]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

@@ -91,11 +91,11 @@ The vanity metric trap is the failure mode where company executives "strive for 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[AARRR Pirate Metrics]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
+- [[Discount Devaluation Anti-Pattern]] — _auto_ (score 6.8: tags×2.0, applicable_to×1.0, category×0.8, alias×3.0)
 - [[Common GTM Mistakes]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Vanity Metrics vs Actionable Metrics]] — _auto_ (score 5.5: applicable_to×2.0, title×1.5, alias×2.0)
+- [[Customer Success Anti-Patterns]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Doom Loop]] — _auto_ (score 4.8: tags×2.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[Flywheel Effect]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
-- [[Product-Market Fit]] — _auto_ (score 4.0: tags×2.0, applicable_to×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

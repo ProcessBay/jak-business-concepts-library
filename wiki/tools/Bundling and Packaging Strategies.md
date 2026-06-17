@@ -99,12 +99,12 @@ Bundling combines multiple products or services into a single package sold at a 
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Bundle Pricing]] — _auto_ (score 15.8: tags×8.0, applicable_to×3.0, category×0.8, alias×4.0)
 - [[Three-Tier Pricing]] — _auto_ (score 12.8: tags×6.0, applicable_to×4.0, category×0.8, alias×2.0)
+- [[Bundle and Cross-Sell Pricing for Ecommerce]] — _auto_ (score 10.8: tags×6.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Pricing Mechanisms]] — _auto_ (score 10.8: tags×4.0, applicable_to×4.0, category×0.8, alias×2.0)
 - [[Pricing Psychology]] — _auto_ (score 10.8: tags×4.0, applicable_to×5.0, category×0.8, alias×1.0)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 9.0: tags×2.0, applicable_to×6.0, alias×1.0)
-- [[Product Launch Playbook]] — _auto_ (score 8.8: tags×2.0, applicable_to×5.0, category×0.8, alias×1.0)
-- [[Ad Pricing Mechanisms]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Tiered Service Packages]] — _auto_ (score 9.8: tags×4.0, applicable_to×3.0, category×0.8, alias×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

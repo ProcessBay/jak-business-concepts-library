@@ -93,9 +93,9 @@ Blue Ocean Strategy (originally Kim & Mauborgne, 2005) is the deliberate creatio
 - [[Go-to-Market Strategy]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
 - [[Three Pricing Strategy Approaches]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
 - [[Innovation Strategy]] — _auto_ (score 9.5: tags×4.0, applicable_to×3.0, title×1.5, alias×1.0)
+- [[Customer Success Strategy 8 Pillars]] — _auto_ (score 8.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8)
 - [[Co-Innovation and Product Development]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Competitive Analysis Process]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
-- [[Customer Value Creation Model]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

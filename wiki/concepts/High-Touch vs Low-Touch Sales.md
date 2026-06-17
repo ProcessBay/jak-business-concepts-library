@@ -82,8 +82,8 @@ The two primary SaaS sales motions, distinguished by intensity of salesperson in
 - [[IaaS vs PaaS vs SaaS]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Joint Marketing and Sales Initiatives]] — _auto_ (score 7.5: tags×4.0, applicable_to×2.0, title×1.5)
 - [[Product-Led Growth]] — _auto_ (score 7.0: tags×2.0, applicable_to×1.0, alias×4.0)
-- [[Sales Enablement]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
-- [[SaaS Rule of 40]] — _auto_ (score 6.0: tags×2.0, applicable_to×3.0, alias×1.0)
+- [[Dedicated Personal Assistance]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
+- [[Self-Service Customer Relationship]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

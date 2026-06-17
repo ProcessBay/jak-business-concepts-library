@@ -93,7 +93,7 @@ Key Partners is the BMC block that identifies the external organizations a firm 
 - [[Cost Structure]] — _auto_ (score 7.8: tags×2.0, applicable_to×4.0, category×0.8, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Distribution Channel]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Customer Segments]] — _auto_ (score 5.8: tags×2.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Six Types of Customer Relationships]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

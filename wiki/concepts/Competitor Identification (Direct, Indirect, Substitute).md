@@ -97,9 +97,9 @@ Pereira's competitor typology defines three competitor categories that every ana
 - [[Competitive Analysis Process]] — _auto_ (score 9.0: tags×4.0, applicable_to×4.0, alias×1.0)
 - [[Feature Matrix Analysis]] — _auto_ (score 7.0: tags×2.0, applicable_to×4.0, alias×1.0)
 - [[Flywheel vs Funnel]] — _auto_ (score 6.8: tags×2.0, applicable_to×4.0, category×0.8)
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Flywheel Effect]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 - [[Perceptual Mapping]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
-- [[Narrow vs General AI]] — _auto_ (score 5.8: tags×2.0, applicable_to×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

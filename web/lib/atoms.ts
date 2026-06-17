@@ -24,6 +24,10 @@ export const atomByTitle = new Map(atoms.map((a) => [a.title.toLowerCase(), a]))
 
 export const categories = [...new Set(atoms.map((a) => a.category))].sort();
 
+// Derived counts — used in UI copy so they never drift from the data.
+export const ATOM_COUNT = atoms.length;
+export const EDGE_COUNT = atoms.reduce((n, a) => n + a.related.length, 0);
+
 export function formatCategory(cat: string): string {
   return cat
     .split(/[-_]/)

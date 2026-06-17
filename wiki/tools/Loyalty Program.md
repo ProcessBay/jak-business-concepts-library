@@ -87,12 +87,12 @@ A loyalty program rewards repeat customers with points, discounts, exclusive acc
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Customer Retention Tactics (Pereira)]] — _auto_ (score 11.8: tags×8.0, applicable_to×2.0, category×0.8, alias×1.0)
 - [[Customer Personas]] — _auto_ (score 8.8: tags×6.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Customer Segmentation Models]] — _auto_ (score 8.8: tags×6.0, applicable_to×1.0, category×0.8, alias×1.0)
 - [[Customer Relationships]] — _auto_ (score 7.0: tags×4.0, applicable_to×2.0, alias×1.0)
 - [[Cohort Retention Analysis]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 - [[Customer Feedback Loop]] — _auto_ (score 6.8: tags×4.0, applicable_to×1.0, category×0.8, alias×1.0)
-- [[Influencer Marketing]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

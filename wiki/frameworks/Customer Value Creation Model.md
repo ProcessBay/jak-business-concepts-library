@@ -91,9 +91,9 @@ The customer value creation model is a six-step methodology for building offerin
 - [[Five-Step Value Creation Plan]] — _auto_ (score 11.8: tags×6.0, applicable_to×2.0, title×3.0, category×0.8)
 - [[Triple Bottom Line]] — _auto_ (score 8.8: tags×4.0, applicable_to×2.0, category×0.8, alias×2.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 7.8: tags×2.0, applicable_to×3.0, category×0.8, alias×2.0)
+- [[Six Types of Customer Relationships]] — _auto_ (score 7.2: tags×2.0, applicable_to×3.0, title×1.5, category×0.8)
+- [[Four Cs of Pricing]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 - [[Lean Startup Methodology]] — _auto_ (score 6.8: tags×4.0, applicable_to×2.0, category×0.8)
-- [[Perceptual Mapping]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
-- [[Three Pricing Strategy Approaches]] — _auto_ (score 6.8: tags×2.0, applicable_to×3.0, category×0.8, alias×1.0)
 <!-- jak-link:auto-end -->
 ## Sources
 

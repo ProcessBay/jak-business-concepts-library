@@ -94,8 +94,8 @@ A supply chain partnership is a strategic collaboration between organizations al
 - [[Strategic Partnership]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[Technology Partnership]] — _auto_ (score 8.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
 - [[Co-Marketing Agreement]] — _auto_ (score 7.8: tags×4.0, applicable_to×2.0, category×0.8, alias×1.0)
+- [[Cost-Plus Pricing]] — _auto_ (score 7.8: tags×4.0, applicable_to×3.0, category×0.8)
 - [[R&D Alliance]] — _auto_ (score 7.8: tags×4.0, applicable_to×1.0, category×0.8, alias×2.0)
-- [[Joint Venture Partnership]] — _auto_ (score 7.2: tags×4.0, applicable_to×1.0, title×1.5, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

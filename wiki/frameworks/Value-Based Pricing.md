@@ -90,6 +90,15 @@ Value-based pricing sets price according to the value the customer perceives or 
 - [[Pricing Mechanisms]] — _specializes_
 - [[Pricing Psychology]] — _see_also_
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Value-Based Services Pricing]] — _auto_ (score 17.2: tags×8.0, applicable_to×4.0, title×4.5, category×0.8)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 11.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×2.0)
+- [[Per-Seat SaaS Pricing]] — _auto_ (score 10.2: tags×6.0, applicable_to×1.0, title×1.5, category×0.8, alias×1.0)
+- [[Value-Based SaaS Pricing]] — _auto_ (score 9.5: tags×4.0, applicable_to×1.0, title×4.5)
+- [[Cost-Plus Pricing]] — _auto_ (score 9.2: tags×4.0, applicable_to×2.0, title×1.5, category×0.8, alias×1.0)
+- [[Four Cs of Pricing]] — _auto_ (score 9.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Super_Guide_Pricing_Strategies__Tactics-mqzuac]] — pages 175-180

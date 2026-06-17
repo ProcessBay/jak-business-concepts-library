@@ -106,12 +106,12 @@ Pereira organizes pricing strategy into three foundational approaches, each root
 
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Cost-Plus Pricing]] — _auto_ (score 12.2: tags×4.0, applicable_to×4.0, title×1.5, category×0.8, alias×2.0)
+- [[Four Cs of Pricing]] — _auto_ (score 12.2: tags×4.0, applicable_to×5.0, title×1.5, category×0.8, alias×1.0)
+- [[Value-Based Services Pricing]] — _auto_ (score 12.2: tags×6.0, applicable_to×2.0, title×1.5, category×0.8, alias×2.0)
 - [[Go-to-Market Strategy]] — _auto_ (score 11.2: tags×4.0, applicable_to×5.0, title×1.5, category×0.8)
+- [[Value-Based Pricing]] — _auto_ (score 11.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×2.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 10.2: tags×4.0, applicable_to×3.0, title×1.5, category×0.8, alias×1.0)
-- [[Pricing Mechanisms]] — _auto_ (score 9.5: tags×4.0, applicable_to×4.0, title×1.5)
-- [[Bundling and Packaging Strategies]] — _auto_ (score 9.0: tags×2.0, applicable_to×6.0, alias×1.0)
-- [[Three-Tier Pricing]] — _auto_ (score 9.0: tags×2.0, applicable_to×4.0, title×3.0)
-- [[Pricing Psychology]] — _auto_ (score 8.5: tags×2.0, applicable_to×5.0, title×1.5)
 <!-- jak-link:auto-end -->
 ## Sources
 

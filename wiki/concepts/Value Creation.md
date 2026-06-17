@@ -85,11 +85,11 @@ Value creation is the process of turning labor and resources into something that
 <!-- jak-link:auto-begin -->
 <!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
 - [[Create-Deliver-Capture Value]] — _auto_ (score 6.5: tags×2.0, applicable_to×3.0, title×1.5)
+- [[Co-Creation Customer Relationship]] — _auto_ (score 6.2: applicable_to×2.0, title×1.5, category×0.8, alias×2.0)
 - [[Blue Ocean Strategy]] — _auto_ (score 6.0: tags×2.0, applicable_to×2.0, alias×2.0)
 - [[Customer Value Creation Model]] — _auto_ (score 6.0: applicable_to×2.0, title×3.0, alias×1.0)
 - [[SWOT Analysis]] — _auto_ (score 6.0: tags×2.0, applicable_to×4.0)
 - [[Triple Bottom Line]] — _auto_ (score 6.0: applicable_to×4.0, alias×2.0)
-- [[Non-Profit Value Creation]] — _auto_ (score 5.8: applicable_to×2.0, title×3.0, category×0.8)
 <!-- jak-link:auto-end -->
 ## Sources
 

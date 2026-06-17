@@ -103,6 +103,15 @@ The one-time purchase model charges a single upfront fee in exchange for unlimit
 - [[Freemium Business Model]] — _see_also_ (free + one-time premium hybrid)
 - [[Bundling and Packaging Strategies]] — _see_also_ (multi-product one-time bundles)
 
+<!-- jak-link:auto-begin -->
+<!-- Auto-discovered by jak-link. Editorial lines above are preserved. -->
+- [[Subscription vs Perpetual Licensing Tension]] — _auto_ (score 16.0: tags×6.0, applicable_to×4.0, alias×6.0)
+- [[Variable Pricing for Digital Goods]] — _auto_ (score 15.0: tags×6.0, applicable_to×6.0, title×3.0)
+- [[Dynamic Pricing for Digital Products]] — _auto_ (score 14.5: tags×4.0, applicable_to×5.0, title×4.5, alias×1.0)
+- [[Digital Product Value Perception]] — _auto_ (score 12.5: tags×4.0, applicable_to×6.0, title×1.5, alias×1.0)
+- [[Limited-Time Offers and Flash Sales]] — _auto_ (score 10.5: tags×4.0, applicable_to×5.0, title×1.5)
+- [[Three Pricing Strategy Approaches]] — _auto_ (score 8.2: tags×6.0, title×1.5, category×0.8)
+<!-- jak-link:auto-end -->
 ## Sources
 
 - [[_Sources/Pricing_Strategies_for_Digital_Products-z91fkd]] — pages 55-62 (One-Time Purchase Pricing Model: key considerations, advantages, disadvantages)
