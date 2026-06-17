@@ -11,12 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   type BusinessModel,
-  type CanvasAreaId,
-  CANVAS_AREAS,
+  type SectionId,
+  PLAN_SECTIONS,
   addDecision,
   getModel,
   subscribeModel,
-  suggestArea,
+  suggestSection,
 } from "@/lib/business-model";
 
 export function useBusinessModel(): BusinessModel {
@@ -51,14 +51,14 @@ interface Props {
 
 export function CementDialog({ seed, onClose }: Props) {
   const [decision, setDecision] = React.useState("");
-  const [area, setArea] = React.useState<CanvasAreaId>("value-proposition");
+  const [section, setSection] = React.useState<SectionId>("strategy");
   const [saved, setSaved] = React.useState(false);
 
   // Seed the form whenever a new cement request arrives.
   React.useEffect(() => {
     if (!seed) return;
     setDecision(extractBottomLine(seed.sourceAnswer ?? ""));
-    setArea(suggestArea(seed.conceptCategory));
+    setSection(suggestSection(seed.conceptCategory));
     setSaved(false);
   }, [seed]);
 
@@ -68,7 +68,7 @@ export function CementDialog({ seed, onClose }: Props) {
       conceptSlug: seed.conceptSlug,
       conceptTitle: seed.conceptTitle,
       conceptCategory: seed.conceptCategory,
-      area,
+      section,
       decision: decision.trim(),
       rationale: seed.sourceAnswer?.slice(0, 2000),
     });
@@ -109,23 +109,23 @@ export function CementDialog({ seed, onClose }: Props) {
             </div>
             <div>
               <label className="text-xs font-medium">
-                Which part of your model does this affect?
+                Which part of your plan does this affect?
               </label>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
-                {CANVAS_AREAS.map((a) => (
+                {PLAN_SECTIONS.map((s) => (
                   <button
-                    key={a.id}
+                    key={s.id}
                     type="button"
-                    onClick={() => setArea(a.id)}
-                    title={a.hint}
+                    onClick={() => setSection(s.id)}
+                    title={s.hint}
                     className={
                       "rounded-full border px-2.5 py-1 text-xs transition-colors " +
-                      (area === a.id
+                      (section === s.id
                         ? "border-primary bg-primary text-primary-foreground"
                         : "text-muted-foreground hover:border-primary hover:text-primary")
                     }
                   >
-                    {a.label}
+                    {s.label}
                   </button>
                 ))}
               </div>
