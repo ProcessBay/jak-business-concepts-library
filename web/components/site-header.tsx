@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { CommandMenu } from "@/components/command-menu";
 import { BusinessProfileDialog } from "@/components/business-profile-dialog";
+import { BrowseSidebar } from "@/components/browse-sidebar";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center gap-6 px-4">
+      <div className="mx-auto flex h-14 max-w-5xl items-center gap-4 px-4">
+        <BrowseSidebar />
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/processbay-logo.png"
