@@ -136,8 +136,8 @@ export function Chat() {
           </h1>
           <p className="mt-3 max-w-md text-sm text-muted-foreground">
             {activeProfile
-              ? `Answers are tailored to ${activeProfile.name} — ${activeProfile.oneLiner}`
-              : `Ask anything about business models, pricing, growth, metrics, platform economics, or strategy. Every answer is grounded in a curated library of ${ATOM_COUNT} concepts — no invented facts.`}
+              ? `Your AI co-strategist for ${activeProfile.name} — ${activeProfile.oneLiner}. Think it through here; cement what's right into your plan.`
+              : `Your AI co-strategist. Tell me what you're working on and I'll reason it through with you — grounded in ${ATOM_COUNT} proven business concepts, building toward a plan that's actually yours.`}
           </p>
           <form
             className="mt-8 w-full max-w-xl"
@@ -150,7 +150,7 @@ export function Chat() {
               autoFocus
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask the library…"
+              placeholder="Ask your co-strategist…"
               className="w-full rounded-xl border bg-background px-5 py-4 text-base shadow-sm outline-none transition-shadow focus:ring-2 focus:ring-ring"
             />
           </form>
@@ -287,7 +287,7 @@ export function Chat() {
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14M12 5v14" />
                         </svg>
-                        Add to my model
+                        Add to my plan
                       </button>
                       <CopyButton text={answerText} />
                     </div>

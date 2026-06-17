@@ -8,7 +8,7 @@ import { HomeNavLink } from "@/components/home-nav-link";
 
 const NAV_LINKS = [
   { href: "/library", label: "Library" },
-  { href: "/model", label: "My Model" },
+  { href: "/model", label: "My Plan" },
   { href: "/playbooks", label: "Playbooks" },
   { href: "/graph", label: "Map" },
 ];

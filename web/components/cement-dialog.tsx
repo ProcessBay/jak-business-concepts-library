@@ -116,11 +116,11 @@ export function CementDialog({ seed, onClose }: Props) {
     <Dialog open={!!seed} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Add to your business model</DialogTitle>
+          <DialogTitle>Add to your plan</DialogTitle>
           <DialogDescription>
             Cement {seed?.conceptTitle ? <strong>{seed.conceptTitle}</strong> : "this concept"}{" "}
-            into your consolidated model — capture what you&apos;ll actually do,
-            and where it fits.
+            into your living plan — capture what you&apos;ll actually do, and
+            where it fits.
           </DialogDescription>
         </DialogHeader>
 
@@ -129,7 +129,7 @@ export function CementDialog({ seed, onClose }: Props) {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 6 9 17l-5-5" />
             </svg>
-            Added to your model.
+            Added to your plan.
           </div>
         ) : (
           <div className="space-y-4">
@@ -185,7 +185,7 @@ export function CementDialog({ seed, onClose }: Props) {
               disabled={!decision.trim() || synthesizing}
               className="w-full"
             >
-              {synthesizing ? "Synthesizing…" : "Add to my model"}
+              {synthesizing ? "Synthesizing…" : "Add to my plan"}
             </Button>
           </div>
         )}

@@ -436,9 +436,9 @@ function EmptyHint() {
     <div className="mt-6 rounded-xl border border-dashed bg-muted/30 px-6 py-10 text-center">
       <h2 className="text-base font-semibold">Build your plan, one decision at a time</h2>
       <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
-        Ask the library or follow a playbook. When an answer gives you a
+        Ask your co-strategist or follow a playbook. When an answer gives you a
         decision worth keeping, hit{" "}
-        <span className="font-medium text-foreground">Add to my model</span> — it
+        <span className="font-medium text-foreground">Add to my plan</span> — it
         files itself into the right pillar. Once you&apos;ve cemented a few, hit
         Synthesize to weave them into one coherent strategy.
       </p>

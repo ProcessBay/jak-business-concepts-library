@@ -89,8 +89,12 @@ export function LibraryBrowser() {
     <div className="mx-auto w-full max-w-5xl px-4 py-10">
       <h1 className="text-2xl font-semibold tracking-tight">The Library</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-        {index.length} business concepts, grouped by what they help you do.
-        Every one is a source the AI can apply to your business.
+        The engine room — {index.length} proven business concepts your
+        co-strategist draws on. Browse them here, or just{" "}
+        <Link href="/" className="text-primary underline-offset-2 hover:underline">
+          ask
+        </Link>{" "}
+        and they get applied to your business.
       </p>
 
       <div className="mt-6">
