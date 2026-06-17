@@ -122,16 +122,19 @@ export function BusinessModelView() {
                     </div>
 
                     {items.length ? (
-                      <ul className="mt-3 space-y-2">
+                      <ul className="mt-4 space-y-3.5">
                         {items.map((d) => (
-                          <li key={d.id} className="text-xs leading-relaxed">
-                            <span className="text-foreground">{d.decision}</span>
+                          <li
+                            key={d.id}
+                            className="border-s-2 border-primary/30 ps-3 text-[13px] leading-relaxed"
+                          >
+                            <p className="text-foreground">{d.decision}</p>
                             {d.conceptSlug && (
                               <Link
                                 href={`/concepts/${d.conceptSlug}`}
-                                className="ms-1 text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+                                className="mt-1 inline-block text-[11px] text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
                               >
-                                ({d.conceptTitle})
+                                via {d.conceptTitle}
                               </Link>
                             )}
                           </li>

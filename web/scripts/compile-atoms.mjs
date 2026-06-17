@@ -199,12 +199,52 @@ const firstSentence = (s) => {
   const m = clean.match(/^(.{20,180}?[.!?])(?:\s|$)/);
   return m ? m[1] : clean.slice(0, 160);
 };
+// Sub-theme classification for the big catch-all buckets (concepts /
+// frameworks / tools each hold 150-320 atoms — too many for one list).
+// Keyword scoring over title + tags + blurb assigns each to a sub-theme so
+// the library and sidebar can show a navigable second level.
+const SUBTHEMES = [
+  { id: "strategy", label: "Strategy & Competition", kw: ["strateg", "competit", "porter", "swot", "blue ocean", "moat", "differentiat", "positioning", "advantage", "okr", "vision", "mission", "war gam", "first mover", "defensib"] },
+  { id: "business-model", label: "Business Models & Revenue", kw: ["business model", "revenue", "monetiz", "canvas", "value chain", "platform", "marketplace", "aggregat", "subscription", "freemium", "licens", "franchis", "value creation", "value capture", "ecosystem"] },
+  { id: "pricing", label: "Pricing & Monetization", kw: ["pric", "willingness to pay", "tier", "discount", "packag", "bundl", "rate card", "margin"] },
+  { id: "marketing", label: "Marketing & Brand", kw: ["market", "brand", "content", "seo", "advertis", "campaign", "positioning", "messaging", "social", "influenc", "pr ", "awareness", "demand gen"] },
+  { id: "growth", label: "Growth & Acquisition", kw: ["growth", "acquisition", "aarrr", "funnel", "viral", "referral", "retention", "churn", "loop", "activation", "flywheel", "network effect", "scale", "scalab"] },
+  { id: "sales-gtm", label: "Sales & Go-to-Market", kw: ["sales", "go-to-market", "gtm", "lead", "pipeline", "deal", "quota", "bant", "outbound", "distribution", "channel", "partner", "account"] },
+  { id: "product", label: "Product & Innovation", kw: ["product", "mvp", "innovat", "experiment", "hypothes", "lean", "design thinking", "jobs to be done", "discovery", "prototyp", "roadmap", "feature", "agile", "scrum", "iterat", "validat"] },
+  { id: "customers", label: "Customers & Research", kw: ["customer", "user", "persona", "segment", "research", "survey", "interview", "journey", "experience", "satisfaction", "nps", "feedback", "voice of"] },
+  { id: "metrics-finance", label: "Metrics & Finance", kw: ["metric", "kpi", "unit econ", "cac", "ltv", "mrr", "arr", "cohort", "valuation", "fundrais", "investment", "cash", "burn", "finance", "financial", "roi", "payback", "forecast", "budget"] },
+  { id: "ops-org", label: "Operations, Team & Org", kw: ["operation", "process", "team", "org", "leadership", "cultur", "hiring", "talent", "management", "supply chain", "logistic", "efficien", "outsourc", "automat", "quality", "lean ops"] },
+];
+
+function classifySubtheme(atom) {
+  const hay = `${atom.title} ${(atom.tags || []).join(" ")} ${atom.definition || ""}`.toLowerCase();
+  let best = null;
+  let bestScore = 0;
+  for (const st of SUBTHEMES) {
+    let score = 0;
+    for (const kw of st.kw) {
+      if (atom.title.toLowerCase().includes(kw)) score += 3; // title hit weighs most
+      else if (hay.includes(kw)) score += 1;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = st;
+    }
+  }
+  return bestScore > 0 ? best.label : "General";
+}
+
+const BIG_BUCKETS = new Set(["concepts", "frameworks", "tools"]);
+
 const slim = list.map((a) => ({
   title: a.title,
   slug: a.slug,
   category: a.category,
   aliases: a.aliases,
   blurb: firstSentence(a.definition || ""),
+  // Only the catch-all buckets get a sub-theme; the 6 canonical categories
+  // are already specific enough.
+  subtheme: BIG_BUCKETS.has(a.category) ? classifySubtheme(a) : null,
 }));
 fs.writeFileSync(path.join(OUT_DIR, "atoms-index.json"), JSON.stringify(slim, null, 0));
 

@@ -16,42 +16,37 @@ const NAV_LINKS = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4">
+      <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
         {/* Hamburger doubles as the mobile nav hub (page links live inside it). */}
         <BrowseSidebar navLinks={NAV_LINKS} />
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="mr-1 flex shrink-0 items-center">
           <Image
             src="/processbay-logo.png"
             alt="ProcessBay"
             width={120}
             height={59}
-            className="h-8 w-auto"
+            className="h-7 w-auto"
             priority
           />
-          <span className="hidden text-sm font-medium text-muted-foreground lg:inline">
-            JAK Business Concepts Library
-          </span>
         </Link>
 
-        {/* Full text nav — desktop only. */}
-        <nav className="ms-auto hidden items-center gap-1 md:flex">
+        {/* Page nav — desktop only, sits next to the logo. */}
+        <nav className="hidden items-center gap-0.5 md:flex">
           <HomeNavLink />
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               {l.label}
             </Link>
           ))}
-          <CommandMenu />
-          <SaveRestoreDialog />
-          <BusinessProfileDialog />
         </nav>
 
-        {/* Mobile: just the essentials — save + profile; nav is in the sheet. */}
-        <div className="ms-auto flex items-center gap-1 md:hidden">
+        {/* Actions — pushed right, grouped. */}
+        <div className="ms-auto flex items-center gap-1">
+          <CommandMenu />
           <SaveRestoreDialog />
           <BusinessProfileDialog />
         </div>

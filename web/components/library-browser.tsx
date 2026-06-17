@@ -14,6 +14,7 @@ interface SlimAtom {
   category: string;
   aliases: string[];
   blurb: string;
+  subtheme: string | null;
 }
 
 const index = atomsIndex as SlimAtom[];
@@ -24,6 +25,34 @@ for (const a of index) {
 }
 for (const k of Object.keys(byCategory)) {
   byCategory[k].sort((a, b) => a.title.localeCompare(b.title));
+}
+
+// Big catch-all buckets get a second level (sub-themes); the 6 canonical
+// categories are shown flat.
+const BIG_BUCKETS = new Set(["concepts", "frameworks", "tools"]);
+
+function groupBySubtheme(atoms: SlimAtom[]): [string, SlimAtom[]][] {
+  const m = new Map<string, SlimAtom[]>();
+  for (const a of atoms) {
+    const key = a.subtheme ?? "General";
+    (m.get(key) ?? m.set(key, []).get(key)!).push(a);
+  }
+  return [...m.entries()].sort((a, b) => b[1].length - a[1].length);
+}
+
+function ConceptCard({ atom }: { atom: SlimAtom }) {
+  return (
+    <Link href={`/concepts/${atom.slug}`}>
+      <Card className="h-full transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
+        <CardContent className="p-4">
+          <h3 className="text-sm font-semibold leading-snug">{atom.title}</h3>
+          <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+            {atom.blurb}
+          </p>
+        </CardContent>
+      </Card>
+    </Link>
+  );
 }
 
 export function LibraryBrowser() {
@@ -120,21 +149,30 @@ export function LibraryBrowser() {
                 </div>
               </button>
               {isOpen && (
-                <div className="grid grid-cols-1 gap-3 border-t p-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {matches.map((atom) => (
-                    <Link key={atom.slug} href={`/concepts/${atom.slug}`}>
-                      <Card className="h-full transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
-                        <CardContent className="p-4">
-                          <h3 className="text-sm font-semibold leading-snug">
-                            {atom.title}
+                <div className="border-t p-4">
+                  {BIG_BUCKETS.has(theme.category) ? (
+                    // Second level: sub-themes within the big bucket.
+                    <div className="space-y-5">
+                      {groupBySubtheme(matches).map(([sub, atoms]) => (
+                        <div key={sub}>
+                          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                            {sub} <span className="font-normal">· {atoms.length}</span>
                           </h3>
-                          <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
-                            {atom.blurb}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
+                          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                            {atoms.map((atom) => (
+                              <ConceptCard key={atom.slug} atom={atom} />
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {matches.map((atom) => (
+                        <ConceptCard key={atom.slug} atom={atom} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
