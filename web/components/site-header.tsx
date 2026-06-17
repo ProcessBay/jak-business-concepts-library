@@ -4,6 +4,7 @@ import { CommandMenu } from "@/components/command-menu";
 import { BusinessProfileDialog } from "@/components/business-profile-dialog";
 import { BrowseSidebar } from "@/components/browse-sidebar";
 import { SaveRestoreDialog } from "@/components/save-restore-dialog";
+import { HomeNavLink } from "@/components/home-nav-link";
 
 export function SiteHeader() {
   return (
@@ -24,12 +25,7 @@ export function SiteHeader() {
           </span>
         </Link>
         <nav className="ms-auto flex items-center gap-1">
-          <Link
-            href="/"
-            className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            Ask
-          </Link>
+          <HomeNavLink />
           <Link
             href="/library"
             className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
