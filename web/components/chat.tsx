@@ -165,6 +165,14 @@ export function Chat() {
               </button>
             ))}
           </div>
+          {/* Activation nudge for first-time / anonymous visitors — the
+              tailored experience is the whole point, so point them to it. */}
+          {!activeProfile && (
+            <p className="mt-8 max-w-md text-sm text-muted-foreground">
+              Tip: add your business (top right) and every answer — plus your
+              own knowledge map and plan — becomes specific to you.
+            </p>
+          )}
           {/* The central plan, below the ask. */}
           {activeProfile && (
             <div className="mt-10 flex w-full justify-center">

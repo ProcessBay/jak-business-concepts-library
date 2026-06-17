@@ -48,6 +48,9 @@ export function KnowledgeGraph() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [size, setSize] = React.useState({ width: 800, height: 600 });
   const [selected, setSelected] = React.useState<GraphNode | null>(null);
+  // Filtering one category at a time turns a 672-node hairball into a
+  // readable map — and dramatically lightens the force simulation.
+  const [activeCat, setActiveCat] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const el = containerRef.current;
@@ -60,10 +63,20 @@ export function KnowledgeGraph() {
     return () => ro.disconnect();
   }, []);
 
-  const data = React.useMemo(
-    () => JSON.parse(JSON.stringify(graphData)),
-    []
-  );
+  const data = React.useMemo(() => {
+    const full = graphData as { nodes: GraphNode[]; links: { source: string; target: string }[] };
+    if (!activeCat) {
+      return JSON.parse(JSON.stringify(full));
+    }
+    const nodes = full.nodes.filter((n) => n.category === activeCat);
+    const ids = new Set(nodes.map((n) => n.id));
+    const links = full.links.filter((l) => ids.has(l.source) && ids.has(l.target));
+    return JSON.parse(JSON.stringify({ nodes, links }));
+  }, [activeCat]);
+
+  // Labels are legible only when the field is thinned out — draw them when a
+  // category is focused; otherwise rely on hover tooltips.
+  const showLabels = activeCat !== null;
 
   return (
     <div
@@ -71,6 +84,7 @@ export function KnowledgeGraph() {
       ref={containerRef}
     >
       <ForceGraph2D
+        key={activeCat ?? "all"}
         width={size.width}
         height={size.height}
         graphData={data}
@@ -81,30 +95,67 @@ export function KnowledgeGraph() {
         nodeColor={(n) =>
           CATEGORY_COLORS[(n as GraphNode).category] ?? "#a1a1aa"
         }
-        nodeRelSize={2.4}
+        nodeRelSize={2.6}
         linkColor={() => "#e4e4e7"}
         linkWidth={0.6}
-        warmupTicks={80}
-        cooldownTicks={120}
+        warmupTicks={showLabels ? 40 : 80}
+        cooldownTicks={showLabels ? 60 : 120}
+        nodeCanvasObjectMode={() => (showLabels ? "after" : undefined)}
+        nodeCanvasObject={
+          showLabels
+            ? (node, ctx, scale) => {
+                const n = node as GraphNode & { x: number; y: number };
+                if (scale < 1.2) return; // only when zoomed in enough to read
+                const fontSize = Math.max(11 / scale, 3);
+                ctx.font = `${fontSize}px Inter, sans-serif`;
+                ctx.fillStyle = "#3f3f46";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                ctx.fillText(n.title, n.x, n.y + 5 / scale);
+              }
+            : undefined
+        }
         onNodeClick={(node) => setSelected(node as GraphNode)}
         onBackgroundClick={() => setSelected(null)}
       />
 
-      {/* Legend */}
-      <div className="pointer-events-none absolute left-4 top-4 flex max-w-[220px] flex-wrap gap-1.5">
+      {/* Filter chips — click a theme to focus it; click again / All to reset. */}
+      <div className="absolute left-4 top-4 flex max-w-[240px] flex-wrap gap-1.5">
+        <button
+          onClick={() => setActiveCat(null)}
+          className={
+            "rounded-full border px-2.5 py-0.5 text-[10px] font-medium backdrop-blur transition-colors " +
+            (activeCat === null
+              ? "border-foreground bg-foreground text-background"
+              : "bg-background/90 text-muted-foreground hover:border-foreground")
+          }
+        >
+          All {(graphData as { nodes: unknown[] }).nodes.length}
+        </button>
         {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
-          <span
+          <button
             key={cat}
-            className="inline-flex items-center gap-1.5 rounded-full border bg-background/90 px-2 py-0.5 text-[10px] font-medium text-muted-foreground backdrop-blur"
+            onClick={() => setActiveCat(activeCat === cat ? null : cat)}
+            className={
+              "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium backdrop-blur transition-colors " +
+              (activeCat === cat
+                ? "border-foreground bg-foreground text-background"
+                : "bg-background/90 text-muted-foreground hover:border-foreground")
+            }
           >
             <span
               className="inline-block size-2 rounded-full"
               style={{ backgroundColor: color }}
             />
             {formatCategory(cat)}
-          </span>
+          </button>
         ))}
       </div>
+      {!activeCat && (
+        <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-foreground/80 px-3 py-1 text-[11px] text-background backdrop-blur">
+          Pick a theme above to focus · scroll to zoom · click a node
+        </div>
+      )}
 
       {/* Selected-node panel */}
       {selected && (

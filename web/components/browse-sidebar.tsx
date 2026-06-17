@@ -30,15 +30,26 @@ for (const k of Object.keys(byCategory)) {
   byCategory[k].sort((a, b) => a.title.localeCompare(b.title));
 }
 
+interface NavLink {
+  href: string;
+  label: string;
+}
+
 /** Collapsible multi-level menu — engaging theme → its atoms — for fast access
- *  from anywhere. Slides in from the left; filter narrows across everything. */
-export function BrowseSidebar() {
+ *  from anywhere. Slides in from the left; filter narrows across everything.
+ *  On mobile it also hosts the page nav (passed via navLinks). */
+export function BrowseSidebar({ navLinks = [] }: { navLinks?: NavLink[] }) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [filter, setFilter] = React.useState("");
   const [expanded, setExpanded] = React.useState<Set<string>>(new Set());
 
   const q = filter.toLowerCase().trim();
+
+  function navigate(href: string) {
+    setOpen(false);
+    router.push(href);
+  }
 
   function toggle(cat: string) {
     setExpanded((prev) => {
@@ -74,6 +85,26 @@ export function BrowseSidebar() {
           <SheetTitle>Browse concepts</SheetTitle>
         </SheetHeader>
         <div className="p-3">
+          {/* Page nav — shown on mobile (the header text-nav is hidden there). */}
+          {navLinks.length > 0 && (
+            <div className="mb-3 grid grid-cols-2 gap-1 border-b pb-3 md:hidden">
+              <button
+                onClick={() => navigate("/")}
+                className="rounded-md px-2 py-1.5 text-left text-sm font-medium transition-colors hover:bg-muted"
+              >
+                Home
+              </button>
+              {navLinks.map((l) => (
+                <button
+                  key={l.href}
+                  onClick={() => navigate(l.href)}
+                  className="rounded-md px-2 py-1.5 text-left text-sm font-medium transition-colors hover:bg-muted"
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          )}
           <input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
