@@ -126,16 +126,32 @@ export interface CementedDecision {
   createdAt: string;
 }
 
+/** AI-synthesized coherent strategy over all decisions. Regenerated on demand;
+ *  the raw decisions are always kept untouched alongside it. */
+export interface StrategySynthesis {
+  headline: string;
+  /** Coherent narrative per pillar (only pillars that have decisions). */
+  pillars: Partial<Record<SectionId, string>>;
+  /** Places where decisions pull against each other. */
+  tensions: string[];
+  /** The most important unanswered questions, given the business + stage. */
+  gaps: string[];
+  /** Decision count when synthesized — drives the "stale" badge. */
+  basedOnCount: number;
+  updatedAt: string;
+}
+
 export interface BusinessModel {
-  version: 2;
+  version: 3;
   decisions: CementedDecision[];
+  strategy?: StrategySynthesis;
   updatedAt: string;
 }
 
 const KEY = "jak-business-model";
 const listeners = new Set<() => void>();
 
-const EMPTY: BusinessModel = { version: 2, decisions: [], updatedAt: "" };
+const EMPTY: BusinessModel = { version: 3, decisions: [], updatedAt: "" };
 
 let cachedRaw: string | null = null;
 let cachedModel: BusinessModel = EMPTY;
@@ -171,11 +187,16 @@ export function getModel(): BusinessModel {
       cachedModel = EMPTY;
       return cachedModel;
     }
-    const parsed = JSON.parse(raw) as { decisions?: Record<string, unknown>[] };
+    const parsed = JSON.parse(raw) as {
+      decisions?: Record<string, unknown>[];
+      strategy?: StrategySynthesis;
+      updatedAt?: string;
+    };
     cachedModel = {
-      version: 2,
+      version: 3,
       decisions: (parsed.decisions ?? []).map(normalizeDecision),
-      updatedAt: (parsed as { updatedAt?: string }).updatedAt ?? "",
+      strategy: parsed.strategy,
+      updatedAt: parsed.updatedAt ?? "",
     };
     return cachedModel;
   } catch {
@@ -238,10 +259,23 @@ export function clearModel() {
 export function replaceModel(model: BusinessModel) {
   const raw = (model.decisions ?? []) as unknown as Record<string, unknown>[];
   write({
-    version: 2,
+    version: 3,
     decisions: raw.map(normalizeDecision),
+    strategy: model.strategy,
     updatedAt: model.updatedAt ?? "",
   });
+}
+
+/** Store an AI synthesis pass. Decisions are never touched — the synthesis
+ *  sits alongside them. */
+export function setStrategy(strategy: StrategySynthesis) {
+  write({ ...getModel(), strategy });
+}
+
+/** The synthesis is stale if decisions were added/removed since it ran. */
+export function strategyStale(model: BusinessModel): boolean {
+  if (!model.strategy) return model.decisions.length > 0;
+  return model.strategy.basedOnCount !== model.decisions.length;
 }
 
 export function hasModel(): boolean {
