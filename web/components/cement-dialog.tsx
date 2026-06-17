@@ -43,6 +43,8 @@ export interface CementSeed {
   conceptCategory?: string;
   /** Source answer text — used to pre-fill the decision + stored as rationale. */
   sourceAnswer?: string;
+  /** Explicit starting pillar; overrides the category-based guess. */
+  section?: SectionId;
 }
 
 interface Props {
@@ -61,7 +63,7 @@ export function CementDialog({ seed, onClose }: Props) {
   // summary sentence. Falls back to the local Bottom-line extraction.
   React.useEffect(() => {
     if (!seed) return;
-    setSection(suggestSection(seed.conceptCategory));
+    setSection(seed.section ?? suggestSection(seed.conceptCategory));
     setSaved(false);
 
     const fallback = extractBottomLine(seed.sourceAnswer ?? "");

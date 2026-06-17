@@ -18,6 +18,8 @@ export interface PlaybookStep {
   applyQuery: string;
 }
 
+import type { SectionId } from "@/lib/business-model";
+
 export interface Playbook {
   slug: string;
   title: string;
@@ -27,11 +29,14 @@ export interface Playbook {
   steps: PlaybookStep[];
   /** Final synthesis prompt — fired after the steps, pulls it together. */
   synthesisQuery: string;
+  /** Which plan pillar the playbook's outcome cements into by default. */
+  section: SectionId;
 }
 
 export const playbooks: Playbook[] = [
   {
     slug: "price-your-product",
+    section: "pricing",
     title: "Price your product",
     question: "What should we charge — and how should the pricing be structured?",
     tagline:
@@ -79,6 +84,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "add-recurring-revenue",
+    section: "business-model",
     title: "Add recurring revenue",
     question: "How do we get off the project/one-off treadmill?",
     tagline:
@@ -126,6 +132,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "find-your-growth-engine",
+    section: "growth",
     title: "Find your growth engine",
     question: "Which growth lever should we actually bet on?",
     tagline:
@@ -180,6 +187,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "build-a-moat",
+    section: "moat",
     title: "Build a moat",
     question: "Why won't someone copy us — and what do we do about it?",
     tagline:
@@ -227,6 +235,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "fix-your-unit-economics",
+    section: "metrics",
     title: "Fix your unit economics",
     question: "Are we actually making money per customer — and which number do we fix first?",
     tagline:
@@ -274,6 +283,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "become-a-platform",
+    section: "business-model",
     title: "Should you become a platform?",
     question: "Everyone says 'platform' — does it actually make sense for us?",
     tagline:
@@ -321,6 +331,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "validate-a-new-idea",
+    section: "strategy",
     title: "Validate a new idea",
     question: "Is this idea worth building — before we spend the money?",
     tagline:
@@ -368,6 +379,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "nail-your-positioning",
+    section: "strategy",
     title: "Nail your positioning",
     question: "Why us, and not the cheaper option next door?",
     tagline:
@@ -408,6 +420,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "reduce-churn",
+    section: "growth",
     title: "Stop the leak (reduce churn)",
     question: "Why are customers leaving — and which fix moves the needle?",
     tagline:
@@ -448,6 +461,7 @@ export const playbooks: Playbook[] = [
   },
   {
     slug: "plan-a-launch",
+    section: "gtm",
     title: "Plan a product launch",
     question: "How do we take this to market without it landing with a thud?",
     tagline:

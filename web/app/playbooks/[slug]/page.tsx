@@ -61,6 +61,8 @@ export default async function PlaybookPage({
         <PlaybookJourney
           playbookSlug={pb.slug}
           title={pb.title}
+          question={pb.question}
+          section={pb.section}
           steps={steps}
           synthesisQuery={pb.synthesisQuery}
         />
