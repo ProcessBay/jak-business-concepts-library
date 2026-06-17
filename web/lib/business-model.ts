@@ -234,6 +234,20 @@ export function clearModel() {
   write({ ...EMPTY });
 }
 
+/** Replace the entire model — used by Backup & Restore import. */
+export function replaceModel(model: BusinessModel) {
+  const raw = (model.decisions ?? []) as unknown as Record<string, unknown>[];
+  write({
+    version: 2,
+    decisions: raw.map(normalizeDecision),
+    updatedAt: model.updatedAt ?? "",
+  });
+}
+
+export function hasModel(): boolean {
+  return getModel().decisions.length > 0;
+}
+
 export function decisionsBySection(
   model: BusinessModel
 ): Record<SectionId, CementedDecision[]> {

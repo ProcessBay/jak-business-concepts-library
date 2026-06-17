@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CommandMenu } from "@/components/command-menu";
 import { BusinessProfileDialog } from "@/components/business-profile-dialog";
 import { BrowseSidebar } from "@/components/browse-sidebar";
+import { SaveRestoreDialog } from "@/components/save-restore-dialog";
 
 export function SiteHeader() {
   return (
@@ -54,6 +55,7 @@ export function SiteHeader() {
             Map
           </Link>
           <CommandMenu />
+          <SaveRestoreDialog />
           <BusinessProfileDialog />
         </nav>
       </div>
