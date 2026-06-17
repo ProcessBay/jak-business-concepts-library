@@ -319,6 +319,173 @@ export const playbooks: Playbook[] = [
     synthesisQuery:
       "We just worked through a platform-readiness playbook: marketplace model, two-sided network effects, critical mass, take-rate economics, and curation. Give the honest verdict: should our business pursue a platform play — yes, no, or not yet? Justify it with our specifics, and if 'not yet', name the precondition that would flip the answer. Be decisive.",
   },
+  {
+    slug: "validate-a-new-idea",
+    title: "Validate a new idea",
+    question: "Is this idea worth building — before we spend the money?",
+    tagline:
+      "Cheap experiments that kill bad ideas fast and de-risk the good ones, in order.",
+    minutes: 15,
+    steps: [
+      {
+        conceptSlug: "desirability-feasibility-viability",
+        framing:
+          "Every idea has to clear three bars — do people want it, can we build it, can it make money? Most ideas die on the one the founder forgot to check.",
+        applyQuery:
+          "Run our idea through desirability, feasibility, and viability. Which of the three is our biggest open question right now, and what would it take to answer it?",
+      },
+      {
+        conceptSlug: "falsifiable-hypothesis-building",
+        framing:
+          "An idea you can't prove wrong is a belief, not a plan. Turn the riskiest assumption into a test that could actually fail.",
+        applyQuery:
+          "What's the single riskiest assumption behind our idea, and how do we phrase it as a falsifiable hypothesis we could test this month?",
+      },
+      {
+        conceptSlug: "wizard-of-oz-test",
+        framing:
+          "You don't need to build it to test demand — you need to fake the back end convincingly. Manual behind the curtain, magic in front.",
+        applyQuery:
+          "Design a Wizard of Oz test for our idea: what would we put in front of customers, what would we fake manually behind it, and what signal would tell us it's real?",
+      },
+      {
+        conceptSlug: "minimum-viable-product",
+        framing:
+          "If the test passes, build the smallest thing that delivers real value — not a tiny version of everything, but the one thing that matters.",
+        applyQuery:
+          "What's the MVP for our idea — the smallest build that delivers real value and lets us learn — and just as importantly, what should we deliberately leave out of v1?",
+      },
+      {
+        conceptSlug: "business-model-testing-cycle",
+        framing:
+          "Validation isn't one test, it's a loop. Each cycle should retire a risk and sharpen the model.",
+        applyQuery:
+          "Lay out our first three validation cycles: what we test, what we'd learn, and the decision each result would trigger (persevere, pivot, or kill).",
+      },
+    ],
+    synthesisQuery:
+      "We just worked through an idea-validation playbook: desirability-feasibility-viability, the riskiest assumption, a Wizard of Oz test, the MVP, and the testing loop. Give us a concrete validation plan for the next 30 days: the one test to run first, the success threshold, and what we'll do at each outcome. Be decisive.",
+  },
+  {
+    slug: "nail-your-positioning",
+    title: "Nail your positioning",
+    question: "Why us, and not the cheaper option next door?",
+    tagline:
+      "From 'we're better' to a sharp position competitors can't simply copy.",
+    minutes: 14,
+    steps: [
+      {
+        conceptSlug: "value-proposition-and-usp",
+        framing:
+          "Start with the promise. If you can't say what customers get and why it matters in one breath, neither can they.",
+        applyQuery:
+          "Sharpen our value proposition and USP into one clear sentence: what specific outcome we deliver, for whom, and why it beats the alternative.",
+      },
+      {
+        conceptSlug: "differentiation-strategy",
+        framing:
+          "Better is a treadmill; different is a moat. Pick the dimension you'll own — and the ones you'll deliberately concede.",
+        applyQuery:
+          "On which single dimension should we be deliberately different (not just better), and what would we have to stop competing on to make that difference sharp?",
+      },
+      {
+        conceptSlug: "perceptual-mapping",
+        framing:
+          "Position is relative. Map the field and you'll see the empty quadrant nobody's claimed — or the crowded corner you should flee.",
+        applyQuery:
+          "Map our market on two axes that matter to customers. Where do we sit, where do competitors cluster, and which open space should we claim?",
+      },
+      {
+        conceptSlug: "niche-market-strategy",
+        framing:
+          "The fastest way to stand out is to be the obvious choice for a few, not a forgettable option for all.",
+        applyQuery:
+          "Is there a niche where we could be the undisputed first choice? Define it, and explain what we'd gain (and give up) by aiming there first.",
+      },
+    ],
+    synthesisQuery:
+      "We just worked through a positioning playbook: value proposition, differentiation, perceptual mapping, and niche focus. Write our positioning statement — who we're for, the one thing we own, and why it's hard to copy — plus the first move to make it real. Be decisive.",
+  },
+  {
+    slug: "reduce-churn",
+    title: "Stop the leak (reduce churn)",
+    question: "Why are customers leaving — and which fix moves the needle?",
+    tagline:
+      "Retention compounds. Find the leak, plug it, and turn staying into the default.",
+    minutes: 14,
+    steps: [
+      {
+        conceptSlug: "churn-rate",
+        framing:
+          "First, face the number honestly — including the slow bleed you've been rounding away. Small monthly churn is a ceiling on everything.",
+        applyQuery:
+          "Help us measure churn properly for our business: what counts as churn for our model, what's it likely costing us, and what's a healthy target at our stage?",
+      },
+      {
+        conceptSlug: "customer-health-score",
+        framing:
+          "Churn shows up in the data months after the customer checked out. A health score catches it while you can still act.",
+        applyQuery:
+          "Design a customer health score for us: which 3-5 behavioral signals would predict churn early, and what would we do when a customer's score drops?",
+      },
+      {
+        conceptSlug: "customer-engagement-score",
+        framing:
+          "Engaged customers don't leave. Define what 'using us properly' looks like, then drive everyone toward it.",
+        applyQuery:
+          "What does deep engagement look like for our product, and how could we move more customers to the habit that makes us hard to quit?",
+      },
+      {
+        conceptSlug: "switching-costs",
+        framing:
+          "The quietest retention lever: make leaving genuinely costly — by being load-bearing, not by trapping people.",
+        applyQuery:
+          "What ethical switching costs could we build so customers stay because we're embedded in their workflow — data, integrations, accumulated value?",
+      },
+    ],
+    synthesisQuery:
+      "We just worked through a churn-reduction playbook: churn math, health score, engagement, and switching costs. Name the single biggest retention lever for our business, the 30-day plan to pull it, and the metric that proves it worked. Be decisive.",
+  },
+  {
+    slug: "plan-a-launch",
+    title: "Plan a product launch",
+    question: "How do we take this to market without it landing with a thud?",
+    tagline:
+      "From 'we built it' to a launch with a channel, a message, and a number to hit.",
+    minutes: 16,
+    steps: [
+      {
+        conceptSlug: "go-to-market-strategy",
+        framing:
+          "A launch without a GTM is a press release into the void. Decide who it's for and how you'll reach them before you ship.",
+        applyQuery:
+          "Draft our go-to-market for this launch: the exact target customer, the single best channel to reach them, and the message that makes them act.",
+      },
+      {
+        conceptSlug: "sales-led-vs-product-led-gtm",
+        framing:
+          "Will humans sell this, or will the product sell itself? Your price and complexity already voted — find out how.",
+        applyQuery:
+          "For this launch, should we be sales-led or product-led? Given our price point and how people evaluate us, which motion fits — and what does that change about the launch?",
+      },
+      {
+        conceptSlug: "distribution-channels-and-partnerships",
+        framing:
+          "The cheapest reach is often someone else's audience. Who already has your customers' attention?",
+        applyQuery:
+          "Which distribution channels or partnerships could put us in front of our customers faster than building an audience from scratch? Rank them by effort vs payoff.",
+      },
+      {
+        conceptSlug: "gtm-kpis-and-measurement",
+        framing:
+          "A launch you can't measure is a firework — bright, then gone. Decide the numbers that mean it worked.",
+        applyQuery:
+          "What KPIs should we set for this launch, what would 'a good week one' look like in numbers, and which leading indicator tells us early if it's working?",
+      },
+    ],
+    synthesisQuery:
+      "We just worked through a launch playbook: GTM strategy, sales- vs product-led motion, distribution channels, and launch KPIs. Give us a one-page launch plan: target, channel, message, motion, and the week-one success number. Be decisive.",
+  },
 ];
 
 export const playbookBySlug = new Map(playbooks.map((p) => [p.slug, p]));

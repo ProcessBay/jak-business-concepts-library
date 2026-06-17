@@ -167,7 +167,13 @@ export function PlaybookJourney({ playbookSlug, title, steps, synthesisQuery }: 
       </Card>
 
       <p className="text-center text-xs text-muted-foreground">
-        Built from the {title} path through the knowledge graph.
+        Every step&apos;s answer has an{" "}
+        <span className="font-medium text-foreground">Add to my model</span>{" "}
+        button — cement the decisions you like into your{" "}
+        <Link href="/model" className="text-primary underline-offset-2 hover:underline">
+          central plan
+        </Link>
+        .
       </p>
     </div>
   );
