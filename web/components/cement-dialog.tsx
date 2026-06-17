@@ -18,6 +18,7 @@ import {
   subscribeModel,
   suggestSection,
 } from "@/lib/business-model";
+import { getProfile, profilePromptBlock } from "@/lib/profile";
 
 export function useBusinessModel(): BusinessModel {
   return React.useSyncExternalStore(subscribeModel, getModel, getModel);
@@ -53,13 +54,46 @@ export function CementDialog({ seed, onClose }: Props) {
   const [decision, setDecision] = React.useState("");
   const [section, setSection] = React.useState<SectionId>("strategy");
   const [saved, setSaved] = React.useState(false);
+  const [synthesizing, setSynthesizing] = React.useState(false);
 
-  // Seed the form whenever a new cement request arrives.
+  // When a cement request arrives, synthesize a concrete, practical commitment
+  // from the advice (tailored to the business) rather than just echoing a
+  // summary sentence. Falls back to the local Bottom-line extraction.
   React.useEffect(() => {
     if (!seed) return;
-    setDecision(extractBottomLine(seed.sourceAnswer ?? ""));
     setSection(suggestSection(seed.conceptCategory));
     setSaved(false);
+
+    const fallback = extractBottomLine(seed.sourceAnswer ?? "");
+    setDecision(fallback);
+
+    if (!seed.sourceAnswer || seed.sourceAnswer.length < 40) return;
+
+    const ctrl = new AbortController();
+    setSynthesizing(true);
+    const profile = getProfile();
+    fetch("/api/cement", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        conceptTitle: seed.conceptTitle,
+        answer: seed.sourceAnswer,
+        profile: profile ? profilePromptBlock(profile) : undefined,
+      }),
+      signal: ctrl.signal,
+    })
+      .then((r) => r.json())
+      .then((d: { decision?: string }) => {
+        if (d.decision && d.decision.trim().length > 10) {
+          setDecision(d.decision.trim());
+        }
+      })
+      .catch(() => {
+        /* keep the fallback */
+      })
+      .finally(() => setSynthesizing(false));
+
+    return () => ctrl.abort();
   }, [seed]);
 
   function save() {
@@ -98,14 +132,28 @@ export function CementDialog({ seed, onClose }: Props) {
         ) : (
           <div className="space-y-4">
             <div>
-              <label className="text-xs font-medium">What you&apos;ll do</label>
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium">What you&apos;ll do</label>
+                {synthesizing && (
+                  <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                    <span className="inline-block size-1.5 animate-pulse rounded-full bg-primary" />
+                    Turning this into a practical move…
+                  </span>
+                )}
+              </div>
               <textarea
                 value={decision}
                 onChange={(e) => setDecision(e.target.value)}
-                rows={3}
+                rows={4}
                 placeholder="e.g. Move to value-based tiers; price the Pro plan on ROI, not cost."
-                className="mt-1 w-full resize-none rounded-lg border bg-background p-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+                className={
+                  "mt-1 w-full resize-none rounded-lg border bg-background p-3 text-sm outline-none transition-opacity focus:ring-2 focus:ring-ring " +
+                  (synthesizing ? "opacity-60" : "")
+                }
               />
+              <p className="mt-1 text-[11px] text-muted-foreground">
+                Synthesized for your business — edit anything before saving.
+              </p>
             </div>
             <div>
               <label className="text-xs font-medium">
@@ -130,8 +178,12 @@ export function CementDialog({ seed, onClose }: Props) {
                 ))}
               </div>
             </div>
-            <Button onClick={save} disabled={!decision.trim()} className="w-full">
-              Add to my model
+            <Button
+              onClick={save}
+              disabled={!decision.trim() || synthesizing}
+              className="w-full"
+            >
+              {synthesizing ? "Synthesizing…" : "Add to my model"}
             </Button>
           </div>
         )}
