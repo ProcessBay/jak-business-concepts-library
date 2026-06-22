@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/model", label: "My Plan" },
   { href: "/playbooks", label: "Playbooks" },
   { href: "/graph", label: "Map" },
+  { href: "/talk", label: "Talk" },
 ];
 
 export function SiteHeader() {
